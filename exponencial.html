@@ -91,6 +91,43 @@
         .formula-matematica {
             font-family: "Times New Roman", serif;
             font-size: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        /* FRACCIÓN 1/λ */
+
+        .fraccion {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            vertical-align: middle;
+
+            margin: 0 8px;
+
+            line-height: 1;
+        }
+
+        .numerador {
+            font-size: 22px;
+            padding-bottom: 4px;
+        }
+
+        .linea-fraccion {
+            width: 30px;
+            border-top: 2px solid #3f3275;
+        }
+
+        .denominador {
+            font-size: 22px;
+            padding-top: 4px;
         }
 
         /* =========================
@@ -99,8 +136,12 @@
 
         .datos {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
             gap: 20px;
+
             margin-top: 20px;
         }
 
@@ -111,15 +152,21 @@
 
         .campo label {
             font-weight: bold;
+
             margin-bottom: 8px;
+
             color: #51428a;
         }
 
         .campo input {
             padding: 12px;
+
             border: 2px solid #ddd5e8;
+
             border-radius: 8px;
+
             font-size: 16px;
+
             outline: none;
         }
 
@@ -133,18 +180,27 @@
 
         .botones {
             display: flex;
+
             gap: 15px;
+
             flex-wrap: wrap;
+
             margin-top: 20px;
         }
 
         button {
             border: none;
+
             padding: 13px 22px;
+
             border-radius: 10px;
+
             font-size: 16px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             color: white;
 
             background: linear-gradient(
@@ -158,6 +214,7 @@
 
         button:hover {
             transform: translateY(-2px);
+
             opacity: 0.9;
         }
 
@@ -167,25 +224,33 @@
 
         #resultados {
             margin-top: 25px;
+
             overflow-x: auto;
         }
 
         table {
             width: 100%;
+
             border-collapse: collapse;
+
             margin-top: 15px;
+
             background: white;
         }
 
         th {
             background: #51428a;
+
             color: white;
+
             padding: 10px;
         }
 
         td {
             padding: 9px;
+
             border: 1px solid #ddd5e8;
+
             text-align: center;
         }
 
@@ -199,9 +264,13 @@
 
         .volver {
             display: inline-block;
+
             margin: 10px 0 30px;
+
             text-decoration: none;
+
             color: #51428a;
+
             font-weight: bold;
         }
 
@@ -215,9 +284,13 @@
 
         footer {
             background: #101c4f;
+
             color: white;
+
             text-align: center;
+
             padding: 25px 15px;
+
             margin-top: 40px;
         }
 
@@ -249,6 +322,11 @@
 
             .formula-matematica {
                 font-size: 23px;
+            }
+
+            .numerador,
+            .denominador {
+                font-size: 18px;
             }
 
         }
@@ -376,23 +454,40 @@
             </p>
 
 
+            <!-- FÓRMULA -->
+
             <div class="formula">
 
                 <div class="formula-matematica">
 
                     E<sub>i</sub>
+
                     =
+
                     −
-                    (
-                    <sup>1</sup>&frasl;<sub>λ</sub>
-                    )
-                    ×
+
+                    <span class="fraccion">
+
+                        <span class="numerador">
+                            1
+                        </span>
+
+                        <span class="linea-fraccion"></span>
+
+                        <span class="denominador">
+                            λ
+                        </span>
+
+                    </span>
+
                     ln(1 − r<sub>i</sub>)
 
                 </div>
 
             </div>
 
+
+            <!-- EXPLICACIÓN -->
 
             <p style="margin-top: 20px;">
                 Donde:
@@ -448,6 +543,7 @@
 
             <div class="botones">
 
+
                 <button
                     onclick="generarExponencial()"
                 >
@@ -464,6 +560,7 @@
                     Copiar Excel
 
                 </button>
+
 
             </div>
 
@@ -602,7 +699,7 @@
                     Math.random();
 
 
-                // EVITAR r = 0 O r = 1
+                // EVITAR VALORES EXTREMOS
 
                 if (r === 0) {
 
@@ -654,6 +751,7 @@
             ).innerHTML =
                 html;
 
+
         }
 
 
@@ -704,6 +802,7 @@
                             );
 
                         }
+
                     );
 
 
@@ -712,7 +811,9 @@
                         +
                         "\n";
 
+
                 }
+
             );
 
 
@@ -725,6 +826,7 @@
                 "Tabla copiada. Ahora puede pegarla en Excel."
             );
 
+
         }
 
 
@@ -736,19 +838,24 @@
             "pageshow",
             function () {
 
+
                 document.getElementById(
                     "cantidad"
                 ).value = "";
+
 
                 document.getElementById(
                     "lambda"
                 ).value = "";
 
+
                 document.getElementById(
                     "resultados"
                 ).innerHTML = "";
 
+
             }
+
         );
 
 
