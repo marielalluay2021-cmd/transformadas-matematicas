@@ -2,10 +2,11 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Transformadas Matemáticas | ESPOCH</title>
+    <title>Método de Transformación Directa | ESPOCH</title>
 
     <style>
 
@@ -21,8 +22,8 @@
         }
 
         body {
-            background: #f4f7fc;
-            color: #17233c;
+            background: #f8f5fb;
+            color: #25203a;
         }
 
         /* =========================
@@ -33,44 +34,56 @@
             min-height: 100vh;
             position: relative;
             overflow: hidden;
+
             background:
-                radial-gradient(circle at 85% 20%, rgba(255, 202, 40, 0.18), transparent 25%),
-                radial-gradient(circle at 10% 80%, rgba(50, 120, 220, 0.25), transparent 30%),
-                linear-gradient(135deg, #061b49, #0b347d 55%, #1256a5);
+                radial-gradient(circle at 85% 15%,
+                rgba(235, 180, 220, 0.28),
+                transparent 25%),
+
+                radial-gradient(circle at 10% 85%,
+                rgba(110, 130, 220, 0.25),
+                transparent 30%),
+
+                linear-gradient(
+                    135deg,
+                    #101c4f,
+                    #263d82 50%,
+                    #5b4b96
+                );
+
             color: white;
         }
-
-        /* círculos decorativos */
 
         .circulo {
             position: absolute;
             border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.13);
         }
 
         .circulo1 {
-            width: 500px;
-            height: 500px;
-            right: -180px;
-            top: -180px;
+            width: 550px;
+            height: 550px;
+            right: -200px;
+            top: -220px;
         }
 
         .circulo2 {
-            width: 350px;
-            height: 350px;
-            left: -170px;
-            bottom: -150px;
+            width: 400px;
+            height: 400px;
+            left: -220px;
+            bottom: -200px;
         }
 
         .circulo3 {
-            width: 180px;
-            height: 180px;
+            width: 220px;
+            height: 220px;
             right: 35%;
-            bottom: -100px;
+            bottom: -130px;
         }
 
+
         /* =========================
-           BARRA SUPERIOR
+           ENCABEZADO
         ========================= */
 
         header {
@@ -83,121 +96,174 @@
 
             padding: 25px 7%;
 
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.16);
         }
 
-        .logo {
+        .identidad {
             display: flex;
             align-items: center;
-            gap: 12px;
-
-            font-size: 26px;
-            font-weight: 800;
+            gap: 18px;
         }
 
-        .logo-simbolo {
-            width: 48px;
-            height: 48px;
+        /* Espacios para logos */
+
+        .logo-universidad,
+        .logo-facultad {
+
+            width: 72px;
+            height: 72px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            border-radius: 14px;
+            border-radius: 16px;
 
-            background: #f5c542;
-            color: #071d4d;
+            background: rgba(255,255,255,0.12);
 
-            font-size: 28px;
-            font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.25);
 
-            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            font-size: 12px;
+
+            text-align: center;
+
+            color: white;
         }
 
-        .datos-universidad {
+        .nombre-universidad strong {
+            display: block;
+
+            font-size: 18px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .nombre-universidad span {
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 13px;
+
+            color: rgba(255,255,255,0.72);
+        }
+
+        .facultad {
             text-align: right;
         }
 
-        .datos-universidad strong {
+        .facultad strong {
             display: block;
+
             font-size: 16px;
         }
 
-        .datos-universidad span {
+        .facultad span {
             font-size: 13px;
-            opacity: 0.8;
+
+            color: rgba(255,255,255,0.72);
         }
 
+
         /* =========================
-           CONTENIDO PRINCIPAL
+           HERO
         ========================= */
 
         .hero {
+
             position: relative;
+
             z-index: 2;
 
             max-width: 1250px;
+
             margin: auto;
 
-            min-height: calc(100vh - 100px);
+            min-height: calc(100vh - 120px);
 
             display: grid;
+
             grid-template-columns: 1.1fr 0.9fr;
 
             align-items: center;
 
-            gap: 50px;
+            gap: 55px;
 
-            padding: 70px 30px 100px;
+            padding: 65px 30px 90px;
         }
 
-        .contenido-hero {
+        .contenido {
+
             animation: aparecer 1s ease;
         }
 
         .etiqueta {
+
             display: inline-block;
 
-            padding: 9px 17px;
+            padding: 9px 18px;
 
             border-radius: 30px;
 
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.11);
+
             border: 1px solid rgba(255,255,255,0.2);
 
-            color: #f5c542;
+            color: #f5d47a;
 
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13px;
 
-            margin-bottom: 25px;
-        }
+            font-weight: 800;
 
-        .hero h1 {
-            font-size: clamp(55px, 7vw, 90px);
-            line-height: 0.95;
-            letter-spacing: -3px;
+            letter-spacing: 1px;
 
             margin-bottom: 25px;
         }
 
-        .hero h1 span {
-            color: #f5c542;
-        }
+        .contenido h1 {
 
-        .subtitulo {
-            font-size: 25px;
-            font-weight: 400;
+            font-size: clamp(48px, 6vw, 78px);
+
+            line-height: 0.98;
+
+            letter-spacing: -2px;
 
             margin-bottom: 22px;
+        }
 
-            color: #e7efff;
+        .contenido h1 span {
+
+            color: #f4b8dc;
+        }
+
+        .materia {
+
+            font-size: 25px;
+
+            font-weight: 500;
+
+            color: #eee9ff;
+
+            margin-bottom: 10px;
+        }
+
+        .tema {
+
+            font-size: 20px;
+
+            color: #f5d47a;
+
+            font-weight: 700;
+
+            margin-bottom: 22px;
         }
 
         .descripcion {
-            max-width: 650px;
+
+            max-width: 670px;
 
             font-size: 17px;
+
             line-height: 1.8;
 
             color: rgba(255,255,255,0.78);
@@ -205,70 +271,98 @@
             margin-bottom: 30px;
         }
 
-        .autor {
-            margin-bottom: 35px;
+        .datos {
+
+            padding: 20px 24px;
+
+            max-width: 530px;
+
+            border-left: 4px solid #f4b8dc;
+
+            background: rgba(255,255,255,0.07);
+
+            border-radius: 0 15px 15px 0;
+
+            margin-bottom: 30px;
         }
 
-        .autor small {
-            display: block;
-            color: rgba(255,255,255,0.65);
-            margin-bottom: 5px;
+        .datos p {
+
+            margin: 6px 0;
+
+            color: rgba(255,255,255,0.82);
         }
 
-        .autor strong {
-            font-size: 22px;
+        .datos strong {
+
+            color: white;
         }
 
-        .boton-principal {
+        .boton {
+
             display: inline-flex;
+
             align-items: center;
-            gap: 12px;
+
+            gap: 10px;
 
             padding: 15px 27px;
 
-            background: #f5c542;
-            color: #071d4d;
+            background: #f4b8dc;
 
-            border-radius: 40px;
+            color: #21183e;
+
+            border-radius: 35px;
 
             text-decoration: none;
 
             font-weight: 800;
-            font-size: 16px;
 
             box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 
             transition: 0.3s;
         }
 
-        .boton-principal:hover {
+        .boton:hover {
+
             transform: translateY(-4px);
-            box-shadow: 0 18px 35px rgba(0,0,0,0.35);
+
+            background: #f5d47a;
         }
 
+
         /* =========================
-           ILUSTRACIÓN MATEMÁTICA
+           PANEL MATEMÁTICO
         ========================= */
 
         .zona-matematica {
-            position: relative;
-
-            min-height: 500px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
+
+            min-height: 500px;
         }
 
-        .panel-matematico {
+        .panel {
+
             position: relative;
 
             width: 440px;
+
             height: 440px;
 
-            border-radius: 40px;
+            border-radius: 45px;
 
-            background: rgba(255,255,255,0.08);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.13),
+                    rgba(255,255,255,0.04)
+                );
+
             border: 1px solid rgba(255,255,255,0.2);
 
             backdrop-filter: blur(12px);
@@ -277,51 +371,69 @@
                 0 30px 80px rgba(0,0,0,0.3),
                 inset 0 0 50px rgba(255,255,255,0.04);
 
-            transform: rotate(2deg);
-
             animation: flotar 5s ease-in-out infinite;
         }
 
         .formula {
-            position: absolute;
 
-            color: white;
+            position: absolute;
 
             font-family: Georgia, serif;
 
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            color: white;
+
+            text-shadow:
+                0 5px 15px rgba(0,0,0,0.4);
         }
 
         .formula1 {
-            top: 45px;
-            left: 40px;
-            font-size: 34px;
-            color: #f5c542;
+
+            top: 40px;
+
+            left: 35px;
+
+            color: #f5d47a;
+
+            font-size: 27px;
         }
 
         .formula2 {
-            top: 120px;
-            right: 35px;
-            font-size: 30px;
+
+            top: 115px;
+
+            right: 30px;
+
+            font-size: 25px;
         }
 
         .formula3 {
-            bottom: 105px;
+
+            bottom: 95px;
+
             left: 35px;
-            font-size: 28px;
+
+            color: #f4b8dc;
+
+            font-size: 24px;
         }
 
         .formula4 {
-            bottom: 40px;
+
+            bottom: 35px;
+
             right: 30px;
-            font-size: 38px;
-            color: #f5c542;
+
+            color: #f5d47a;
+
+            font-size: 28px;
         }
 
-        .integral-grande {
+        .simbolo {
+
             position: absolute;
 
             left: 50%;
+
             top: 50%;
 
             transform: translate(-50%, -50%);
@@ -333,100 +445,94 @@
             color: rgba(255,255,255,0.9);
 
             text-shadow:
-                0 0 30px rgba(245,197,66,0.25),
+                0 0 30px rgba(244,184,220,0.35),
                 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .grafica {
+        .circulo-formula {
+
             position: absolute;
 
             width: 230px;
-            height: 110px;
+
+            height: 230px;
 
             left: 105px;
-            top: 165px;
 
-            overflow: hidden;
-        }
-
-        .grafica::before {
-            content: "";
-
-            position: absolute;
-
-            width: 100%;
-            height: 1px;
-
-            background: rgba(255,255,255,0.35);
-
-            top: 55px;
-        }
-
-        .grafica::after {
-            content: "";
-
-            position: absolute;
-
-            width: 300px;
-            height: 100px;
-
-            left: -20px;
-            top: 5px;
-
-            border-top: 4px solid #f5c542;
+            top: 105px;
 
             border-radius: 50%;
 
-            transform: rotate(-8deg);
+            border: 2px dashed rgba(244,184,220,0.6);
         }
 
+
         /* =========================
-           SECCIÓN MÉTODOS
+           SECCIÓN
         ========================= */
 
-        .seccion-metodos {
+        .seccion {
+
             padding: 90px 7%;
 
             background:
-                radial-gradient(circle at 90% 10%, rgba(25,90,170,0.07), transparent 30%),
-                #f4f7fc;
+
+                radial-gradient(
+                    circle at 90% 10%,
+                    rgba(120,90,180,0.09),
+                    transparent 30%
+                ),
+
+                #faf8fc;
         }
 
-        .encabezado-metodos {
-            text-align: center;
+        .encabezado {
 
             max-width: 800px;
 
             margin: auto auto 55px;
+
+            text-align: center;
         }
 
-        .encabezado-metodos .mini {
-            color: #1457a6;
+        .mini {
 
-            font-size: 14px;
+            color: #7354a4;
+
+            font-size: 13px;
+
             font-weight: 800;
 
             letter-spacing: 2px;
-            text-transform: uppercase;
 
             margin-bottom: 10px;
         }
 
-        .encabezado-metodos h2 {
-            font-size: 42px;
+        .encabezado h2 {
 
-            color: #0a2452;
+            color: #172653;
+
+            font-size: 42px;
 
             margin-bottom: 15px;
         }
 
-        .encabezado-metodos p {
-            color: #65728a;
+        .encabezado p {
+
+            color: #6f7080;
 
             line-height: 1.7;
+
+            font-size: 16px;
         }
 
-        .metodos {
+
+        /* =========================
+           TARJETAS
+        ========================= */
+
+        .tarjetas {
+
             max-width: 1250px;
 
             margin: auto;
@@ -435,21 +541,23 @@
 
             grid-template-columns: repeat(4, 1fr);
 
-            gap: 24px;
+            gap: 23px;
         }
 
         .tarjeta {
+
             position: relative;
 
-            padding: 30px 25px;
+            padding: 28px 24px;
 
             background: white;
 
             border-radius: 22px;
 
-            border: 1px solid #e4eaf3;
+            border: 1px solid #e7e0ed;
 
-            box-shadow: 0 10px 30px rgba(15,45,90,0.07);
+            box-shadow:
+                0 10px 30px rgba(50,40,90,0.07);
 
             overflow: hidden;
 
@@ -457,84 +565,104 @@
         }
 
         .tarjeta::before {
+
             content: "";
 
             position: absolute;
 
             left: 0;
+
             top: 0;
 
             width: 100%;
+
             height: 5px;
 
-            background: linear-gradient(90deg, #0b3d88, #f5c542);
+            background:
+
+                linear-gradient(
+                    90deg,
+                    #596cb7,
+                    #d88abb,
+                    #e4bf62
+                );
         }
 
         .tarjeta:hover {
-            transform: translateY(-10px);
 
-            box-shadow: 0 20px 40px rgba(15,45,90,0.13);
+            transform: translateY(-9px);
 
-            border-color: #cdd9eb;
+            box-shadow:
+                0 20px 40px rgba(50,40,90,0.13);
         }
 
         .numero {
+
             position: absolute;
 
-            top: 18px;
-            right: 20px;
+            top: 17px;
+
+            right: 19px;
 
             font-size: 12px;
-            font-weight: bold;
 
-            color: #9aa8bd;
+            color: #a19aae;
+
+            font-weight: 800;
         }
 
         .icono {
-            width: 65px;
-            height: 65px;
+
+            width: 62px;
+
+            height: 62px;
 
             display: flex;
+
             align-items: center;
+
             justify-content: center;
 
             border-radius: 18px;
 
-            background: #eaf1fc;
+            background: #f3eaf7;
 
-            color: #104f9d;
+            color: #65529b;
 
             font-family: Georgia, serif;
 
-            font-size: 34px;
+            font-size: 28px;
 
-            margin-bottom: 20px;
+            margin-bottom: 19px;
         }
 
         .tarjeta h3 {
-            font-size: 19px;
 
-            color: #102b5a;
+            color: #242d59;
 
-            margin-bottom: 12px;
+            font-size: 18px;
+
+            margin-bottom: 11px;
         }
 
         .tarjeta p {
+
+            color: #717183;
+
             font-size: 14px;
 
             line-height: 1.6;
 
-            color: #68758a;
-
-            min-height: 90px;
+            min-height: 72px;
         }
 
         .boton-metodo {
+
             display: inline-block;
 
-            margin-top: 20px;
+            margin-top: 18px;
 
-            color: #0c4d9d;
+            color: #66509b;
 
             text-decoration: none;
 
@@ -546,47 +674,67 @@
         }
 
         .boton-metodo:hover {
-            color: #d39d00;
+
+            color: #c477a7;
+
             transform: translateX(5px);
         }
 
+
         /* =========================
-           SECCIÓN FINAL
+           INFORMACIÓN FINAL
         ========================= */
 
         .final {
-            padding: 65px 20px;
+
+            padding: 70px 20px;
 
             text-align: center;
 
-            background: #071d4d;
+            background:
+                linear-gradient(
+                    135deg,
+                    #172653,
+                    #4c4081
+                );
 
             color: white;
         }
 
         .final h2 {
-            font-size: 30px;
+
+            font-size: 32px;
+
             margin-bottom: 12px;
         }
 
         .final p {
-            color: rgba(255,255,255,0.7);
+
+            color: rgba(255,255,255,0.75);
+
             margin-bottom: 25px;
         }
 
-        footer {
-            background: #041331;
 
-            color: rgba(255,255,255,0.55);
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            background: #101735;
+
+            color: rgba(255,255,255,0.62);
 
             text-align: center;
 
-            padding: 25px;
+            padding: 27px;
 
             font-size: 13px;
 
-            line-height: 1.7;
+            line-height: 1.8;
         }
+
 
         /* =========================
            ANIMACIONES
@@ -595,26 +743,39 @@
         @keyframes flotar {
 
             0%, 100% {
-                transform: rotate(2deg) translateY(0);
+
+                transform:
+                    rotate(2deg)
+                    translateY(0);
             }
 
             50% {
-                transform: rotate(-1deg) translateY(-12px);
+
+                transform:
+                    rotate(-1deg)
+                    translateY(-12px);
             }
         }
 
         @keyframes aparecer {
 
             from {
+
                 opacity: 0;
-                transform: translateY(25px);
+
+                transform:
+                    translateY(25px);
             }
 
             to {
+
                 opacity: 1;
-                transform: translateY(0);
+
+                transform:
+                    translateY(0);
             }
         }
+
 
         /* =========================
            RESPONSIVE
@@ -623,91 +784,129 @@
         @media (max-width: 1050px) {
 
             .hero {
+
                 grid-template-columns: 1fr;
 
                 text-align: center;
             }
 
             .descripcion {
+
                 margin-left: auto;
+
                 margin-right: auto;
             }
 
-            .autor {
-                text-align: center;
+            .datos {
+
+                margin-left: auto;
+
+                margin-right: auto;
+
+                text-align: left;
+            }
+
+            .tarjetas {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
             .zona-matematica {
+
                 min-height: 430px;
             }
-
-            .metodos {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
         }
+
 
         @media (max-width: 650px) {
 
             header {
+
                 flex-direction: column;
-                gap: 15px;
+
+                gap: 18px;
             }
 
-            .datos-universidad {
+            .facultad {
+
+                text-align: center;
+            }
+
+            .identidad {
+
+                flex-direction: column;
+
                 text-align: center;
             }
 
             .hero {
-                padding-top: 50px;
+
+                padding-top: 45px;
             }
 
-            .hero h1 {
-                font-size: 52px;
+            .contenido h1 {
+
+                font-size: 48px;
             }
 
-            .subtitulo {
-                font-size: 20px;
-            }
+            .materia {
 
-            .panel-matematico {
-                width: 320px;
-                height: 320px;
-            }
-
-            .integral-grande {
-                font-size: 100px;
-            }
-
-            .grafica {
-                width: 170px;
-                left: 75px;
-            }
-
-            .formula1 {
-                font-size: 23px;
-            }
-
-            .formula2 {
                 font-size: 21px;
             }
 
+            .panel {
+
+                width: 320px;
+
+                height: 320px;
+            }
+
+            .simbolo {
+
+                font-size: 105px;
+            }
+
+            .circulo-formula {
+
+                width: 175px;
+
+                height: 175px;
+
+                left: 72px;
+
+                top: 72px;
+            }
+
+            .formula1 {
+
+                font-size: 19px;
+            }
+
+            .formula2 {
+
+                font-size: 18px;
+            }
+
             .formula3 {
-                font-size: 20px;
+
+                font-size: 18px;
             }
 
             .formula4 {
-                font-size: 25px;
+
+                font-size: 20px;
             }
 
-            .metodos {
+            .tarjetas {
+
                 grid-template-columns: 1fr;
             }
 
-            .encabezado-metodos h2 {
+            .encabezado h2 {
+
                 font-size: 32px;
             }
-
         }
 
     </style>
@@ -720,7 +919,7 @@
 
     <!-- =========================
          PORTADA
-    ========================== -->
+    ========================= -->
 
     <section class="portada" id="inicio">
 
@@ -731,28 +930,45 @@
 
         <header>
 
-            <div class="logo">
 
-                <div class="logo-simbolo">
-                    ∫
+            <div class="identidad">
+
+                <!-- Aquí posteriormente colocaremos el logo oficial ESPOCH -->
+
+                <div class="logo-universidad">
+
+                    ESPOCH
+
                 </div>
 
-                <div>
-                    ESPOCH
+
+                <div class="nombre-universidad">
+
+                    <strong>
+                        ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+                    </strong>
+
+                    <span>
+                        ESPOCH
+                    </span>
+
                 </div>
 
             </div>
 
 
-            <div class="datos-universidad">
+            <div class="facultad">
 
-                <strong>Facultad de Mecánica</strong>
+                <strong>
+                    FACULTAD DE MECÁNICA
+                </strong>
 
                 <span>
-                    Ingeniería Industrial
+                    Carrera de Ingeniería Industrial
                 </span>
 
             </div>
+
 
         </header>
 
@@ -761,57 +977,87 @@
         <div class="hero">
 
 
-            <div class="contenido-hero">
+            <div class="contenido">
 
 
                 <div class="etiqueta">
-                    GUÍA INTERACTIVA · MATEMÁTICAS
+
+                    SIMULACIÓN DE PROCESOS
+
                 </div>
 
 
                 <h1>
 
-                    TRANSFORMADAS
+                    MÉTODO DE
 
                     <br>
 
-                    <span>MATEMÁTICAS</span>
+                    <span>TRANSFORMACIÓN DIRECTA</span>
 
                 </h1>
 
 
-                <div class="subtitulo">
+                <div class="materia">
 
-                    Aprende · Comprende · Resuelve
+                    Materia: Simulación de Procesos
+
+                </div>
+
+
+                <div class="tema">
+
+                    Tema académico
 
                 </div>
 
 
                 <p class="descripcion">
 
-                    Explora las principales transformadas matemáticas,
-                    sus propiedades, métodos de resolución y aplicaciones
-                    mediante ejemplos explicados de manera sencilla.
+                    Página interactiva para conocer el fundamento,
+                    procedimiento y aplicación del Método de
+                    Transformación Directa en la simulación de procesos.
 
                 </p>
 
 
-                <div class="autor">
+                <div class="datos">
 
-                    <small>
-                        Elaborado por
-                    </small>
+                    <p>
 
-                    <strong>
-                        Mariela Lluay
-                    </strong>
+                        <strong>Estudiante:</strong>
+
+                        Mariela Elizabeth Lluay Vimos
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Código:</strong>
+
+                        7403
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>Docente:</strong>
+
+                        Ing. Ángel Guamán Lozano
+
+                    </p>
 
                 </div>
 
 
-                <a href="#metodos" class="boton-principal">
+                <a
+                    href="#contenido"
+                    class="boton"
+                >
 
-                    Explorar métodos
+                    Explorar contenido
 
                     <span>↓</span>
 
@@ -822,49 +1068,50 @@
 
 
 
-            <!-- ILUSTRACIÓN -->
+            <!-- PANEL MATEMÁTICO -->
 
             <div class="zona-matematica">
 
-                <div class="panel-matematico">
+
+                <div class="panel">
 
 
                     <div class="formula formula1">
 
-                        ∫ f(t)e<sup>-st</sup>dt
+                        X = F⁻¹(U)
 
                     </div>
 
 
                     <div class="formula formula2">
 
-                        F(ω) = ∫ f(t)e<sup>-iωt</sup>dt
+                        0 ≤ U ≤ 1
 
                     </div>
 
 
                     <div class="formula formula3">
 
-                        y'' + ay' + by = f(t)
+                        F(X) = U
 
                     </div>
 
 
                     <div class="formula formula4">
 
-                        ∑ a<sub>n</sub>e<sup>int</sup>
+                        X ~ F(x)
 
                     </div>
 
 
-                    <div class="integral-grande">
+                    <div class="circulo-formula"></div>
+
+
+                    <div class="simbolo">
 
                         ∫
 
                     </div>
-
-
-                    <div class="grafica"></div>
 
 
                 </div>
@@ -879,255 +1126,330 @@
 
 
     <!-- =========================
-         MÉTODOS
-    ========================== -->
+         CONTENIDO
+    ========================= -->
 
-    <section class="seccion-metodos" id="metodos">
+    <section
+        class="seccion"
+        id="contenido"
+    >
 
 
-        <div class="encabezado-metodos">
+        <div class="encabezado">
+
 
             <div class="mini">
+
                 CONTENIDO ACADÉMICO
+
             </div>
 
+
             <h2>
-                Métodos de Transformadas
+
+                Método de Transformación Directa
+
             </h2>
+
 
             <p>
 
-                Selecciona un método para conocer sus conceptos,
-                fórmulas, propiedades y ejemplos de aplicación.
+                Selecciona una sección para conocer el fundamento,
+                procedimiento y aplicación del Método de Transformación
+                Directa, así como sus distribuciones.
 
             </p>
+
 
         </div>
 
 
 
-        <section class="metodos">
+        <div class="tarjetas">
 
 
-            <!-- 1 -->
+            <!-- 01 -->
 
             <div class="tarjeta">
 
-                <span class="numero">01</span>
+                <span class="numero">
+                    01
+                </span>
 
-                <div class="icono">∫</div>
+                <div class="icono">
+                    ∑
+                </div>
 
                 <h3>
-                    Transformada de Laplace
+                    Fundamento
                 </h3>
 
                 <p>
-                    Método utilizado para transformar funciones
-                    del dominio del tiempo al dominio de la frecuencia.
+                    Principios básicos del Método de Transformación Directa
+                    y su importancia dentro de la simulación.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 2 -->
+            <!-- 02 -->
 
             <div class="tarjeta">
 
-                <span class="numero">02</span>
+                <span class="numero">
+                    02
+                </span>
 
-                <div class="icono">〰</div>
+                <div class="icono">
+                    f
+                </div>
 
                 <h3>
-                    Transformada de Fourier
+                    Distribuciones
                 </h3>
 
                 <p>
-                    Permite analizar funciones y señales mediante
-                    sus componentes de frecuencia.
+                    Distribuciones de probabilidad utilizadas para
+                    representar diferentes comportamientos aleatorios.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 3 -->
+            <!-- 03 -->
 
             <div class="tarjeta">
 
-                <span class="numero">03</span>
+                <span class="numero">
+                    03
+                </span>
 
-                <div class="icono">ℤ</div>
+                <div class="icono">
+                    U
+                </div>
 
                 <h3>
-                    Transformada Z
+                    Números Aleatorios
                 </h3>
 
                 <p>
-                    Herramienta utilizada principalmente para estudiar
-                    señales y sistemas discretos.
+                    Uso de números aleatorios uniformes como entrada
+                    para generar variables aleatorias.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 4 -->
+            <!-- 04 -->
 
             <div class="tarjeta">
 
-                <span class="numero">04</span>
+                <span class="numero">
+                    04
+                </span>
 
-                <div class="icono">↩</div>
+                <div class="icono">
+                    F
+                </div>
 
                 <h3>
-                    Transformada Inversa
+                    Función de Distribución
                 </h3>
 
                 <p>
-                    Permite regresar del dominio transformado
-                    hacia la función original.
+                    Relación entre la función de distribución y la
+                    generación de variables aleatorias.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 5 -->
+            <!-- 05 -->
 
             <div class="tarjeta">
 
-                <span class="numero">05</span>
+                <span class="numero">
+                    05
+                </span>
 
-                <div class="icono">📐</div>
+                <div class="icono">
+                    X
+                </div>
 
                 <h3>
-                    Propiedades
+                    Transformación Directa
                 </h3>
 
                 <p>
-                    Conoce las principales propiedades utilizadas
-                    para simplificar las transformadas.
+                    Procedimiento para transformar números aleatorios
+                    uniformes en variables con una distribución determinada.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 6 -->
+            <!-- 06 -->
 
             <div class="tarjeta">
 
-                <span class="numero">06</span>
+                <span class="numero">
+                    06
+                </span>
 
-                <div class="icono">🔢</div>
+                <div class="icono">
+                    ∫
+                </div>
 
                 <h3>
-                    Fracciones Parciales
+                    Método de la Inversa
                 </h3>
 
                 <p>
-                    Técnica utilizada para resolver expresiones
-                    racionales relacionadas con transformadas.
+                    Aplicación de la función inversa de distribución
+                    para obtener valores de la variable aleatoria.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 7 -->
+            <!-- 07 -->
 
             <div class="tarjeta">
 
-                <span class="numero">07</span>
+                <span class="numero">
+                    07
+                </span>
 
-                <div class="icono">⚙</div>
+                <div class="icono">
+                    λ
+                </div>
 
                 <h3>
-                    Ecuaciones Diferenciales
+                    Distribución Exponencial
                 </h3>
 
                 <p>
-                    Aplicación de las transformadas para resolver
-                    ecuaciones diferenciales.
+                    Generación de variables aleatorias exponenciales
+                    mediante transformación directa.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 8 -->
+            <!-- 08 -->
 
             <div class="tarjeta">
 
-                <span class="numero">08</span>
+                <span class="numero">
+                    08
+                </span>
 
-                <div class="icono">📊</div>
+                <div class="icono">
+                    μ
+                </div>
 
                 <h3>
-                    Funciones Escalonadas
+                    Distribución Normal
                 </h3>
 
                 <p>
-                    Estudio de funciones definidas por intervalos
-                    mediante transformadas.
+                    Características de la distribución normal y su
+                    utilización dentro de la simulación.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
 
-            <!-- 9 -->
+            <!-- 09 -->
 
             <div class="tarjeta">
 
-                <span class="numero">09</span>
+                <span class="numero">
+                    09
+                </span>
 
-                <div class="icono">🔄</div>
+                <div class="icono">
+                    P
+                </div>
 
                 <h3>
-                    Convolución
+                    Distribución Uniforme
                 </h3>
 
                 <p>
-                    Operación importante relacionada con las
-                    transformadas y sistemas lineales.
+                    Distribución utilizada como base para la generación
+                    de números aleatorios.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
@@ -1138,21 +1460,28 @@
 
             <div class="tarjeta">
 
-                <span class="numero">10</span>
+                <span class="numero">
+                    10
+                </span>
 
-                <div class="icono">📈</div>
+                <div class="icono">
+                    →
+                </div>
 
                 <h3>
-                    Series de Fourier
+                    Procedimiento
                 </h3>
 
                 <p>
-                    Representación de funciones periódicas mediante
-                    series trigonométricas.
+                    Secuencia de pasos necesarios para aplicar
+                    correctamente el método.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
@@ -1163,21 +1492,28 @@
 
             <div class="tarjeta">
 
-                <span class="numero">11</span>
+                <span class="numero">
+                    11
+                </span>
 
-                <div class="icono">🧮</div>
+                <div class="icono">
+                    Σ
+                </div>
 
                 <h3>
-                    Transformaciones
+                    Cálculos
                 </h3>
 
                 <p>
-                    Diferentes procedimientos para cambiar una
-                    función a una representación más conveniente.
+                    Desarrollo de los cálculos necesarios para obtener
+                    las variables utilizadas en la simulación.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
@@ -1188,50 +1524,69 @@
 
             <div class="tarjeta">
 
-                <span class="numero">12</span>
+                <span class="numero">
+                    12
+                </span>
 
-                <div class="icono">💡</div>
+                <div class="icono">
+                    ✓
+                </div>
 
                 <h3>
-                    Aplicaciones
+                    Aplicación
                 </h3>
 
                 <p>
-                    Ejemplos de aplicación de las transformadas
-                    en ingeniería y resolución de problemas.
+                    Aplicación del Método de Transformación Directa
+                    dentro de un proceso de simulación.
                 </p>
 
-                <a href="#" class="boton-metodo">
-                    Ver método →
+                <a
+                    href="#"
+                    class="boton-metodo"
+                >
+                    Ver sección →
                 </a>
 
             </div>
 
 
-        </section>
+        </div>
 
     </section>
 
 
 
     <!-- =========================
-         SECCIÓN FINAL
-    ========================== -->
+         PARTE FINAL
+    ========================= -->
 
     <section class="final">
 
+
         <h2>
-            Transformadas Matemáticas
+
+            Método de Transformación Directa
+
         </h2>
 
+
         <p>
-            Una herramienta interactiva para el aprendizaje
-            de las matemáticas aplicadas a la ingeniería.
+
+            Simulación de Procesos · Ingeniería Industrial · ESPOCH
+
         </p>
 
-        <a href="#inicio" class="boton-principal">
+
+        <a
+            href="#inicio"
+            class="boton"
+        >
+
             Volver al inicio ↑
+
         </a>
+
 
     </section>
 
@@ -1239,21 +1594,57 @@
 
     <!-- =========================
          PIE DE PÁGINA
-    ========================== -->
+    ========================= -->
 
     <footer>
 
-        <div>
-            © 2026 · Transformadas Matemáticas · ESPOCH
-        </div>
 
         <div>
-            Facultad de Mecánica · Ingeniería Industrial
+
+            <strong>
+                ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
+            </strong>
+
         </div>
 
+
         <div>
-            Elaborado por Mariela Lluay
+
+            Facultad de Mecánica · Carrera de Ingeniería Industrial
+
         </div>
+
+
+        <div>
+
+            Simulación de Procesos
+
+        </div>
+
+
+        <div>
+
+            Mariela Elizabeth Lluay Vimos · Código 7403
+
+        </div>
+
+
+        <div>
+
+            Docente: Ing. Ángel Guamán Lozano
+
+        </div>
+
+
+        <br>
+
+
+        <div>
+
+            © 2026 · Método de Transformación Directa
+
+        </div>
+
 
     </footer>
 
