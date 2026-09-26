@@ -18,9 +18,9 @@
     <style>
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
 
@@ -30,7 +30,7 @@
 
 
         body {
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background: #faf8fc;
             color: #27223b;
         }
@@ -52,13 +52,13 @@
 
                 radial-gradient(
                     circle at 85% 15%,
-                    rgba(255, 126, 190, 0.28),
+                    rgba(255, 157, 206, 0.35),
                     transparent 28%
                 ),
 
                 radial-gradient(
                     circle at 10% 85%,
-                    rgba(130, 150, 255, 0.25),
+                    rgba(110, 126, 232, 0.30),
                     transparent 30%
                 ),
 
@@ -70,8 +70,13 @@
                 );
 
             color: white;
+
         }
 
+
+        /* =========================
+           DECORACIONES
+        ========================= */
 
         .circulo1,
         .circulo2,
@@ -82,60 +87,67 @@
             border-radius: 50%;
 
             pointer-events: none;
+
         }
 
 
         .circulo1 {
 
-            width: 280px;
-            height: 280px;
+            width: 220px;
+            height: 220px;
 
-            background:
-                rgba(255, 159, 211, 0.08);
+            top: -80px;
+            right: 10%;
 
-            top: -100px;
-            right: -80px;
+            border: 2px solid
+                rgba(255, 255, 255, 0.10);
+
         }
 
 
         .circulo2 {
 
-            width: 190px;
-            height: 190px;
+            width: 150px;
+            height: 150px;
+
+            bottom: 8%;
+            left: -60px;
 
             background:
-                rgba(255, 220, 126, 0.08);
+                rgba(255, 157, 206, 0.08);
 
-            bottom: 40px;
-            left: -80px;
         }
 
 
         .circulo3 {
 
-            width: 110px;
-            height: 110px;
+            width: 90px;
+            height: 90px;
 
-            background:
-                rgba(198, 164, 255, 0.12);
+            top: 35%;
+            right: 4%;
 
-            top: 45%;
-            right: 5%;
+            border: 1px solid
+                rgba(255, 216, 117, 0.20);
+
         }
 
 
         /* =========================
-           HEADER
+           ENCABEZADO
         ========================= */
 
         header {
 
-            width: 100%;
+            position: relative;
+
+            z-index: 2;
+
             max-width: 1280px;
 
             margin: auto;
 
-            padding: 28px 35px;
+            padding: 25px 35px;
 
             display: flex;
 
@@ -143,16 +155,26 @@
 
             gap: 18px;
 
-            position: relative;
-
-            z-index: 5;
         }
 
 
         .logo-universidad {
 
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+        }
+
+
+        .sello {
+
             width: 78px;
             height: 78px;
+
+            object-fit: contain;
 
             background: white;
 
@@ -160,39 +182,17 @@
 
             border-radius: 14px;
 
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            box-shadow:
-                0 10px 25px rgba(0, 0, 0, 0.15);
-        }
-
-
-        .sello {
-
-            width: 100%;
-            height: 100%;
-
-            object-fit: contain;
         }
 
 
         .universidad {
 
-            line-height: 1.3;
-        }
+            font-size: 16px;
 
+            font-weight: bold;
 
-        .universidad strong {
+            line-height: 1.4;
 
-            display: block;
-
-            font-size: 20px;
-
-            letter-spacing: 0.5px;
         }
 
 
@@ -200,11 +200,12 @@
 
             display: block;
 
-            font-size: 14px;
+            color: #ffd875;
 
-            color: #e6ddff;
+            font-size: 13px;
 
-            margin-top: 4px;
+            font-weight: normal;
+
         }
 
 
@@ -214,34 +215,27 @@
 
         .hero {
 
-            width: 100%;
+            position: relative;
+
+            z-index: 2;
+
             max-width: 1280px;
 
             margin: auto;
 
-            min-height:
-                calc(100vh - 130px);
+            min-height: calc(100vh - 130px);
 
-            padding: 35px;
+            padding: 55px 35px 80px;
 
             display: grid;
 
             grid-template-columns:
                 1.1fr 0.9fr;
 
-            align-items: center;
-
             gap: 55px;
 
-            position: relative;
+            align-items: center;
 
-            z-index: 2;
-        }
-
-
-        .contenido-hero {
-
-            max-width: 700px;
         }
 
 
@@ -249,7 +243,7 @@
 
             display: inline-block;
 
-            padding: 8px 18px;
+            padding: 8px 17px;
 
             border-radius: 30px;
 
@@ -257,36 +251,41 @@
                 rgba(255, 255, 255, 0.10);
 
             border:
-                1px solid rgba(255, 255, 255, 0.25);
+                1px solid
+                rgba(255, 255, 255, 0.15);
 
-            color: #ffd5eb;
+            color: #ffd875;
 
-            font-size: 14px;
+            font-size: 13px;
 
-            font-weight: 700;
+            font-weight: bold;
 
             letter-spacing: 2px;
 
-            margin-bottom: 22px;
+            margin-bottom: 20px;
+
         }
 
 
-        h1 {
+        .hero h1 {
 
-            font-size:
-                clamp(48px, 6vw, 76px);
+            font-size: clamp(
+                48px,
+                6vw,
+                76px
+            );
 
-            line-height: 0.98;
-
-            letter-spacing: -2px;
+            line-height: 1.05;
 
             margin-bottom: 22px;
+
         }
 
 
-        h1 span {
+        .hero h1 span {
 
             color: #ff9dce;
+
         }
 
 
@@ -294,35 +293,37 @@
 
             font-size: 25px;
 
-            font-weight: 600;
+            margin-bottom: 10px;
 
-            margin-bottom: 8px;
         }
 
 
         .tema {
 
-            font-size: 20px;
-
             color: #ffd875;
 
-            font-weight: 600;
+            font-size: 20px;
 
-            margin-bottom: 20px;
+            font-weight: bold;
+
+            margin-bottom: 22px;
+
         }
 
 
         .descripcion {
 
-            max-width: 680px;
+            max-width: 700px;
 
             font-size: 17px;
 
             line-height: 1.8;
 
-            color: #eeeaff;
+            color:
+                rgba(255, 255, 255, 0.82);
 
-            margin-bottom: 28px;
+            margin-bottom: 25px;
+
         }
 
 
@@ -331,24 +332,17 @@
             border-left:
                 4px solid #ff9dce;
 
-            padding:
-                15px 20px;
+            padding: 12px 18px;
 
             background:
-                rgba(255, 255, 255, 0.07);
+                rgba(255, 255, 255, 0.06);
 
-            border-radius:
-                0 14px 14px 0;
+            border-radius: 0 12px 12px 0;
+
+            line-height: 1.8;
 
             margin-bottom: 28px;
 
-            line-height: 1.8;
-        }
-
-
-        .datos strong {
-
-            color: #ffd875;
         }
 
 
@@ -356,24 +350,20 @@
 
             display: inline-block;
 
-            text-decoration: none;
-
-            background: #ff8fc6;
-
-            color: #241b3d;
-
-            font-weight: 800;
-
-            padding:
-                14px 26px;
+            padding: 14px 28px;
 
             border-radius: 30px;
 
-            box-shadow:
-                0 10px 25px
-                rgba(255, 105, 180, 0.25);
+            background: #ff9dce;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-weight: bold;
 
             transition: 0.3s;
+
         }
 
 
@@ -381,46 +371,61 @@
 
             background: #ffd875;
 
-            transform:
-                translateY(-3px);
+            color: #33284b;
+
+            transform: translateY(-3px);
+
         }
 
 
         /* =========================
-           PANEL MATEMÁTICO
+           PANEL MATEMATICO
         ========================= */
 
         .panel-matematico {
 
             width: 440px;
+
             height: 440px;
 
             max-width: 100%;
 
             margin: auto;
 
-            position: relative;
-
             border-radius: 45px;
 
             background:
-                rgba(255, 255, 255, 0.10);
+                rgba(255, 255, 255, 0.08);
 
             border:
                 1px solid
-                rgba(255, 255, 255, 0.20);
+                rgba(255, 255, 255, 0.16);
 
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
 
-            box-shadow:
-                0 30px 60px
-                rgba(0, 0, 0, 0.20);
+            position: relative;
 
             display: flex;
 
             align-items: center;
 
             justify-content: center;
+
+            box-shadow:
+                0 30px 70px
+                rgba(0, 0, 0, 0.18);
+
+        }
+
+
+        .integral {
+
+            font-size: 125px;
+
+            color: #ffd875;
+
+            font-family: Georgia, serif;
+
         }
 
 
@@ -428,73 +433,38 @@
 
             position: absolute;
 
-            font-size: 21px;
+            font-size: 22px;
 
-            font-weight: 700;
+            font-weight: bold;
 
-            color: #ffe1f0;
+            color: white;
+
         }
 
 
         .formula1 {
-
-            top: 75px;
-            left: 55px;
-        }
-
-
-        .formula2 {
-
-            top: 75px;
-            right: 45px;
-
-            color: #ffd875;
-        }
-
-
-        .formula3 {
-
-            bottom: 80px;
+            top: 55px;
             left: 50px;
         }
 
 
-        .formula4 {
-
-            bottom: 80px;
-            right: 45px;
-
-            color: #d7c4ff;
+        .formula2 {
+            top: 70px;
+            right: 40px;
+            color: #ff9dce;
         }
 
 
-        .centro {
+        .formula3 {
+            bottom: 70px;
+            left: 45px;
+        }
 
-            width: 145px;
-            height: 145px;
 
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ff9dce,
-                    #a98bea
-                );
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 82px;
-
-            color: white;
-
-            box-shadow:
-                0 20px 40px
-                rgba(0, 0, 0, 0.18);
+        .formula4 {
+            bottom: 55px;
+            right: 45px;
+            color: #a98bea;
         }
 
 
@@ -504,70 +474,70 @@
 
         .contenido {
 
-            padding:
-                90px 35px 100px;
+            padding: 90px 30px;
 
             background:
 
                 radial-gradient(
-                    circle at 10% 10%,
-                    rgba(214, 194, 255, 0.22),
-                    transparent 25%
-                ),
-
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(255, 191, 224, 0.20),
+                    circle at 90% 10%,
+                    #eee8ff,
                     transparent 25%
                 ),
 
                 #faf8fc;
+
         }
 
 
-        .encabezado-contenido {
+        .contenido-superior {
 
-            max-width: 900px;
+            max-width: 1200px;
 
-            margin:
-                0 auto 55px;
+            margin: auto;
 
             text-align: center;
+
         }
 
 
-        .mini-titulo {
+        .etiqueta-seccion {
 
-            color: #a15bc5;
+            color: #9b4f9e;
 
-            font-size: 14px;
+            font-size: 13px;
 
             font-weight: 800;
 
-            letter-spacing: 3px;
+            letter-spacing: 2px;
 
             margin-bottom: 12px;
+
         }
 
 
-        .encabezado-contenido h2 {
+        .contenido h2 {
 
-            font-size:
-                clamp(34px, 5vw, 52px);
+            font-size: 42px;
 
-            color: #27223b;
+            color: #33284b;
 
-            margin-bottom: 18px;
+            margin-bottom: 15px;
+
         }
 
 
-        .encabezado-contenido p {
+        .contenido-intro {
+
+            max-width: 780px;
+
+            margin: 0 auto 45px;
 
             font-size: 17px;
 
             line-height: 1.7;
 
-            color: #625c72;
+            color: #655e73;
+
         }
 
 
@@ -577,9 +547,7 @@
 
         .tarjetas {
 
-            width: 100%;
-
-            max-width: 1280px;
+            max-width: 1250px;
 
             margin: auto;
 
@@ -589,29 +557,28 @@
                 repeat(4, 1fr);
 
             gap: 23px;
+
         }
 
 
         .tarjeta {
 
-            position: relative;
-
             background: white;
 
-            border-radius: 22px;
+            padding: 27px;
 
-            padding:
-                30px 25px;
+            border-radius: 23px;
 
-            min-height: 300px;
+            position: relative;
 
             overflow: hidden;
 
             box-shadow:
-                0 12px 35px
-                rgba(65, 44, 100, 0.08);
+                0 10px 30px
+                rgba(92, 65, 130, 0.10);
 
             transition: 0.3s;
+
         }
 
 
@@ -622,74 +589,59 @@
             position: absolute;
 
             top: 0;
+
             left: 0;
+
             right: 0;
 
             height: 5px;
 
             background:
-
                 linear-gradient(
                     90deg,
                     #6e7ee8,
                     #ff9dce,
                     #ffd875
                 );
+
         }
 
 
         .tarjeta:hover {
 
-            transform:
-                translateY(-8px);
+            transform: translateY(-7px);
 
             box-shadow:
-                0 20px 40px
-                rgba(65, 44, 100, 0.15);
+                0 18px 40px
+                rgba(92, 65, 130, 0.16);
+
         }
 
 
         .numero {
 
-            display: inline-flex;
+            position: absolute;
 
-            width: 42px;
-            height: 42px;
+            top: 18px;
 
-            align-items: center;
+            right: 20px;
 
-            justify-content: center;
+            font-size: 12px;
 
-            border-radius: 50%;
+            color: #b4abc4;
 
-            background: #f0e8ff;
+            font-weight: bold;
 
-            color: #7852a9;
-
-            font-size: 13px;
-
-            font-weight: 800;
-
-            margin-bottom: 20px;
         }
 
 
         .icono {
 
-            width: 62px;
-            height: 62px;
+            width: 58px;
 
-            border-radius: 18px;
+            height: 58px;
 
-            background:
-
-                linear-gradient(
-                    135deg,
-                    #e8e0ff,
-                    #ffe2f0
-                );
-
-            color: #694e9e;
+            border-radius: 17px;
 
             display: flex;
 
@@ -697,51 +649,65 @@
 
             justify-content: center;
 
-            font-size: 22px;
+            background:
+                linear-gradient(
+                    135deg,
+                    #eee8ff,
+                    #ffe4f1
+                );
 
-            font-weight: 800;
+            color: #51428a;
+
+            font-size: 24px;
+
+            font-weight: bold;
 
             margin-bottom: 20px;
+
         }
 
 
         .tarjeta h3 {
 
-            font-size: 22px;
+            color: #33284b;
 
-            color: #302944;
+            font-size: 21px;
 
             margin-bottom: 12px;
+
         }
 
 
         .tarjeta p {
 
+            color: #655e73;
+
             font-size: 15px;
 
-            line-height: 1.65;
-
-            color: #6d6879;
+            line-height: 1.7;
 
             margin-bottom: 20px;
+
         }
 
 
         .boton-metodo {
 
-            color: #9b4f9e;
+            color: #7c5bb8;
+
+            text-decoration: none;
 
             font-size: 14px;
 
-            font-weight: 800;
+            font-weight: bold;
 
-            text-decoration: none;
         }
 
 
         .boton-metodo:hover {
 
-            color: #e45c9e;
+            color: #d45b9c;
+
         }
 
 
@@ -751,13 +717,11 @@
 
         .final {
 
-            padding:
-                90px 30px;
+            padding: 90px 30px;
 
             text-align: center;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #e9e1ff,
@@ -765,6 +729,7 @@
                 );
 
             position: relative;
+
         }
 
 
@@ -775,10 +740,9 @@
             color: #33284b;
 
             margin-bottom: 35px;
+
         }
 
-
-        /* TARJETA FINAL */
 
         .mensaje-final {
 
@@ -786,8 +750,7 @@
 
             margin: auto;
 
-            padding:
-                38px 45px;
+            padding: 38px 45px;
 
             background:
                 rgba(255, 255, 255, 0.90);
@@ -805,6 +768,7 @@
             position: relative;
 
             overflow: hidden;
+
         }
 
 
@@ -815,13 +779,14 @@
             position: absolute;
 
             top: 0;
+
             left: 0;
+
             right: 0;
 
             height: 6px;
 
             background:
-
                 linear-gradient(
                     90deg,
                     #6e7ee8,
@@ -829,12 +794,14 @@
                     #ffd875,
                     #a98bea
                 );
+
         }
 
 
         .decoracion-final {
 
             width: 58px;
+
             height: 58px;
 
             margin:
@@ -843,7 +810,6 @@
             border-radius: 50%;
 
             background:
-
                 linear-gradient(
                     135deg,
                     #ff9dce,
@@ -861,6 +827,7 @@
             box-shadow:
                 0 10px 25px
                 rgba(169, 139, 234, 0.30);
+
         }
 
 
@@ -873,6 +840,7 @@
             line-height: 1.8;
 
             margin-bottom: 20px;
+
         }
 
 
@@ -888,12 +856,12 @@
             border-radius: 10px;
 
             background:
-
                 linear-gradient(
                     90deg,
                     #ff9dce,
                     #a98bea
                 );
+
         }
 
 
@@ -906,6 +874,7 @@
             font-weight: 800;
 
             letter-spacing: 2px;
+
         }
 
 
@@ -919,44 +888,23 @@
 
             text-align: center;
 
-            background: #171538;
+            background: #101c4f;
 
-            color: #d9d3ec;
-
-            font-size: 14px;
+            color: white;
 
             line-height: 1.8;
-        }
 
-
-        footer strong {
-
-            color: #ff9dce;
         }
 
 
         .volver-inicio {
 
-            display: inline-block;
-
-            color: #ff9dce;
+            color: #ffd875;
 
             text-decoration: none;
 
-            font-weight: 700;
+            font-weight: bold;
 
-            margin-bottom: 5px;
-
-            transition: 0.3s;
-        }
-
-
-        .volver-inicio:hover {
-
-            color: #ffd875;
-
-            transform:
-                translateY(-2px);
         }
 
 
@@ -971,12 +919,7 @@
                 grid-template-columns: 1fr;
 
                 text-align: center;
-            }
 
-
-            .contenido-hero {
-
-                margin: auto;
             }
 
 
@@ -985,12 +928,14 @@
                 margin-left: auto;
 
                 margin-right: auto;
+
             }
 
 
             .datos {
 
                 text-align: left;
+
             }
 
 
@@ -998,6 +943,7 @@
 
                 grid-template-columns:
                     repeat(2, 1fr);
+
             }
 
         }
@@ -1007,140 +953,62 @@
 
             header {
 
-                padding: 20px;
-            }
+                padding:
+                    20px;
 
-
-            .logo-universidad {
-
-                width: 62px;
-
-                height: 62px;
-            }
-
-
-            .universidad strong {
-
-                font-size: 16px;
-            }
-
-
-            .universidad span {
-
-                font-size: 11px;
             }
 
 
             .hero {
 
                 padding:
-                    25px 20px 60px;
-            }
+                    40px 20px 60px;
 
-
-            h1 {
-
-                font-size: 45px;
-            }
-
-
-            .materia {
-
-                font-size: 21px;
-            }
-
-
-            .tema {
-
-                font-size: 18px;
             }
 
 
             .panel-matematico {
 
-                width: 330px;
+                width: 320px;
 
-                height: 330px;
+                height: 320px;
+
             }
 
 
-            .centro {
+            .integral {
 
-                width: 110px;
+                font-size: 90px;
 
-                height: 110px;
-
-                font-size: 60px;
-            }
-
-
-            .formula {
-
-                font-size: 16px;
-            }
-
-
-            .formula1 {
-
-                top: 50px;
-
-                left: 30px;
-            }
-
-
-            .formula2 {
-
-                top: 50px;
-
-                right: 25px;
-            }
-
-
-            .formula3 {
-
-                bottom: 55px;
-
-                left: 25px;
-            }
-
-
-            .formula4 {
-
-                bottom: 55px;
-
-                right: 25px;
-            }
-
-
-            .contenido {
-
-                padding:
-                    65px 20px;
             }
 
 
             .tarjetas {
 
                 grid-template-columns: 1fr;
+
+            }
+
+
+            .contenido h2 {
+
+                font-size: 32px;
+
             }
 
 
             .final h2 {
 
                 font-size: 30px;
+
             }
 
 
             .mensaje-final {
 
                 padding:
-                    35px 25px;
-            }
+                    30px 22px;
 
-
-            .mensaje-final p {
-
-                font-size: 16px;
             }
 
         }
@@ -1162,40 +1030,34 @@
         id="inicio"
     >
 
-
         <div class="circulo1"></div>
-
         <div class="circulo2"></div>
-
         <div class="circulo3"></div>
 
 
         <header>
 
-
             <div class="logo-universidad">
 
                 <img
-                    src="./sello-espoch.png"
-                    alt="Sello ESPOCH"
+                    src="sello-espoch.png"
                     class="sello"
+                    alt="ESPOCH"
                 >
 
+
+                <div class="universidad">
+
+                    ESCUELA SUPERIOR
+                    POLITÉCNICA DE CHIMBORAZO
+
+                    <span>
+                        Facultad de Mecánica · Ingeniería Industrial
+                    </span>
+
+                </div>
+
             </div>
-
-
-            <div class="universidad">
-
-                <strong>
-                    ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO
-                </strong>
-
-                <span>
-                    Facultad de Mecánica · Ingeniería Industrial
-                </span>
-
-            </div>
-
 
         </header>
 
@@ -1203,81 +1065,68 @@
         <div class="hero">
 
 
-            <div class="contenido-hero">
-
+            <div>
 
                 <div class="etiqueta">
+
                     SIMULACIÓN DE PROCESOS
+
                 </div>
 
 
                 <h1>
 
-                    GENERADOR DE
-
-                    <br>
-
+                    Generador de
                     <span>
-                        VARIABLES ALEATORIAS
+                        Variables Aleatorias
                     </span>
 
                 </h1>
 
 
                 <div class="materia">
-                    Materia: Simulación de Procesos
+
+                    Simulación de Procesos
+
                 </div>
 
 
                 <div class="tema">
-                    Generador de Variables Aleatorias
+
+                    Métodos de generación
+
                 </div>
 
 
                 <p class="descripcion">
 
-                    Página interactiva para conocer el fundamento,
-                    procedimiento y aplicación de los generadores de
-                    variables aleatorias en la simulación de procesos.
+                    Página interactiva para conocer y aplicar
+                    diferentes métodos de generación de variables
+                    aleatorias utilizados en la simulación de procesos.
 
                 </p>
 
 
                 <div class="datos">
 
+                    <strong>
+                        Estudiante:
+                    </strong>
+                    Mariela Elizabeth Lluay Vimos
 
-                    <div>
+                    <br>
 
-                        <strong>
-                            Estudiante:
-                        </strong>
+                    <strong>
+                        Código:
+                    </strong>
+                    7403
 
-                        Mariela Elizabeth Lluay Vimos
+                    <br>
 
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Código:
-                        </strong>
-
-                        7403
-
-                    </div>
-
-
-                    <div>
-
-                        <strong>
-                            Docente:
-                        </strong>
-
-                        Ing. Ángel Guamán Lozano
-
-                    </div>
-
+                    <strong>
+                        Docente:
+                    </strong>
+                    Ing. Ángel Guamán Lozano
 
                 </div>
 
@@ -1287,675 +1136,31 @@
                     class="boton"
                 >
 
-                    Explorar contenido →
+                    Explorar contenido
 
                 </a>
-
 
             </div>
 
 
             <div class="panel-matematico">
 
-
                 <div class="formula formula1">
-                    X = F⁻¹(U)
+
+                    X = F<sup>-1</sup>(U)
+
                 </div>
 
 
                 <div class="formula formula2">
+
                     0 ≤ U ≤ 1
+
                 </div>
 
 
-                <div class="formula formula3">
-                    F(X) = U
-                </div>
+                <div class="integral">
 
-
-                <div class="formula formula4">
-                    X ~ F(x)
-                </div>
-
-
-                <div class="centro">
                     ∫
-                </div>
 
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =========================
-         CONTENIDO
-    ========================= -->
-
-    <section
-        class="contenido"
-        id="contenido"
-    >
-
-
-        <div class="encabezado-contenido">
-
-
-            <div class="mini-titulo">
-                CONTENIDO ACADÉMICO
-            </div>
-
-
-            <h2>
-                Generador de Variables Aleatorias
-            </h2>
-
-
-            <p>
-
-                Selecciona una sección para conocer los fundamentos,
-                procedimientos, distribuciones y aplicaciones de los
-                generadores de variables aleatorias.
-
-            </p>
-
-
-        </div>
-
-
-
-        <div class="tarjetas">
-
-
-            <!-- 01 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    01
-                </span>
-
-
-                <div class="icono">
-                    U<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Distribución Uniforme
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias cuyos valores
-                    se encuentran dentro de un intervalo definido entre
-                    un límite inferior y un límite superior.
-
-                </p>
-
-
-                <a
-                    href="uniforme.html"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 02 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    02
-                </span>
-
-
-                <div class="icono">
-                    χ²
-                </div>
-
-
-                <h3>
-                    Chi-cuadrada
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias continuas a
-                    partir de una distribución definida por sus
-                    grados de libertad.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 03 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    03
-                </span>
-
-
-                <div class="icono">
-                    ER<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Erlang
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias que representan
-                    tiempos asociados con la ocurrencia de varios
-                    eventos en un proceso.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 04 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    04
-                </span>
-
-
-                <div class="icono">
-                    N<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Normal
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias continuas que
-                    se distribuyen alrededor de una media, considerando
-                    una desviación estándar.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 05 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    05
-                </span>
-
-
-                <div class="icono">
-                    N<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Normal
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias con distribución
-                    normal mediante un método de generación basado en
-                    números aleatorios.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 06 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    06
-                </span>
-
-
-                <div class="icono">
-                    E<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Exponencial
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias que representan
-                    principalmente tiempos entre eventos que ocurren de
-                    forma aleatoria.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 07 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    07
-                </span>
-
-
-                <div class="icono">
-                    W<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Weibull
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias que pueden
-                    representar tiempos de vida, duración o fallas de
-                    elementos y procesos.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 08 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    08
-                </span>
-
-
-                <div class="icono">
-                    G<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Gamma
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias continuas
-                    relacionadas principalmente con tiempos de espera
-                    y la ocurrencia de varios eventos.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 09 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    09
-                </span>
-
-
-                <div class="icono">
-                    LN<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Lognormal
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias positivas cuyo
-                    logaritmo sigue una distribución normal.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 10 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    10
-                </span>
-
-
-                <div class="icono">
-                    BE<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Bernoulli
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias con dos
-                    posibles resultados: éxito o fracaso, de acuerdo
-                    con una probabilidad determinada.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 11 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    11
-                </span>
-
-
-                <div class="icono">
-                    B<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Binomial
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias que representan
-                    el número de éxitos obtenidos en un número determinado
-                    de ensayos.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-
-            <!-- 12 -->
-
-            <div class="tarjeta">
-
-                <span class="numero">
-                    12
-                </span>
-
-
-                <div class="icono">
-                    P<sub>i</sub>
-                </div>
-
-
-                <h3>
-                    Poisson
-                </h3>
-
-
-                <p>
-
-                    Permite generar variables aleatorias que representan
-                    el número de eventos que ocurren durante un intervalo
-                    determinado.
-
-                </p>
-
-
-                <a
-                    href="#"
-                    class="boton-metodo"
-                >
-
-                    Ver método →
-
-                </a>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =========================
-         FINAL
-    ========================= -->
-
-    <section class="final">
-
-
-        <h2>
-            Generador de Variables Aleatorias
-        </h2>
-
-
-        <div class="mensaje-final">
-
-
-            <div class="decoracion-final">
-                ✨
-            </div>
-
-
-            <p>
-
-                Aprende, comprende y aplica los fundamentos de la
-                simulación de procesos.
-
-            </p>
-
-
-            <div class="linea-final"></div>
-
-
-            <span>
-                SIMULACIÓN DE PROCESOS
-            </span>
-
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
-    <footer>
-
-
-        <a
-            href="#inicio"
-            class="volver-inicio"
-        >
-
-            ↑ Volver al inicio
-
-        </a>
-
-
-        <br><br>
-
-
-        © 2026 ·
-
-        <strong>
-            Transformadas Matemáticas
-        </strong>
-
-        · ESPOCH
-
-
-        <br>
-
-
-        Facultad de Mecánica · Ingeniería Industrial
-
-
-        <br>
-
-
-        Elaborado por Mariela Lluay
-
-
-    </footer>
-
-
-</body>
-
-</html>
+                </div
