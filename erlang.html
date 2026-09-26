@@ -2,33 +2,34 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Distribución Erlang</title>
+    <title>Distribución Erlang | Simulación de Procesos</title>
 
     <style>
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
             background: #faf8fc;
             color: #27223b;
         }
 
-        /* ENCABEZADO */
-
         .encabezado {
-            background: linear-gradient(
-                135deg,
-                #101c4f,
-                #263d82,
-                #65509b
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #101c4f,
+                    #263d82,
+                    #65509b
+                );
 
             color: white;
             padding: 45px 25px;
@@ -37,24 +38,19 @@
 
         .encabezado h1 {
             font-size: 42px;
-            margin: 0 0 12px;
+            margin-bottom: 12px;
         }
 
         .encabezado p {
             font-size: 18px;
-            margin: 0;
             opacity: 0.9;
         }
-
-        /* CONTENEDOR */
 
         .contenedor {
             max-width: 1100px;
             margin: 40px auto;
             padding: 0 25px;
         }
-
-        /* TARJETAS */
 
         .tarjeta {
             background: white;
@@ -80,8 +76,6 @@
             color: #514a63;
         }
 
-        /* DATOS */
-
         .datos {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -89,82 +83,73 @@
             margin-top: 20px;
         }
 
-        .campo label {
+        label {
             display: block;
-            margin-bottom: 8px;
             font-weight: bold;
+            margin-bottom: 8px;
             color: #51428a;
         }
 
-        .campo input {
+        input {
             width: 100%;
             padding: 13px;
 
-            border: 2px solid #ddd5ee;
-            border-radius: 12px;
+            border:
+                2px solid
+                #ddd5ee;
 
+            border-radius: 12px;
             font-size: 16px;
             outline: none;
         }
 
-        .campo input:focus {
+        input:focus {
             border-color: #a98bea;
         }
 
-        /* BOTONES */
-
-        .botones {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
         .boton {
+            display: block;
+
+            margin: 30px auto 10px;
+
             padding: 15px 35px;
 
             border: none;
+
             border-radius: 30px;
 
-            background: linear-gradient(
-                135deg,
-                #ff9dce,
-                #a98bea
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff9dce,
+                    #a98bea
+                );
 
             color: white;
 
             font-size: 17px;
+
             font-weight: bold;
 
             cursor: pointer;
-
-            transition: 0.3s;
         }
 
         .boton:hover {
             transform: translateY(-2px);
-
-            box-shadow:
-                0 8px 20px
-                rgba(169, 139, 234, 0.35);
         }
-
-        /* FORMULA */
 
         .formula {
             text-align: center;
 
             background: #f3efff;
 
-            padding: 30px;
+            padding: 25px;
 
             border-radius: 18px;
 
             margin-top: 20px;
 
-            font-size: 28px;
+            font-size: 24px;
 
             color: #51428a;
 
@@ -174,39 +159,33 @@
         }
 
         .explicacion {
-            text-align: center;
-
-            color: #655e73;
-
-            line-height: 1.7;
-
             margin-top: 20px;
+            text-align: center;
+            color: #655e73;
+            line-height: 1.7;
         }
-
-        /* TABLA */
 
         .tabla-contenedor {
             overflow-x: auto;
             margin-top: 25px;
+            max-width: 100%;
         }
 
         table {
             width: 100%;
-            min-width: 600px;
-
+            min-width: 700px;
             border-collapse: collapse;
-
             background: white;
         }
 
         th,
         td {
             padding: 12px;
-
             text-align: center;
 
             border-bottom:
-                1px solid #e5dff0;
+                1px solid
+                #e5dff0;
 
             white-space: nowrap;
         }
@@ -220,8 +199,6 @@
             background: #faf7ff;
         }
 
-        /* VOLVER */
-
         .volver {
             display: inline-block;
 
@@ -233,24 +210,6 @@
 
             font-weight: bold;
         }
-
-        .volver:hover {
-            text-decoration: underline;
-        }
-
-        /* MENSAJE */
-
-        #mensaje {
-            text-align: center;
-
-            margin-top: 15px;
-
-            color: #51428a;
-
-            font-weight: bold;
-        }
-
-        /* FOOTER */
 
         footer {
             margin-top: 50px;
@@ -266,20 +225,14 @@
             line-height: 1.8;
         }
 
-        /* RESPONSIVE */
-
         @media (max-width: 700px) {
-
-            .encabezado h1 {
-                font-size: 32px;
-            }
 
             .datos {
                 grid-template-columns: 1fr;
             }
 
-            .formula {
-                font-size: 22px;
+            .encabezado h1 {
+                font-size: 32px;
             }
 
         }
@@ -291,8 +244,6 @@
 
 <body>
 
-
-    <!-- ENCABEZADO -->
 
     <header class="encabezado">
 
@@ -319,9 +270,12 @@
             </h2>
 
             <p>
-                La distribución Erlang es una distribución
-                continua utilizada para representar tiempos
-                de espera y procesos formados por varias etapas.
+
+                La distribución Erlang se utiliza para
+                generar variables aleatorias continuas
+                relacionadas con tiempos de espera y
+                procesos formados por varias etapas.
+
             </p>
 
         </section>
@@ -338,26 +292,31 @@
             <div class="datos">
 
 
-                <div class="campo">
+                <div>
 
                     <label for="cantidad">
+
                         Cantidad de variables a generar
+
                     </label>
 
                     <input
                         type="number"
                         id="cantidad"
                         min="1"
+                        step="1"
                         value="10"
                     >
 
                 </div>
 
 
-                <div class="campo">
+                <div>
 
                     <label for="lambda">
+
                         Tasa (λ)
+
                     </label>
 
                     <input
@@ -371,16 +330,19 @@
                 </div>
 
 
-                <div class="campo">
+                <div>
 
                     <label for="k">
+
                         Número de etapas (k)
+
                     </label>
 
                     <input
                         type="number"
                         id="k"
                         min="1"
+                        step="1"
                         value="4"
                     >
 
@@ -392,7 +354,7 @@
         </section>
 
 
-        <!-- 03. MÉTODO -->
+        <!-- 03. METODO -->
 
         <section class="tarjeta">
 
@@ -401,10 +363,12 @@
             </h2>
 
             <p>
+
                 Para generar cada variable Erlang se utilizan
-                números aleatorios entre 0 y 1. Luego se aplica
-                la fórmula correspondiente según los valores
-                de λ y k.
+                números aleatorios entre 0 y 1. Estos valores
+                se multiplican mediante la fórmula de Erlang
+                de acuerdo con la tasa y el número de etapas.
+
             </p>
 
 
@@ -413,14 +377,13 @@
                 ER<sub>i</sub>
                 =
                 −
-                <span style="display:inline-block;">
-                    <span style="display:block; border-bottom:2px solid #51428a;">
-                        1
-                    </span>
-                    <span style="display:block;">
-                        kλ
-                    </span>
+                <span>
+                    1
                 </span>
+                /
+                (
+                kλ
+                )
                 ln
                 ∏<sub>j=1</sub><sup>k</sup>
                 (1 − r<sub>j</sub>)
@@ -428,34 +391,27 @@
             </div>
 
 
-            <div class="explicacion">
+            <p class="explicacion">
 
-                <p>
-                    <strong>ER<sub>i</sub></strong>
-                    = variable aleatoria Erlang
-                </p>
+                r<sub>j</sub> =
+                número aleatorio entre 0 y 1
 
-                <p>
-                    <strong>λ</strong>
-                    = tasa
-                </p>
+                <br>
 
-                <p>
-                    <strong>k</strong>
-                    = número de etapas
-                </p>
+                λ =
+                tasa
 
-                <p>
-                    <strong>r<sub>j</sub></strong>
-                    = número aleatorio entre 0 y 1
-                </p>
+                <br>
 
-            </div>
+                k =
+                número de etapas
+
+            </p>
 
         </section>
 
 
-        <!-- 04. GENERACIÓN -->
+        <!-- 04. GENERACION -->
 
         <section class="tarjeta">
 
@@ -463,53 +419,49 @@
                 04. Generación de variables
             </h2>
 
-            <div class="botones">
 
-                <button
-                    class="boton"
-                    onclick="generarErlang()"
-                >
-                    Generar variables aleatorias
-                </button>
+            <button
+                class="boton"
+                onclick="generarErlang()"
+            >
 
+                Generar variables aleatorias
 
-                <button
-                    class="boton"
-                    onclick="copiarExcel()"
-                >
-                    Copiar Excel
-                </button>
-
-            </div>
+            </button>
 
 
-            <div id="mensaje"></div>
+            <button
+                class="boton"
+                onclick="copiarExcel()"
+            >
+
+                Copiar Excel
+
+            </button>
 
 
-            <div
-                id="resultados"
-                class="tabla-contenedor"
-            ></div>
+            <div id="resultados"></div>
 
         </section>
 
 
         <a
-            href="https://marielalluay2021-cmd.github.io/transformadas-matematicas/index.html"
+            href="index.html"
             class="volver"
         >
+
             ← Volver al inicio
+
         </a>
 
 
     </main>
 
 
-    <!-- FOOTER -->
-
     <footer>
 
         Simulación de Procesos · ESPOCH
+
         <br>
 
         Facultad de Mecánica · Ingeniería Industrial
@@ -523,55 +475,55 @@
 
     <script>
 
-        /* NÚMEROS ALEATORIOS */
 
-        let usados = new Set();
-
-
-        function generarAleatorioSinRepetir() {
-
-            let r;
-
-            do {
-
-                r = Math.random();
-
-            } while (usados.has(r));
-
-            usados.add(r);
-
-            return r;
-
-        }
-
-
-        /* GENERAR ERLANG */
+        /*
+        GENERAR ERLANG
+        */
 
         function generarErlang() {
 
+
             const cantidad =
                 parseInt(
-                    document.getElementById("cantidad").value
+                    document.getElementById(
+                        "cantidad"
+                    ).value
                 );
+
 
             const lambda =
                 parseFloat(
-                    document.getElementById("lambda").value
+                    document.getElementById(
+                        "lambda"
+                    ).value
                 );
+
 
             const k =
                 parseInt(
-                    document.getElementById("k").value
+                    document.getElementById(
+                        "k"
+                    ).value
                 );
 
 
+            const resultados =
+                document.getElementById(
+                    "resultados"
+                );
+
+
+            /*
+            VALIDAR DATOS
+            */
+
             if (
-                isNaN(cantidad) ||
+                !Number.isInteger(cantidad) ||
                 cantidad < 1
             ) {
 
                 alert(
-                    "Ingrese una cantidad válida."
+                    "La cantidad de variables debe ser un número entero mayor que 0."
                 );
 
                 return;
@@ -585,7 +537,7 @@
             ) {
 
                 alert(
-                    "La tasa λ debe ser mayor que 0."
+                    "La tasa debe ser mayor que 0."
                 );
 
                 return;
@@ -594,12 +546,12 @@
 
 
             if (
-                isNaN(k) ||
+                !Number.isInteger(k) ||
                 k < 1
             ) {
 
                 alert(
-                    "El valor de k debe ser mayor que 0."
+                    "El número de etapas debe ser un número entero mayor que 0."
                 );
 
                 return;
@@ -607,43 +559,20 @@
             }
 
 
-            usados.clear();
+            /*
+            ENCABEZADOS
+            */
+
+            let encabezados = `
+
+                <th>i</th>
+
+            `;
 
 
-            let html = "<table>";
-
-            html += "<thead>";
-
-            html += "<tr>";
-
-            html += "<th>i</th>";
-
-
-            for (
-                let j = 1;
-                j <= k;
-                j++
-            ) {
-
-                html +=
-                    `<th>r${j}</th>`;
-
-            }
-
-
-            html += "<th>ERi</th>";
-
-            html += "</tr>";
-
-            html += "</thead>";
-
-            html += "<tbody>";
-
-
-            let datosExcel = [];
-
-            let encabezado = ["i"];
-
+            /*
+            Crear r1, r2, r3...
+            */
 
             for (
                 let j = 1;
@@ -651,19 +580,52 @@
                 j++
             ) {
 
-                encabezado.push(
-                    `r${j}`
-                );
+                encabezados += `
+
+                    <th>
+                        r<sub>${j}</sub>
+                    </th>
+
+                `;
 
             }
 
 
-            encabezado.push("ERi");
+            /*
+            Columna final Erlang
+            */
 
-            datosExcel.push(
-                encabezado
-            );
+            encabezados += `
 
+                <th>
+                    ER<sub>i</sub>
+                </th>
+
+            `;
+
+
+            /*
+            CREAR TABLA
+            */
+
+            let tabla = `
+
+                <div class="tabla-contenedor">
+
+                <table>
+
+                    <tr>
+
+                        ${encabezados}
+
+                    </tr>
+
+            `;
+
+
+            /*
+            GENERAR VARIABLES
+            */
 
             for (
                 let i = 1;
@@ -671,16 +633,24 @@
                 i++
             ) {
 
+
                 let producto = 1;
 
-                let valores = [];
+
+                let fila = `
+
+                    <tr>
+
+                        <td>
+                            ${i}
+                        </td>
+
+                `;
 
 
-                html += "<tr>";
-
-                html +=
-                    `<td>${i}</td>`;
-
+                /*
+                GENERAR LOS r
+                */
 
                 for (
                     let j = 1;
@@ -688,82 +658,101 @@
                     j++
                 ) {
 
+
                     const r =
-                        generarAleatorioSinRepetir();
+                        Math.random();
 
 
-                    valores.push(r);
-
+                    /*
+                    Calcular producto
+                    */
 
                     producto *=
                         (1 - r);
 
 
-                    html +=
-                        `<td>${r.toFixed(4)}</td>`;
+                    /*
+                    Mostrar r
+                    */
+
+                    fila += `
+
+                        <td>
+                            ${r.toFixed(6)}
+                        </td>
+
+                    `;
 
                 }
 
 
+                /*
+                CALCULAR ERLANG
+                */
+
                 const ER =
-                    -(1 / (k * lambda))
-                    * Math.log(producto);
+                    -(
+                        1 /
+                        (k * lambda)
+                    )
+                    *
+                    Math.log(
+                        producto
+                    );
 
 
-                html +=
-                    `<td>${ER.toFixed(4)}</td>`;
+                /*
+                MOSTRAR ERLANG
+                */
+
+                fila += `
+
+                        <td>
+                            ${ER.toFixed(6)}
+                        </td>
+
+                    </tr>
+
+                `;
 
 
-                html += "</tr>";
-
-
-                datosExcel.push([
-
-                    i,
-
-                    ...valores.map(
-                        r => r.toFixed(4)
-                    ),
-
-                    ER.toFixed(4)
-
-                ]);
+                tabla += fila;
 
             }
 
 
-            html += "</tbody>";
+            tabla += `
 
-            html += "</table>";
+                </table>
 
+                </div>
 
-            document.getElementById(
-                "resultados"
-            ).innerHTML = html;
-
-
-            window.datosErlangExcel =
-                datosExcel;
+            `;
 
 
-            document.getElementById(
-                "mensaje"
-            ).textContent =
-                `Se generaron ${cantidad} variables aleatorias.`;
+            resultados.innerHTML =
+                tabla;
 
         }
 
 
-        /* COPIAR EXCEL */
+        /*
+        COPIAR TABLA PARA EXCEL
+        */
 
         function copiarExcel() {
 
-            if (
-                !window.datosErlangExcel
-            ) {
+
+            const tabla =
+                document.querySelector(
+                    "#resultados table"
+                );
+
+
+            if (!tabla) {
 
                 alert(
-                    "Primero genere las variables aleatorias."
+                    "Primero genera las variables."
                 );
 
                 return;
@@ -771,26 +760,59 @@
             }
 
 
-            const texto =
-                window.datosErlangExcel
-                    .map(
-                        fila =>
-                            fila.join("\t")
-                    )
-                    .join("\n");
+            let texto = "";
 
 
-            navigator.clipboard
-                .writeText(texto)
-                .then(() => {
+            const filas =
+                tabla.querySelectorAll(
+                    "tr"
+                );
 
-                    alert(
-                        "Los datos fueron copiados. Ahora puede pegarlos en Excel."
+
+            filas.forEach(
+                fila => {
+
+
+                    const celdas =
+                        fila.querySelectorAll(
+                            "th, td"
+                        );
+
+
+                    const datos = [];
+
+
+                    celdas.forEach(
+                        celda => {
+
+                            datos.push(
+                                celda.innerText
+                            );
+
+                        }
                     );
 
-                });
+
+                    texto +=
+                        datos.join("\t")
+                        +
+                        "\n";
+
+                }
+            );
+
+
+            navigator.clipboard.writeText(
+                texto
+            );
+
+
+            alert(
+                "Datos copiados. Ahora puedes pegarlos en Excel."
+            );
 
         }
+
 
     </script>
 
