@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Generador de Variables Aleatorias | ESPOCH</title>
 
     <style>
@@ -11,6 +10,10 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -29,59 +32,58 @@
             position: relative;
             overflow: hidden;
             background:
-                radial-gradient(circle at 15% 20%, rgba(100, 80, 255, 0.45), transparent 28%),
-                radial-gradient(circle at 85% 25%, rgba(255, 80, 180, 0.35), transparent 25%),
-                radial-gradient(circle at 50% 100%, rgba(50, 100, 255, 0.25), transparent 35%),
-                linear-gradient(135deg, #090b30, #171052 50%, #090b2b);
-        }
-
-        .hero::before,
-        .hero::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.08);
+                radial-gradient(circle at 15% 20%, rgba(105, 75, 255, 0.42), transparent 28%),
+                radial-gradient(circle at 85% 25%, rgba(255, 70, 180, 0.32), transparent 25%),
+                radial-gradient(circle at 50% 100%, rgba(45, 100, 255, 0.24), transparent 35%),
+                linear-gradient(135deg, #080b2b, #171052 50%, #090b2b);
         }
 
         .hero::before {
-            width: 500px;
-            height: 500px;
-            top: -250px;
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50%;
+            top: -300px;
             right: -180px;
         }
 
         .hero::after {
-            width: 400px;
-            height: 400px;
-            bottom: -220px;
-            left: -160px;
+            content: "";
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 50%;
+            bottom: -250px;
+            left: -170px;
         }
 
         /* =========================
-           ENCABEZADO
+           HEADER
         ========================= */
 
         header {
             position: relative;
-            z-index: 2;
+            z-index: 5;
             width: 90%;
             max-width: 1250px;
             margin: auto;
             padding: 25px 0;
             display: flex;
             align-items: center;
-            gap: 18px;
         }
 
         .logo-universidad {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .sello {
-            width: 75px;
-            height: 75px;
+            width: 78px;
+            height: 78px;
             object-fit: contain;
         }
 
@@ -93,42 +95,42 @@
 
         .facultad {
             font-size: 13px;
-            color: #c8c7e8;
-            margin-top: 4px;
+            color: #c8c5e5;
+            margin-top: 5px;
         }
 
         /* =========================
-           HERO CONTENIDO
+           HERO
         ========================= */
 
         .hero-contenido {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             width: 90%;
             max-width: 1250px;
             margin: auto;
             min-height: calc(100vh - 125px);
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1.08fr 0.92fr;
             align-items: center;
-            gap: 60px;
+            gap: 55px;
         }
 
         .etiqueta {
             display: inline-block;
-            padding: 8px 16px;
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 17px;
+            border: 1px solid rgba(255,255,255,0.17);
             border-radius: 30px;
-            background: rgba(255,255,255,0.07);
-            color: #d9d6ff;
+            background: rgba(255,255,255,0.06);
+            color: #d9d5ff;
             font-size: 12px;
             letter-spacing: 2px;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         h1 {
-            font-size: clamp(45px, 6vw, 82px);
-            line-height: 0.95;
+            font-size: clamp(48px, 6vw, 82px);
+            line-height: 0.94;
             letter-spacing: -3px;
             margin-bottom: 25px;
         }
@@ -141,34 +143,34 @@
 
         .asignatura {
             font-size: 20px;
-            color: #d8d5f2;
+            color: #ddd9f3;
             margin-bottom: 8px;
         }
 
         .tema {
             font-size: 17px;
-            color: #bcb8dd;
-            margin-bottom: 25px;
+            color: #bdb9dd;
+            margin-bottom: 23px;
         }
 
         .descripcion {
             max-width: 620px;
-            line-height: 1.7;
+            line-height: 1.75;
             color: #c4c1df;
             font-size: 16px;
         }
 
         .datos {
-            margin-top: 30px;
+            margin-top: 28px;
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
         .dato {
-            padding: 10px 15px;
+            padding: 9px 14px;
             border-radius: 10px;
-            background: rgba(255,255,255,0.07);
+            background: rgba(255,255,255,0.06);
             border: 1px solid rgba(255,255,255,0.08);
             font-size: 13px;
             color: #d9d7ef;
@@ -176,7 +178,7 @@
 
         .boton-explorar {
             display: inline-block;
-            margin-top: 30px;
+            margin-top: 28px;
             padding: 14px 25px;
             border-radius: 30px;
             text-decoration: none;
@@ -196,26 +198,29 @@
         ========================= */
 
         .panel-matematico {
-            min-height: 420px;
-            border-radius: 35px;
+            min-height: 440px;
+            border-radius: 38px;
             border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.055);
             backdrop-filter: blur(15px);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             box-shadow: 0 25px 70px rgba(0,0,0,0.25);
+            overflow: hidden;
         }
 
         .formula {
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .formula-principal {
-            font-size: 50px;
+            font-size: 52px;
             font-weight: 300;
-            color: #fff;
+            color: white;
             margin-bottom: 25px;
         }
 
@@ -226,7 +231,7 @@
         }
 
         .integral {
-            font-size: 130px;
+            font-size: 180px;
             font-family: Georgia, serif;
             font-weight: 300;
             color: #bcaaff;
@@ -246,7 +251,7 @@
 
         .encabezado-contenido {
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             margin: auto;
             margin-bottom: 55px;
         }
@@ -256,16 +261,17 @@
             font-size: 13px;
             font-weight: 700;
             letter-spacing: 3px;
-            margin-bottom: 12px;
+            margin-bottom: 13px;
         }
 
         .encabezado-contenido h2 {
-            font-size: 42px;
+            font-size: 44px;
             margin-bottom: 18px;
+            color: #201e3b;
         }
 
         .encabezado-contenido p {
-            color: #68687c;
+            color: #69687b;
             line-height: 1.7;
             font-size: 16px;
         }
@@ -284,30 +290,30 @@
 
         .tarjeta {
             position: relative;
-            padding: 30px 24px;
-            min-height: 280px;
+            padding: 28px 24px;
+            min-height: 285px;
             border-radius: 22px;
             background: white;
             border: 1px solid #e7e6f0;
-            box-shadow: 0 10px 30px rgba(36, 31, 80, 0.08);
-            transition: 0.3s;
+            box-shadow: 0 10px 30px rgba(36,31,80,0.08);
+            transition: all 0.3s ease;
             overflow: hidden;
         }
 
         .tarjeta::before {
             content: "";
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 115px;
+            height: 115px;
             border-radius: 50%;
-            background: rgba(118, 92, 255, 0.08);
-            right: -35px;
-            top: -35px;
+            background: rgba(118,92,255,0.08);
+            right: -40px;
+            top: -40px;
         }
 
         .tarjeta:hover {
             transform: translateY(-8px);
-            box-shadow: 0 18px 40px rgba(36, 31, 80, 0.14);
+            box-shadow: 0 18px 40px rgba(36,31,80,0.14);
         }
 
         .numero {
@@ -320,20 +326,24 @@
         }
 
         .icono {
-            width: 65px;
-            height: 65px;
+            width: 66px;
+            height: 66px;
             border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #eeeaff, #ffe7f5);
             color: #765cff;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 25px;
+            margin-bottom: 23px;
         }
 
         .icono sub {
+            font-size: 13px;
+        }
+
+        .icono sup {
             font-size: 14px;
         }
 
@@ -352,11 +362,12 @@
 
         .boton-metodo {
             display: inline-block;
-            margin-top: 20px;
+            margin-top: 18px;
             text-decoration: none;
             color: #765cff;
             font-size: 14px;
             font-weight: 700;
+            transition: 0.2s;
         }
 
         .boton-metodo:hover {
@@ -368,8 +379,10 @@
         ========================= */
 
         .final {
+            position: relative;
+            overflow: hidden;
             background:
-                radial-gradient(circle at 80% 20%, rgba(255, 92, 190, 0.18), transparent 25%),
+                radial-gradient(circle at 80% 20%, rgba(255,92,190,0.18), transparent 25%),
                 linear-gradient(135deg, #10113b, #24165b);
             padding: 90px 7%;
             text-align: center;
@@ -381,7 +394,7 @@
         }
 
         .final p {
-            max-width: 700px;
+            max-width: 720px;
             margin: auto;
             color: #c8c6e0;
             line-height: 1.7;
@@ -399,15 +412,15 @@
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 1000px) {
+        @media (max-width: 1050px) {
 
             .hero-contenido {
                 grid-template-columns: 1fr;
-                padding: 60px 0;
+                padding: 60px 0 80px;
             }
 
             .panel-matematico {
-                min-height: 300px;
+                min-height: 320px;
             }
 
             .tarjetas {
@@ -422,7 +435,7 @@
             }
 
             .universidad {
-                font-size: 15px;
+                font-size: 14px;
             }
 
             .facultad {
@@ -518,7 +531,6 @@
                     variables aleatorias en la simulación de procesos.
                 </p>
 
-
                 <div class="datos">
 
                     <div class="dato">
@@ -534,7 +546,6 @@
                     </div>
 
                 </div>
-
 
                 <a href="#contenido" class="boton-explorar">
                     Explorar contenido →
@@ -600,15 +611,11 @@
         <div class="tarjetas">
 
 
-            <!-- =========================
-                 01 - YA EXISTENTE
-            ========================= -->
+            <!-- 01 UNIFORME -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    01
-                </span>
+                <span class="numero">01</span>
 
                 <div class="icono">
                     U<sub>i</sub>
@@ -630,15 +637,11 @@
             </div>
 
 
-            <!-- =========================
-                 02 - EXPONENCIAL
-            ========================= -->
+            <!-- 02 EXPONENCIAL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    02
-                </span>
+                <span class="numero">02</span>
 
                 <div class="icono">
                     E<sub>i</sub>
@@ -660,15 +663,11 @@
             </div>
 
 
-            <!-- =========================
-                 03 - WEIBULL
-            ========================= -->
+            <!-- 03 WEIBULL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    03
-                </span>
+                <span class="numero">03</span>
 
                 <div class="icono">
                     W<sub>i</sub>
@@ -690,15 +689,11 @@
             </div>
 
 
-            <!-- =========================
-                 04 - GAMMA
-            ========================= -->
+            <!-- 04 GAMMA -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    04
-                </span>
+                <span class="numero">04</span>
 
                 <div class="icono">
                     G<sub>i</sub>
@@ -720,15 +715,11 @@
             </div>
 
 
-            <!-- =========================
-                 05 - LOGNORMAL
-            ========================= -->
+            <!-- 05 LOGNORMAL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    05
-                </span>
+                <span class="numero">05</span>
 
                 <div class="icono">
                     LN<sub>i</sub>
@@ -750,15 +741,11 @@
             </div>
 
 
-            <!-- =========================
-                 06 - BERNOULLI
-            ========================= -->
+            <!-- 06 BERNOULLI -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    06
-                </span>
+                <span class="numero">06</span>
 
                 <div class="icono">
                     BE<sub>i</sub>
@@ -780,15 +767,11 @@
             </div>
 
 
-            <!-- =========================
-                 07 - BINOMIAL
-            ========================= -->
+            <!-- 07 BINOMIAL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    07
-                </span>
+                <span class="numero">07</span>
 
                 <div class="icono">
                     B<sub>i</sub>
@@ -810,15 +793,11 @@
             </div>
 
 
-            <!-- =========================
-                 08 - POISSON
-            ========================= -->
+            <!-- 08 POISSON -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    08
-                </span>
+                <span class="numero">08</span>
 
                 <div class="icono">
                     P<sub>i</sub>
@@ -840,15 +819,11 @@
             </div>
 
 
-            <!-- =========================
-                 09 - CHI CUADRADA
-            ========================= -->
+            <!-- 09 CHI-CUADRADA -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    09
-                </span>
+                <span class="numero">09</span>
 
                 <div class="icono">
                     χ<sup>2</sup>
@@ -870,15 +845,11 @@
             </div>
 
 
-            <!-- =========================
-                 10 - ERLANG
-            ========================= -->
+            <!-- 10 ERLANG -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    10
-                </span>
+                <span class="numero">10</span>
 
                 <div class="icono">
                     ER<sub>i</sub>
@@ -900,15 +871,11 @@
             </div>
 
 
-            <!-- =========================
-                 11 - NORMAL
-            ========================= -->
+            <!-- 11 NORMAL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    11
-                </span>
+                <span class="numero">11</span>
 
                 <div class="icono">
                     N<sub>i</sub>
@@ -930,15 +897,11 @@
             </div>
 
 
-            <!-- =========================
-                 12 - NORMAL
-            ========================= -->
+            <!-- 12 NORMAL -->
 
             <div class="tarjeta">
 
-                <span class="numero">
-                    12
-                </span>
+                <span class="numero">12</span>
 
                 <div class="icono">
                     N<sub>i</sub>
@@ -966,7 +929,7 @@
 
 
     <!-- =========================
-         SECCIÓN FINAL
+         FINAL
     ========================= -->
 
     <section class="final">
@@ -985,13 +948,11 @@
 
 
     <!-- =========================
-         PIE DE PÁGINA
+         FOOTER
     ========================= -->
 
     <footer>
-
         © 2026 · Generador de Variables Aleatorias · ESPOCH
-
     </footer>
 
 
