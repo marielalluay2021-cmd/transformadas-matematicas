@@ -483,6 +483,10 @@
         }
 
 
+        /*
+        Genera las variables Chi-cuadrada
+        */
+
         function generarChiCuadrada() {
 
 
@@ -522,6 +526,47 @@
             }
 
 
+            /*
+            Crear encabezados de la tabla
+            */
+
+            let encabezados = `
+
+                <th>i</th>
+
+            `;
+
+
+            for (
+                let j = 1;
+                j <= grados;
+                j++
+            ) {
+
+                encabezados += `
+
+                    <th>
+                        Z<sub>${j}</sub>
+                    </th>
+
+                `;
+
+            }
+
+
+            encabezados += `
+
+                <th>
+                    χ²<sub>i</sub>
+                </th>
+
+            `;
+
+
+            /*
+            Crear tabla
+            */
+
             let tabla = `
 
                 <div class="tabla-contenedor">
@@ -530,14 +575,16 @@
 
                     <tr>
 
-                        <th>i</th>
-
-                        <th>χ²ᵢ</th>
+                        ${encabezados}
 
                     </tr>
 
             `;
 
+
+            /*
+            Generar las variables
+            */
 
             for (
                 let i = 1;
@@ -548,6 +595,22 @@
 
                 let suma = 0;
 
+
+                let fila = `
+
+                    <tr>
+
+                        <td>
+                            ${i}
+                        </td>
+
+                `;
+
+
+                /*
+                Generar Z según los grados
+                de libertad
+                */
 
                 for (
                     let j = 1;
@@ -560,19 +623,33 @@
                         generarNormal();
 
 
+                    /*
+                    Sumar Z²
+                    */
+
                     suma += Z * Z;
 
+
+                    /*
+                    Mostrar Z
+                    */
+
+                    fila += `
+
+                        <td>
+                            ${Z.toFixed(6)}
+                        </td>
+
+                    `;
 
                 }
 
 
-                tabla += `
+                /*
+                Mostrar Chi-cuadrada
+                */
 
-                    <tr>
-
-                        <td>
-                            ${i}
-                        </td>
+                fila += `
 
                         <td>
                             ${suma.toFixed(6)}
@@ -581,6 +658,9 @@
                     </tr>
 
                 `;
+
+
+                tabla += fila;
 
             }
 
@@ -599,6 +679,10 @@
 
         }
 
+
+        /*
+        Copiar tabla para Excel
+        */
 
         function copiarExcel() {
 
