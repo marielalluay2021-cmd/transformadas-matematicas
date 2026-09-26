@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Transformadas Matemáticas | ESPOCH</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #071a52, #123c88, #1e63b5);
+            color: white;
+        }
+
+        /* ENCABEZADO */
+        header {
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .universidad {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* PORTADA */
+        .hero {
+            text-align: center;
+            padding: 70px 20px 45px;
+        }
+
+        .hero h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .hero h2 {
+            font-size: 25px;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.7;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        .autor {
+            margin-top: 25px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* MÉTODOS */
+        .contenedor {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .titulo-metodos {
+            text-align: center;
+            font-size: 32px;
+            margin: 35px 0;
+        }
+
+        .metodos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .tarjeta {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .icono {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .tarjeta p {
+            font-size: 14px;
+            line-height: 1.5;
+            opacity: 0.85;
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 22px;
+            background: white;
+            color: #123c88;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .boton:hover {
+            transform: scale(1.05);
+        }
+
+        /* PIE DE PÁGINA */
+        footer {
+            text-align: center;
+            margin-top: 70px;
+            padding: 30px;
+            background: rgba(0,0,0,0.2);
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero h2 {
+                font-size: 20px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+    <header>
+
+        <div class="logo">
+            ∫ ESPOCH
+        </div>
+
+        <div class="universidad">
+            Facultad de Mecánica · Ingeniería Industrial
+        </div>
+
+    </header>
+
+
+    <!-- PORTADA -->
+    <section class="hero">
+
+        <h1>Transformadas Matemáticas</h1>
+
+        <h2>Una guía interactiva para aprender y comprender sus métodos</h2>
+
+        <p>
+            Explora diferentes métodos de transformadas matemáticas,
+            conoce sus fórmulas, propiedades y aplicaciones mediante
+            ejemplos explicados de manera sencilla.
+        </p>
+
+        <div class="autor">
+            Elaborado por: Mariela Lluay
+        </div>
+
+    </section>
+
+
+    <!-- MÉTODOS -->
+    <main class="contenedor">
+
+        <h2 class="titulo-metodos">
+            📚 Métodos de Transformadas
+        </h2>
+
+        <section class="metodos">
+
+            <div class="tarjeta">
+                <div class="icono">∫</div>
+                <h3>Transformada de Laplace</h3>
+                <p>
+                    Método utilizado para transformar funciones
+                    del dominio del tiempo al dominio de la frecuencia.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">〰️</div>
+                <h3>Transformada de Fourier</h3>
+                <p>
+                    Permite analizar funciones y señales mediante
+                    sus componentes de frecuencia.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">ℤ</div>
+                <h3>Transformada Z</h3>
+                <p>
+                    Herramienta utilizada principalmente para estudiar
+                    señales y sistemas discretos.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">↩️</div>
+                <h3>Transformada Inversa</h3>
+                <p>
+                    Permite regresar del dominio transformado
+                    hacia la función original.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">📐</div>
+                <h3>Propiedades</h3>
+                <p>
+                    Conoce las principales propiedades utilizadas
+                    para simplificar las transformadas.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">🔢</div>
+                <h3>Fracciones Parciales</h3>
+                <p>
+                    Técnica utilizada para resolver expresiones
+                    racionales relacionadas con transformadas.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">⚙️</div>
+                <h3>Ecuaciones Diferenciales</h3>
+                <p>
+                    Aplicación de las transformadas para resolver
+                    ecuaciones diferenciales.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">📊</div>
+                <h3>Funciones Escalonadas</h3>
+                <p>
+                    Estudio de funciones definidas por intervalos
+                    mediante transformadas.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">🔄</div>
+                <h3>Convolución</h3>
+                <p>
+                    Operación importante relacionada con las
+                    transformadas y sistemas lineales.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">📈</div>
+                <h3>Series de Fourier</h3>
+                <p>
+                    Representación de funciones periódicas mediante
+                    series trigonométricas.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">🧮</div>
+                <h3>Transformaciones</h3>
+                <p>
+                    Diferentes procedimientos para cambiar una
+                    función a una representación más conveniente.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+
+            <div class="tarjeta">
+                <div class="icono">💡</div>
+                <h3>Aplicaciones</h3>
+                <p>
+                    Ejemplos de aplicación de las transformadas
+                    en ingeniería y resolución de problemas.
+                </p>
+                <a href="#" class="boton">Ver método</a>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- PIE -->
+    <footer>
+
+        <p>
+            © 2026 · Transformadas Matemáticas · ESPOCH
+        </p>
+
+        <p>
+            Ingeniería Industrial
+        </p>
+
+    </footer>
+
+</body>
+</html>
