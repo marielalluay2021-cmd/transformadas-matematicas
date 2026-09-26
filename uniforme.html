@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Distribución Uniforme | Simulación de Procesos</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -19,7 +21,13 @@
         }
 
         .encabezado {
-            background: linear-gradient(135deg, #101c4f, #263d82, #65509b);
+            background: linear-gradient(
+                135deg,
+                #101c4f,
+                #263d82,
+                #65509b
+            );
+
             color: white;
             padding: 45px 25px;
             text-align: center;
@@ -94,7 +102,13 @@
             padding: 15px 35px;
             border: none;
             border-radius: 30px;
-            background: linear-gradient(135deg, #ff9dce, #a98bea);
+
+            background: linear-gradient(
+                135deg,
+                #ff9dce,
+                #a98bea
+            );
+
             color: white;
             font-size: 17px;
             font-weight: bold;
@@ -160,6 +174,7 @@
         }
 
         @media (max-width: 700px) {
+
             .datos {
                 grid-template-columns: 1fr;
             }
@@ -167,38 +182,66 @@
             .encabezado h1 {
                 font-size: 32px;
             }
+
         }
+
     </style>
+
 </head>
 
 <body>
 
     <header class="encabezado">
+
         <h1>Distribución Uniforme</h1>
-        <p>Generador de Variables Aleatorias</p>
+
+        <p>
+            Generador de Variables Aleatorias
+        </p>
+
     </header>
+
 
     <main class="contenedor">
 
+
+        <!-- CONCEPTO -->
+
         <section class="tarjeta">
-            <h2>01. Concepto</h2>
+
+            <h2>
+                01. Concepto
+            </h2>
 
             <p>
+
                 La distribución uniforme permite generar variables
                 aleatorias cuyos valores se encuentran dentro de un
                 intervalo definido entre un límite inferior y un
                 límite superior.
+
             </p>
+
         </section>
 
+
+        <!-- DATOS DE ENTRADA -->
+
         <section class="tarjeta">
-            <h2>02. Datos de entrada</h2>
+
+            <h2>
+                02. Datos de entrada
+            </h2>
 
             <div class="datos">
 
+
                 <div>
+
                     <label for="cantidad">
+
                         Cantidad de variables a generar
+
                     </label>
 
                     <input
@@ -207,11 +250,16 @@
                         min="1"
                         value="10"
                     >
+
                 </div>
 
+
                 <div>
+
                     <label for="limiteInferior">
+
                         Límite inferior (a)
+
                     </label>
 
                     <input
@@ -220,11 +268,16 @@
                         value="0"
                         step="any"
                     >
+
                 </div>
 
+
                 <div>
+
                     <label for="limiteSuperior">
+
                         Límite superior (b)
+
                     </label>
 
                     <input
@@ -233,113 +286,294 @@
                         value="1"
                         step="any"
                     >
+
                 </div>
 
+
             </div>
+
         </section>
+
+
+        <!-- METODO -->
 
         <section class="tarjeta">
 
-            <h2>03. Método de generación</h2>
+            <h2>
+                03. Método de generación
+            </h2>
 
             <p>
+
                 Primero se generan números aleatorios uniformes
                 entre 0 y 1. Luego se utiliza el intervalo definido
                 por el usuario para obtener las variables aleatorias.
+
             </p>
 
+
             <div class="formula">
-                X<sub>i</sub> = a + (b - a)U<sub>i</sub>
+
+                X<sub>i</sub> =
+                a + (b - a)U<sub>i</sub>
+
             </div>
 
         </section>
 
+
+        <!-- GENERACION -->
+
         <section class="tarjeta">
 
-            <h2>04. Generación de variables</h2>
+            <h2>
+                04. Generación de variables
+            </h2>
 
-            <button class="boton" onclick="generarVariables()">
+
+            <button
+                class="boton"
+                onclick="generarVariables()"
+            >
+
                 Generar variables aleatorias
+
             </button>
+
+
+            <button
+                class="boton"
+                onclick="copiarExcel()"
+            >
+
+                Copiar Excel
+
+            </button>
+
 
             <div id="resultados"></div>
 
+
         </section>
 
-        <a href="index.html" class="volver">
+
+        <a
+            href="index.html"
+            class="volver"
+        >
+
             ← Volver al inicio
+
         </a>
+
 
     </main>
 
+
     <footer>
+
         Simulación de Procesos · ESPOCH
+
         <br>
+
         Facultad de Mecánica · Ingeniería Industrial
+
         <br>
+
         Mariela Lluay
+
     </footer>
 
+
+
     <script>
+
 
         function generarVariables() {
 
             const cantidad =
-                parseInt(document.getElementById("cantidad").value);
+                parseInt(
+                    document.getElementById("cantidad").value
+                );
+
 
             const a =
-                parseFloat(document.getElementById("limiteInferior").value);
+                parseFloat(
+                    document.getElementById("limiteInferior").value
+                );
+
 
             const b =
-                parseFloat(document.getElementById("limiteSuperior").value);
+                parseFloat(
+                    document.getElementById("limiteSuperior").value
+                );
+
 
             const resultados =
                 document.getElementById("resultados");
 
+
             if (cantidad < 1) {
-                alert("La cantidad debe ser mayor que 0.");
+
+                alert(
+                    "La cantidad debe ser mayor que 0."
+                );
+
                 return;
+
             }
+
 
             if (a >= b) {
-                alert("El límite inferior debe ser menor que el límite superior.");
+
+                alert(
+                    "El límite inferior debe ser menor que el límite superior."
+                );
+
                 return;
+
             }
+
 
             let tabla = `
+
                 <div class="tabla-contenedor">
+
                 <table>
+
                     <tr>
+
                         <th>i</th>
+
                         <th>Uᵢ</th>
+
                         <th>Xᵢ</th>
+
                     </tr>
+
             `;
 
-            for (let i = 1; i <= cantidad; i++) {
 
-                const U = Math.random();
+            for (
+                let i = 1;
+                i <= cantidad;
+                i++
+            ) {
 
-                const X = a + (b - a) * U;
+
+                const U =
+                    Math.random();
+
+
+                const X =
+                    a + (b - a) * U;
+
 
                 tabla += `
+
                     <tr>
-                        <td>${i}</td>
-                        <td>${U.toFixed(6)}</td>
-                        <td>${X.toFixed(6)}</td>
+
+                        <td>
+                            ${i}
+                        </td>
+
+                        <td>
+                            ${U.toFixed(6)}
+                        </td>
+
+                        <td>
+                            ${X.toFixed(6)}
+                        </td>
+
                     </tr>
+
                 `;
+
             }
 
+
             tabla += `
+
                 </table>
+
                 </div>
+
             `;
 
-            resultados.innerHTML = tabla;
+
+            resultados.innerHTML =
+                tabla;
+
         }
 
+
+
+        function copiarExcel() {
+
+            const tabla =
+                document.querySelector(
+                    "#resultados table"
+                );
+
+
+            if (!tabla) {
+
+                alert(
+                    "Primero genera las variables."
+                );
+
+                return;
+
+            }
+
+
+            let texto = "";
+
+
+            const filas =
+                tabla.querySelectorAll("tr");
+
+
+            filas.forEach(fila => {
+
+                const celdas =
+                    fila.querySelectorAll(
+                        "th, td"
+                    );
+
+
+                const datos = [];
+
+
+                celdas.forEach(celda => {
+
+                    datos.push(
+                        celda.innerText
+                    );
+
+                });
+
+
+                texto +=
+                    datos.join("\t") + "\n";
+
+            });
+
+
+            navigator.clipboard.writeText(
+                texto
+            );
+
+
+            alert(
+                "Datos copiados. Ahora puedes pegarlos en Excel."
+            );
+
+        }
+
+
     </script>
+
 
 </body>
 </html>
