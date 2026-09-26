@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Distribución Weibull | Simulación de Procesos</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #faf8fc;
+            color: #27223b;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           ENCABEZADO
+           ========================= */
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #101c4f,
+                #263d82,
+                #65509b
+            );
+
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        /* =========================
+           CONTENIDO
+           ========================= */
+
+        main {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(50, 40, 90, 0.10);
+
+            border-top: 5px solid #ff9dce;
+        }
+
+        .tarjeta h2 {
+            color: #51428a;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .tarjeta p {
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           FÓRMULA
+           ========================= */
+
+        .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+
+            padding: 40px 15px;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            color: #3f3275;
+
+            overflow-x: auto;
+        }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+
+            font-size: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+
+            white-space: nowrap;
+
+            min-width: max-content;
+        }
+
+        /* =========================
+           RAÍZ CON ÍNDICE ALPHA
+           ========================= */
+
+        .raiz {
+            position: relative;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            margin-left: 5px;
+        }
+
+        .indice {
+            font-size: 16px;
+
+            position: relative;
+
+            top: -13px;
+
+            margin-right: -3px;
+        }
+
+        .radical {
+            font-size: 48px;
+
+            line-height: 1;
+
+            font-family: "Times New Roman", serif;
+        }
+
+        .radicando {
+            border-top: 2px solid #3f3275;
+
+            padding: 2px 7px 0 5px;
+
+            margin-left: -5px;
+
+            font-size: 28px;
+        }
+
+        /* =========================
+           DATOS DE ENTRADA
+           ========================= */
+
+        .datos {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            color: #51428a;
+        }
+
+        .campo input {
+            padding: 12px;
+
+            border: 2px solid #ddd5e8;
+
+            border-radius: 8px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            width: 100%;
+        }
+
+        .campo input:focus {
+            border-color: #8d70c7;
+        }
+
+        /* =========================
+           BOTONES
+           ========================= */
+
+        .botones {
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+
+            padding: 13px 22px;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            color: white;
+
+            background: linear-gradient(
+                135deg,
+                #ff9dce,
+                #8d70c7
+            );
+
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+
+            opacity: 0.9;
+        }
+
+        /* =========================
+           TABLA
+           ========================= */
+
+        #resultados {
+            margin-top: 25px;
+
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            margin-top: 15px;
+
+            background: white;
+        }
+
+        th {
+            background: #51428a;
+
+            color: white;
+
+            padding: 10px;
+        }
+
+        td {
+            padding: 9px;
+
+            border: 1px solid #ddd5e8;
+
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #faf7fd;
+        }
+
+        /* =========================
+           VOLVER
+           ========================= */
+
+        .volver {
+            display: inline-block;
+
+            margin: 10px 0 30px;
+
+            text-decoration: none;
+
+            color: #51428a;
+
+            font-weight: bold;
+        }
+
+        .volver:hover {
+            color: #ff72b5;
+        }
+
+        /* =========================
+           FOOTER
+           ========================= */
+
+        footer {
+            background: #101c4f;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px 15px;
+
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+
+        @media (max-width: 800px) {
+
+            .datos {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            header h1 {
+                font-size: 30px;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .datos {
+                grid-template-columns: 1fr;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .formula-matematica {
+                font-size: 24px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         ENCABEZADO
+         ========================= -->
+
+    <header>
+
+        <h1>
+            Distribución Weibull (W<sub>i</sub>)
+        </h1>
+
+        <p>
+            Generador de Variables Aleatorias
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- =========================
+             CONCEPTO
+             ========================= -->
+
+        <section class="tarjeta">
+
+            <h2>
+                Concepto
+            </h2>
+
+            <p>
+                La distribución Weibull se utiliza para generar
+                variables aleatorias continuas a partir de números
+                aleatorios y determinados parámetros de la
+                distribución.
+            </p>
+
+            <p>
+                Su comportamiento está definido por los parámetros
+                de escala, forma y localización.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             DATOS DE ENTRADA
+             ========================= -->
+
+        <section class="tarjeta">
+
+            <h2>
+                Datos de entrada
+            </h2>
+
+            <div class="datos">
+
+
+                <div class="campo">
+
+                    <label for="cantidad">
+                        Cantidad
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        min="1"
+                        step="1"
+                        placeholder="Cantidad"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="beta">
+                        β — Escala
+                    </label>
+
+                    <input
+                        type="number"
+                        id="beta"
+                        min="0.000001"
+                        step="0.01"
+                        placeholder="β"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="alpha">
+                        α — Forma
+                    </label>
+
+                    <input
+                        type="number"
+                        id="alpha"
+                        min="0.000001"
+                        step="0.01"
+                        placeholder="α"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="gamma">
+                        γ — Localización
+                    </label>
+
+                    <input
+                        type="number"
+                        id="gamma"
+                        step="0.01"
+                        placeholder="γ"
+                    >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MÉTODO
+             ========================= -->
+
+        <section class="tarjeta">
+
+            <h2>
+                Distribución Weibull (W<sub>i</sub>)
+            </h2>
+
+            <p>
+                La variable aleatoria Weibull se obtiene mediante
+                la siguiente expresión:
+            </p>
+
+
+            <!-- =========================
+                 FÓRMULA
+                 ========================= -->
+
+            <div class="formula">
+
+                <div class="formula-matematica">
+
+                    <span>
+                        W<sub>i</sub>
+                    </span>
+
+                    <span>
+                        =
+                    </span>
+
+                    <span>
+                        γ
+                    </span>
+
+                    <span>
+                        +
+                    </span>
+
+                    <span>
+                        β
+                    </span>
+
+                    <span>
+                        ·
+                    </span>
+
+
+                    <span class="raiz">
+
+                        <span class="indice">
+                            α
+                        </span>
+
+                        <span class="radical">
+                            √
+                        </span>
+
+                        <span class="radicando">
+                            −ln(1 − r<sub>i</sub>)
+                        </span>
+
+                    </span>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 NOTAS
+                 ========================= -->
+
+            <p style="margin-top: 20px;">
+
+                <strong>
+                    Notas / Parámetros:
+                </strong>
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    β:
+                </strong>
+
+                Parámetro de escala.
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    α:
+                </strong>
+
+                Parámetro de forma.
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    γ:
+                </strong>
+
+                Parámetro de localización.
+
+            </p>
+
+
+            <p>
+
+                <strong>
+                    r<sub>i</sub>:
+                </strong>
+
+                Número aleatorio entre 0 y 1.
+
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             GENERACIÓN
+             ========================= -->
+
+        <section class="tarjeta">
+
+            <h2>
+                Generación de variables aleatorias
+            </h2>
+
+
+            <div class="botones">
+
+                <button
+                    onclick="generarWeibull()"
+                >
+
+                    Generar variables aleatorias
+
+                </button>
+
+
+                <button
+                    onclick="copiarExcel()"
+                >
+
+                    Copiar Excel
+
+                </button>
+
+            </div>
+
+
+            <div id="resultados"></div>
+
+        </section>
+
+
+        <!-- =========================
+             VOLVER
+             ========================= -->
+
+        <a
+            href="index.html"
+            class="volver"
+        >
+
+            ← Volver al inicio
+
+        </a>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer>
+
+        <p>
+            Simulación de Procesos · ESPOCH
+        </p>
+
+        <p>
+            Facultad de Mecánica · Ingeniería Industrial
+        </p>
+
+        <p>
+            Mariela Lluay
+        </p>
+
+    </footer>
+
+
+    <script>
+
+
+        // ==========================================
+        // GENERAR WEIBULL
+        // ==========================================
+
+        function generarWeibull() {
+
+
+            const cantidad =
+
+                parseInt(
+                    document.getElementById(
+                        "cantidad"
+                    ).value
+                );
+
+
+            const beta =
+
+                parseFloat(
+                    document.getElementById(
+                        "beta"
+                    ).value
+                );
+
+
+            const alpha =
+
+                parseFloat(
+                    document.getElementById(
+                        "alpha"
+                    ).value
+                );
+
+
+            const gamma =
+
+                parseFloat(
+                    document.getElementById(
+                        "gamma"
+                    ).value
+                );
+
+
+            // VALIDAR DATOS
+
+            if (
+
+                isNaN(cantidad) ||
+
+                isNaN(beta) ||
+
+                isNaN(alpha) ||
+
+                isNaN(gamma) ||
+
+                cantidad <= 0 ||
+
+                beta <= 0 ||
+
+                alpha <= 0
+
+            ) {
+
+                alert(
+                    "Ingrese valores válidos. β y α deben ser mayores que 0."
+                );
+
+                return;
+
+            }
+
+
+            // CREAR TABLA
+
+            let html =
+                "<table>";
+
+
+            html +=
+                "<tr>";
+
+
+            html +=
+                "<th>i</th>";
+
+
+            html +=
+                "<th>r<sub>i</sub></th>";
+
+
+            html +=
+                "<th>W<sub>i</sub></th>";
+
+
+            html +=
+                "</tr>";
+
+
+            // GENERAR VALORES
+
+            for (
+
+                let i = 1;
+
+                i <= cantidad;
+
+                i++
+
+            ) {
+
+
+                let r =
+                    Math.random();
+
+
+                // Evitar log(0)
+
+                if (r === 0) {
+
+                    r = 0.000001;
+
+                }
+
+
+                if (r === 1) {
+
+                    r = 0.999999;
+
+                }
+
+
+                /*
+                    Fórmula:
+
+                    Wᵢ = γ + β · √[α]{-ln(1-rᵢ)}
+
+                    Equivalente matemáticamente a:
+
+                    Wᵢ = γ + β · (-ln(1-rᵢ))^(1/α)
+                */
+
+                let Wi =
+
+                    gamma
+
+                    +
+
+                    beta *
+
+                    Math.pow(
+
+                        -Math.log(1 - r),
+
+                        1 / alpha
+
+                    );
+
+
+                html +=
+                    "<tr>";
+
+
+                html +=
+                    `<td>${i}</td>`;
+
+
+                html +=
+                    `<td>${r.toFixed(6)}</td>`;
+
+
+                html +=
+                    `<td>${Wi.toFixed(6)}</td>`;
+
+
+                html +=
+                    "</tr>";
+
+            }
+
+
+            html +=
+                "</table>";
+
+
+            document.getElementById(
+                "resultados"
+            ).innerHTML =
+                html;
+
+        }
+
+
+        // ==========================================
+        // COPIAR TABLA A EXCEL
+        // ==========================================
+
+        function copiarExcel() {
+
+
+            const tabla =
+
+                document.querySelector(
+                    "#resultados table"
+                );
+
+
+            if (!tabla) {
+
+                alert(
+                    "Primero genere las variables aleatorias."
+                );
+
+                return;
+
+            }
+
+
+            let texto =
+                "";
+
+
+            tabla.querySelectorAll(
+                "tr"
+            ).forEach(
+
+                fila => {
+
+
+                    let datos =
+                        [];
+
+
+                    fila.querySelectorAll(
+                        "th, td"
+                    ).forEach(
+
+                        celda => {
+
+                            datos.push(
+                                celda.innerText
+                            );
+
+                        }
+
+                    );
+
+
+                    texto +=
+
+                        datos.join("\t")
+
+                        +
+
+                        "\n";
+
+                }
+
+            );
+
+
+            navigator.clipboard.writeText(
+                texto
+            );
+
+
+            alert(
+                "Tabla copiada. Ahora puede pegarla en Excel."
+            );
+
+        }
+
+
+        // ==========================================
+        // LIMPIAR CAMPOS AL CARGAR
+        // ==========================================
+
+        window.addEventListener(
+
+            "pageshow",
+
+            function () {
+
+
+                document.getElementById(
+                    "cantidad"
+                ).value = "";
+
+
+                document.getElementById(
+                    "beta"
+                ).value = "";
+
+
+                document.getElementById(
+                    "alpha"
+                ).value = "";
+
+
+                document.getElementById(
+                    "gamma"
+                ).value = "";
+
+
+                document.getElementById(
+                    "resultados"
+                ).innerHTML = "";
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>
