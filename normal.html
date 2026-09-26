@@ -1,0 +1,687 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Normal | Simulación de Procesos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #faf8fc;
+            color: #27223b;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(
+                135deg,
+                #101c4f,
+                #263d82,
+                #65509b
+            );
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(50, 40, 90, 0.10);
+            border-top: 5px solid #ff9dce;
+        }
+
+        .tarjeta h2 {
+            color: #51428a;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .tarjeta p {
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            text-align: center;
+            font-size: 20px;
+            color: #3f3275;
+            font-weight: bold;
+        }
+
+        .formula-secundaria {
+            margin-top: 12px;
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #51428a;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 2px solid #ddd5e8;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .campo input:focus {
+            border-color: #8d70c7;
+        }
+
+        .botones {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(
+                135deg,
+                #ff9dce,
+                #8d70c7
+            );
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        #resultados {
+            margin-top: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background: white;
+        }
+
+        th {
+            background: #51428a;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 9px;
+            border: 1px solid #ddd5e8;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background: #faf7fd;
+        }
+
+        .volver {
+            display: inline-block;
+            margin: 10px 0 30px;
+            text-decoration: none;
+            color: #51428a;
+            font-weight: bold;
+        }
+
+        .volver:hover {
+            color: #ff72b5;
+        }
+
+        footer {
+            background: #101c4f;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 4px 0;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            .datos {
+                grid-template-columns: 1fr;
+            }
+
+            .botones {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ENCABEZADO -->
+
+    <header>
+
+        <h1>Distribución Normal</h1>
+
+        <p>
+            Generador de Variables Aleatorias · Método de Box-Muller
+        </p>
+
+    </header>
+
+
+    <main>
+
+
+        <!-- CONCEPTO -->
+
+        <section class="tarjeta">
+
+            <h2>Concepto</h2>
+
+            <p>
+                La distribución normal es una de las distribuciones de
+                probabilidad más utilizadas en simulación de procesos.
+                Se caracteriza por su media y su desviación estándar.
+            </p>
+
+            <p>
+                En este método se utiliza la transformación de Box-Muller
+                para generar variables aleatorias con distribución normal
+                a partir de números aleatorios.
+            </p>
+
+        </section>
+
+
+        <!-- DATOS DE ENTRADA -->
+
+        <section class="tarjeta">
+
+            <h2>Datos de entrada</h2>
+
+            <div class="datos">
+
+
+                <div class="campo">
+
+                    <label for="cantidad">
+                        Cantidad de variables aleatorias
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        min="1"
+                        step="1"
+                        placeholder="Ingrese la cantidad"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="media">
+                        Media (μ)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="media"
+                        step="0.01"
+                        placeholder="Ingrese la media"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="desviacion">
+                        Desviación estándar (σ)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="desviacion"
+                        min="0"
+                        step="0.01"
+                        placeholder="Ingrese la desviación estándar"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MÉTODO DE GENERACIÓN -->
+
+        <section class="tarjeta">
+
+            <h2>Método de generación – Box-Muller</h2>
+
+            <p>
+                Para generar las variables normales se utilizan dos números
+                aleatorios y las siguientes expresiones:
+            </p>
+
+
+            <div class="formula">
+
+                N₁ =
+                √[-2 ln(1 − rᵢ)]
+                cos(2πrⱼ) σ + μ
+
+            </div>
+
+
+            <div class="formula formula-secundaria">
+
+                N₂ =
+                √[-2 ln(1 − rᵢ)]
+                sen(2πrⱼ) σ + μ
+
+            </div>
+
+
+            <p style="margin-top: 15px;">
+                Donde:
+            </p>
+
+            <p>
+                <strong>rᵢ y rⱼ:</strong> números aleatorios.
+            </p>
+
+            <p>
+                <strong>μ:</strong> media de la distribución normal.
+            </p>
+
+            <p>
+                <strong>σ:</strong> desviación estándar de la distribución normal.
+            </p>
+
+        </section>
+
+
+        <!-- GENERACIÓN -->
+
+        <section class="tarjeta">
+
+            <h2>Generación de variables aleatorias</h2>
+
+            <div class="botones">
+
+                <button onclick="generarNormalBoxMuller()">
+                    Generar variables aleatorias
+                </button>
+
+                <button onclick="copiarExcel()">
+                    Copiar Excel
+                </button>
+
+            </div>
+
+            <div id="resultados"></div>
+
+        </section>
+
+
+        <!-- VOLVER -->
+
+        <a
+            href="index.html"
+            class="volver"
+        >
+            ← Volver al inicio
+        </a>
+
+    </main>
+
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer>
+
+        <p>
+            Simulación de Procesos · ESPOCH
+        </p>
+
+        <p>
+            Facultad de Mecánica · Ingeniería Industrial
+        </p>
+
+        <p>
+            Mariela Lluay
+        </p>
+
+    </footer>
+
+
+    <script>
+
+
+        // ==========================================
+        // MÉTODO DE BOX-MULLER
+        // ==========================================
+
+        function generarNormalBoxMuller() {
+
+
+            const cantidad =
+                parseInt(
+                    document.getElementById("cantidad").value
+                );
+
+
+            const media =
+                parseFloat(
+                    document.getElementById("media").value
+                );
+
+
+            const desviacion =
+                parseFloat(
+                    document.getElementById("desviacion").value
+                );
+
+
+            // VALIDACIÓN
+
+            if (
+                isNaN(cantidad) ||
+                isNaN(media) ||
+                isNaN(desviacion) ||
+                cantidad <= 0 ||
+                desviacion <= 0
+            ) {
+
+                alert(
+                    "Ingrese valores válidos para cantidad, media y desviación estándar."
+                );
+
+                return;
+            }
+
+
+            // CREAR TABLA
+
+            let html = "<table>";
+
+            html += "<tr>";
+
+            html += "<th>Variable</th>";
+
+            html += "<th>rᵢ</th>";
+
+            html += "<th>rⱼ</th>";
+
+            html += "<th>N₁</th>";
+
+            html += "<th>N₂</th>";
+
+            html += "</tr>";
+
+
+            // GENERAR VARIABLES
+
+            for (
+                let i = 1;
+                i <= cantidad;
+                i++
+            ) {
+
+
+                // NÚMEROS ALEATORIOS
+
+                let ri =
+                    Math.random();
+
+                let rj =
+                    Math.random();
+
+
+                // BOX-MULLER
+
+                let factor =
+                    Math.sqrt(
+                        -2 *
+                        Math.log(
+                            1 - ri
+                        )
+                    );
+
+
+                let n1 =
+                    factor *
+                    Math.cos(
+                        2 *
+                        Math.PI *
+                        rj
+                    ) *
+                    desviacion +
+                    media;
+
+
+                let n2 =
+                    factor *
+                    Math.sin(
+                        2 *
+                        Math.PI *
+                        rj
+                    ) *
+                    desviacion +
+                    media;
+
+
+                // AGREGAR FILA
+
+                html += "<tr>";
+
+                html +=
+                    `<td>${i}</td>`;
+
+                html +=
+                    `<td>${ri.toFixed(6)}</td>`;
+
+                html +=
+                    `<td>${rj.toFixed(6)}</td>`;
+
+                html +=
+                    `<td>${n1.toFixed(6)}</td>`;
+
+                html +=
+                    `<td>${n2.toFixed(6)}</td>`;
+
+                html += "</tr>";
+
+            }
+
+
+            html += "</table>";
+
+
+            document.getElementById(
+                "resultados"
+            ).innerHTML = html;
+
+        }
+
+
+        // ==========================================
+        // COPIAR TABLA PARA EXCEL
+        // ==========================================
+
+        function copiarExcel() {
+
+
+            const tabla =
+                document.querySelector(
+                    "#resultados table"
+                );
+
+
+            if (!tabla) {
+
+                alert(
+                    "Primero genere las variables aleatorias."
+                );
+
+                return;
+
+            }
+
+
+            let texto = "";
+
+
+            tabla.querySelectorAll("tr").forEach(
+                fila => {
+
+
+                    let datos = [];
+
+
+                    fila.querySelectorAll(
+                        "th, td"
+                    ).forEach(
+                        celda => {
+
+                            datos.push(
+                                celda.innerText
+                            );
+
+                        }
+                    );
+
+
+                    texto +=
+                        datos.join("\t") +
+                        "\n";
+
+                }
+            );
+
+
+            navigator.clipboard.writeText(
+                texto
+            );
+
+
+            alert(
+                "Tabla copiada. Ahora puede pegarla en Excel."
+            );
+
+        }
+
+
+        // ==========================================
+        // LIMPIAR CAMPOS AL ENTRAR
+        // ==========================================
+
+        window.addEventListener(
+            "pageshow",
+            function () {
+
+
+                document.getElementById(
+                    "cantidad"
+                ).value = "";
+
+
+                document.getElementById(
+                    "media"
+                ).value = "";
+
+
+                document.getElementById(
+                    "desviacion"
+                ).value = "";
+
+
+                document.getElementById(
+                    "resultados"
+                ).innerHTML = "";
+
+            }
+        );
+
+
+    </script>
+
+</body>
+</html>
+```
+
+**Ojo:** en esta versión la fórmula está aplicada exactamente como corresponde:
+
+$$
+N_1=\sqrt{-2\ln(1-r_i)}\cos(2\pi r_j)\sigma+\mu
+$$
+
+$$
+N_2=\sqrt{-2\ln(1-r_i)}\sin(2\pi r_j)\sigma+\mu
+$$
+
+Y al regresar al inicio y volver a entrar, **cantidad, μ y σ quedan vacíos**.
