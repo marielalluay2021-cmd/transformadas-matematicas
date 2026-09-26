@@ -305,7 +305,7 @@
                         id="cantidad"
                         min="1"
                         step="1"
-                        value="10"
+                        placeholder="Ingrese la cantidad"
                     >
 
                 </div>
@@ -324,7 +324,7 @@
                         id="lambda"
                         min="0"
                         step="0.01"
-                        value="2"
+                        placeholder="Ingrese λ"
                     >
 
                 </div>
@@ -343,7 +343,7 @@
                         id="k"
                         min="1"
                         step="1"
-                        value="4"
+                        placeholder="Ingrese k"
                     >
 
                 </div>
@@ -365,9 +365,9 @@
             <p>
 
                 Para generar cada variable Erlang se utilizan
-                números aleatorios entre 0 y 1. Estos valores
-                se multiplican mediante la fórmula de Erlang
-                de acuerdo con la tasa y el número de etapas.
+                números aleatorios. Estos valores se emplean
+                en la fórmula de Erlang de acuerdo con la tasa
+                y el número de etapas seleccionados.
 
             </p>
 
@@ -377,9 +377,7 @@
                 ER<sub>i</sub>
                 =
                 −
-                <span>
-                    1
-                </span>
+                1
                 /
                 (
                 kλ
@@ -394,7 +392,7 @@
             <p class="explicacion">
 
                 r<sub>j</sub> =
-                número aleatorio entre 0 y 1
+                número aleatorio
 
                 <br>
 
@@ -560,7 +558,7 @@
 
 
             /*
-            ENCABEZADOS
+            CREAR ENCABEZADOS
             */
 
             let encabezados = `
@@ -571,7 +569,7 @@
 
 
             /*
-            Crear r1, r2, r3...
+            CREAR r1, r2, r3...
             */
 
             for (
@@ -592,7 +590,7 @@
 
 
             /*
-            Columna final Erlang
+            COLUMNA FINAL
             */
 
             encabezados += `
@@ -624,7 +622,7 @@
 
 
             /*
-            GENERAR VARIABLES
+            GENERAR CADA VARIABLE
             */
 
             for (
@@ -649,7 +647,7 @@
 
 
                 /*
-                GENERAR LOS r
+                GENERAR LOS VALORES ALEATORIOS
                 */
 
                 for (
@@ -664,7 +662,7 @@
 
 
                     /*
-                    Calcular producto
+                    CALCULAR PRODUCTO
                     */
 
                     producto *=
@@ -672,7 +670,7 @@
 
 
                     /*
-                    Mostrar r
+                    MOSTRAR r
                     */
 
                     fila += `
