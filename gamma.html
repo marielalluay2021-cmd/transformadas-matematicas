@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Distribución Gamma | Simulación de Procesos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1f8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #30245f, #6b4ca5);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #d85c91;
+        }
+
+        .tarjeta h2 {
+            color: #3f3275;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+            padding: 40px 15px;
+            margin-top: 15px;
+            text-align: center;
+            color: #3f3275;
+            overflow-x: auto;
+        }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+            font-size: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            white-space: nowrap;
+            min-width: max-content;
+        }
+
+        .fraccion {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            margin: 0 6px;
+            line-height: 1;
+        }
+
+        .numerador {
+            font-size: 22px;
+            padding-bottom: 4px;
+        }
+
+        .linea-fraccion {
+            width: 45px;
+            border-top: 2px solid #3f3275;
+        }
+
+        .denominador {
+            font-size: 22px;
+            padding-top: 4px;
+        }
+
+        .producto {
+            position: relative;
+            display: inline-block;
+            font-size: 44px;
+            line-height: 1;
+            margin: 0 3px;
+            padding: 12px 8px;
+        }
+
+        .limite-superior {
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        .limite-inferior {
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+        }
+
+        .parentesis {
+            font-size: 34px;
+        }
+
+        .notas {
+            background: #faf8fc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .notas ul {
+            padding-left: 20px;
+        }
+
+        .notas li {
+            margin-bottom: 8px;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            color: #3f3275;
+            margin-bottom: 8px;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6b4ca5, #d85c91);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #resultados {
+            margin-top: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #6b4ca5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f5fb;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 10px;
+            color: #3f3275;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #30245f;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 25px;
+            }
+
+            .formula-matematica {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Distribución Gamma (G<sub>i</sub>)</h1>
+    <p>Generador de Variables Aleatorias</p>
+</header>
+
+<div class="contenedor">
+
+    <!-- CONCEPTO -->
+    <div class="tarjeta">
+        <h2>Concepto</h2>
+
+        <p>
+            La distribución Gamma se utiliza para modelar tiempos de espera
+            asociados a la ocurrencia de varios eventos aleatorios.
+        </p>
+
+        <p>
+            En este método se generan variables aleatorias Gamma a partir
+            de números aleatorios uniformes.
+        </p>
+    </div>
+
+    <!-- PARÁMETROS -->
+    <div class="tarjeta">
+        <h2>Parámetros</h2>
+
+        <div class="notas">
+            <ul>
+                <li>
+                    <strong>1/λ:</strong> valor esperado.
+                </li>
+
+                <li>
+                    <strong>k:</strong> parámetro de forma.
+                </li>
+
+                <li>
+                    <strong>r<sub>j</sub>:</strong> números aleatorios entre 0 y 1.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FÓRMULA -->
+    <div class="tarjeta">
+        <h2>Fórmula</h2>
+
+        <div class="formula">
+            <div class="formula-matematica">
+
+                <span>G<sub>i</sub></span>
+
+                <span>=</span>
+
+                <span>−</span>
+
+                <span class="fraccion">
+                    <span class="numerador">1</span>
+                    <span class="linea-fraccion"></span>
+                    <span class="denominador">kλ</span>
+                </span>
+
+                <span>ln</span>
+
+                <span class="parentesis">(</span>
+
+                <span class="producto">
+                    ∏
+                    <span class="limite-superior">k</span>
+                    <span class="limite-inferior">j=1</span>
+                </span>
+
+                <span>(1 − r<sub>j</sub>)</span>
+
+                <span class="parentesis">)</span>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- GENERADOR -->
+    <div class="tarjeta">
+
+        <h2>Generador de variables aleatorias</h2>
+
+        <div class="formulario">
+
+            <div class="campo">
+                <label for="cantidad">
+                    Cantidad de variables
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    placeholder="Ej. 10"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="lambda">
+                    λ
+                </label>
+
+                <input
+                    type="number"
+                    id="lambda"
+                    min="0.000001"
+                    step="any"
+                    placeholder="Ej. 0.5"
+                >
+            </div>
+
+            <div class="campo">
+                <label for="k">
+                    k
+                </label>
+
+                <input
+                    type="number"
+                    id="k"
+                    min="1"
+                    step="1"
+                    placeholder="Ej. 3"
+                >
+            </div>
+
+        </div>
+
+        <div class="botones">
+
+            <button onclick="generarGamma()">
+                Generar variables aleatorias
+            </button>
+
+            <button onclick="copiarExcel()">
+                Copiar Excel
+            </button>
+
+        </div>
+
+        <div id="resultados"></div>
+
+    </div>
+
+    <a href="./index.html" class="volver">
+        ← Volver al inicio
+    </a>
+
+</div>
+
+<footer>
+    <strong>ESPOCH</strong><br>
+    Facultad de Mecánica<br>
+    Ingeniería Industrial<br>
+    Mariela Lluay
+</footer>
+
+<script>
+
+function generarGamma() {
+
+    const cantidad =
+        parseInt(document.getElementById("cantidad").value);
+
+    const lambda =
+        parseFloat(document.getElementById("lambda").value);
+
+    const k =
+        parseInt(document.getElementById("k").value);
+
+    if (
+        isNaN(cantidad) ||
+        isNaN(lambda) ||
+        isNaN(k) ||
+        cantidad <= 0 ||
+        lambda <= 0 ||
+        k <= 0
+    ) {
+
+        alert(
+            "Ingrese valores válidos. λ y k deben ser mayores que 0."
+        );
+
+        return;
+    }
+
+    let html = "<table>";
+
+    html += "<tr>";
+    html += "<th>i</th>";
+
+    for (let j = 1; j <= k; j++) {
+        html += `<th>r<sub>${j}</sub></th>`;
+    }
+
+    html += "<th>G<sub>i</sub></th>";
+    html += "</tr>";
+
+    for (let i = 1; i <= cantidad; i++) {
+
+        html += `<tr>`;
+        html += `<td>${i}</td>`;
+
+        let producto = 1;
+
+        for (let j = 1; j <= k; j++) {
+
+            let r = Math.random();
+
+            if (r === 1) {
+                r = 0.999999;
+            }
+
+            if (r === 0) {
+                r = 0.000001;
+            }
+
+            producto *= (1 - r);
+
+            html += `<td>${r.toFixed(6)}</td>`;
+        }
+
+        let Gi =
+            -(1 / (k * lambda))
+            * Math.log(producto);
+
+        html += `<td><strong>${Gi.toFixed(6)}</strong></td>`;
+
+        html += "</tr>";
+    }
+
+    html += "</table>";
+
+    document.getElementById("resultados").innerHTML = html;
+}
+
+
+function copiarExcel() {
+
+    const tabla =
+        document.querySelector("#resultados table");
+
+    if (!tabla) {
+
+        alert(
+            "Primero genere las variables aleatorias."
+        );
+
+        return;
+    }
+
+    let texto = "";
+
+    const filas = tabla.querySelectorAll("tr");
+
+    filas.forEach(fila => {
+
+        const celdas =
+            fila.querySelectorAll("th, td");
+
+        const valores = [];
+
+        celdas.forEach(celda => {
+            valores.push(celda.innerText);
+        });
+
+        texto += valores.join("\t") + "\n";
+    });
+
+    navigator.clipboard.writeText(texto);
+
+    alert(
+        "Tabla copiada. Ahora puede pegarla directamente en Excel."
+    );
+}
+
+
+window.addEventListener("pageshow", function() {
+
+    document.getElementById("cantidad").value = "";
+    document.getElementById("lambda").value = "";
+    document.getElementById("k").value = "";
+
+    document.getElementById("resultados").innerHTML = "";
+
+});
+
+</script>
+
+</body>
+</html>
