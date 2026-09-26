@@ -1,12 +1,16 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Chi-cuadrada | Simulación de Procesos</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,6 +24,10 @@
             line-height: 1.6;
         }
 
+        /* =========================
+           ENCABEZADO
+           ========================= */
+
         header {
             background: linear-gradient(
                 135deg,
@@ -27,6 +35,7 @@
                 #263d82,
                 #65509b
             );
+
             color: white;
             text-align: center;
             padding: 45px 20px;
@@ -42,6 +51,10 @@
             opacity: 0.95;
         }
 
+        /* =========================
+           CONTENIDO
+           ========================= */
+
         main {
             max-width: 1000px;
             margin: 35px auto;
@@ -53,7 +66,10 @@
             border-radius: 15px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 5px 18px rgba(50, 40, 90, 0.10);
+
+            box-shadow:
+                0 5px 18px rgba(50, 40, 90, 0.10);
+
             border-top: 5px solid #ff9dce;
         }
 
@@ -67,40 +83,119 @@
             margin-bottom: 10px;
         }
 
+        /* =========================
+           FÓRMULA
+           ========================= */
+
         .formula {
             background: #f5f0fa;
             border-radius: 10px;
-            padding: 20px;
+
+            padding: 30px 15px;
+
             margin-top: 15px;
+
             text-align: center;
-            font-size: 20px;
+
             color: #3f3275;
-            font-weight: bold;
         }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+
+            font-size: 30px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+        }
+
+        /* =========================
+           SUMATORIA
+           ========================= */
+
+        .sumatoria {
+            position: relative;
+
+            display: inline-block;
+
+            font-size: 46px;
+
+            line-height: 1;
+
+            margin: 0 10px;
+
+            padding: 12px 8px;
+        }
+
+        .limite-superior {
+            position: absolute;
+
+            top: -2px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 14px;
+        }
+
+        .limite-inferior {
+            position: absolute;
+
+            bottom: -3px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 14px;
+        }
+
+        /* =========================
+           DATOS DE ENTRADA
+           ========================= */
 
         .datos {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
             gap: 20px;
+
             margin-top: 20px;
         }
 
         .campo {
             display: flex;
+
             flex-direction: column;
         }
 
         .campo label {
             font-weight: bold;
+
             margin-bottom: 8px;
+
             color: #51428a;
         }
 
         .campo input {
             padding: 12px;
+
             border: 2px solid #ddd5e8;
+
             border-radius: 8px;
+
             font-size: 16px;
+
             outline: none;
         }
 
@@ -108,55 +203,83 @@
             border-color: #8d70c7;
         }
 
+        /* =========================
+           BOTONES
+           ========================= */
+
         .botones {
             display: flex;
+
             gap: 15px;
+
             flex-wrap: wrap;
+
             margin-top: 20px;
         }
 
         button {
             border: none;
+
             padding: 13px 22px;
+
             border-radius: 10px;
+
             font-size: 16px;
+
             font-weight: bold;
+
             cursor: pointer;
+
             color: white;
+
             background: linear-gradient(
                 135deg,
                 #ff9dce,
                 #8d70c7
             );
+
             transition: 0.2s;
         }
 
         button:hover {
             transform: translateY(-2px);
+
             opacity: 0.9;
         }
 
+        /* =========================
+           TABLA
+           ========================= */
+
         #resultados {
             margin-top: 25px;
+
             overflow-x: auto;
         }
 
         table {
             width: 100%;
+
             border-collapse: collapse;
+
             margin-top: 15px;
+
             background: white;
         }
 
         th {
             background: #51428a;
+
             color: white;
+
             padding: 10px;
         }
 
         td {
             padding: 9px;
+
             border: 1px solid #ddd5e8;
+
             text-align: center;
         }
 
@@ -164,11 +287,19 @@
             background: #faf7fd;
         }
 
+        /* =========================
+           VOLVER
+           ========================= */
+
         .volver {
             display: inline-block;
+
             margin: 10px 0 30px;
+
             text-decoration: none;
+
             color: #51428a;
+
             font-weight: bold;
         }
 
@@ -176,11 +307,19 @@
             color: #ff72b5;
         }
 
+        /* =========================
+           FOOTER
+           ========================= */
+
         footer {
             background: #101c4f;
+
             color: white;
+
             text-align: center;
+
             padding: 25px 15px;
+
             margin-top: 40px;
         }
 
@@ -188,7 +327,12 @@
             margin: 4px 0;
         }
 
+        /* =========================
+           CELULAR
+           ========================= */
+
         @media (max-width: 700px) {
+
             header h1 {
                 font-size: 28px;
             }
@@ -204,43 +348,90 @@
             button {
                 width: 100%;
             }
+
+            .formula-matematica {
+                font-size: 23px;
+            }
+
+            .sumatoria {
+                font-size: 38px;
+            }
+
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- =========================
+         ENCABEZADO
+         ========================= -->
+
     <header>
-        <h1>Distribución Chi-cuadrada χ²</h1>
-        <p>Generador de Variables Aleatorias</p>
+
+        <h1>
+            Distribución Chi-cuadrada χ²
+        </h1>
+
+        <p>
+            Generador de Variables Aleatorias
+        </p>
+
     </header>
+
 
     <main>
 
-        <!-- CONCEPTO -->
+
+        <!-- =========================
+             CONCEPTO
+             ========================= -->
+
         <section class="tarjeta">
-            <h2>Concepto</h2>
+
+            <h2>
+                Concepto
+            </h2>
 
             <p>
-                La distribución Chi-cuadrada se utiliza para generar variables
-                aleatorias continuas a partir de variables normales estándar.
-                Su comportamiento depende de los grados de libertad establecidos.
+                La distribución Chi-cuadrada se utiliza para
+                generar variables aleatorias continuas a partir
+                de variables normales estándar.
             </p>
 
             <p>
-                Para generar una variable Chi-cuadrada se elevan al cuadrado
-                varias variables normales estándar y posteriormente se suman.
+                Su comportamiento depende de los grados de
+                libertad establecidos.
             </p>
+
+            <p>
+                Para generar una variable Chi-cuadrada se elevan
+                al cuadrado varias variables normales estándar
+                y posteriormente se suman.
+            </p>
+
         </section>
 
 
-        <!-- DATOS DE ENTRADA -->
+        <!-- =========================
+             DATOS DE ENTRADA
+             ========================= -->
+
         <section class="tarjeta">
-            <h2>Datos de entrada</h2>
+
+            <h2>
+                Datos de entrada
+            </h2>
 
             <div class="datos">
 
+
                 <div class="campo">
+
                     <label for="cantidad">
                         Cantidad de variables aleatorias
                     </label>
@@ -252,12 +443,14 @@
                         step="1"
                         placeholder="Ingrese la cantidad"
                     >
+
                 </div>
 
 
                 <div class="campo">
+
                     <label for="grados">
-                        Grados de libertad
+                        Grados de libertad (n)
                     </label>
 
                     <input
@@ -267,63 +460,159 @@
                         step="1"
                         placeholder="Ingrese los grados de libertad"
                     >
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MÉTODO
+             ========================= -->
+
+        <section class="tarjeta">
+
+            <h2>
+                Distribución Chi-cuadrada (χ²<sub>i</sub>)
+            </h2>
+
+
+            <p>
+                La variable Chi-cuadrada se obtiene mediante
+                la suma de los cuadrados de variables normales
+                estándar independientes.
+            </p>
+
+
+            <!-- FÓRMULA -->
+
+            <div class="formula">
+
+                <div class="formula-matematica">
+
+                    χ<sub>i</sub><sup>2</sup>
+
+                    =
+
+                    <span class="sumatoria">
+
+                        ∑
+
+                        <span class="limite-superior">
+                            n
+                        </span>
+
+                        <span class="limite-inferior">
+                            j=1
+                        </span>
+
+                    </span>
+
+                    Z<sub>j</sub><sup>2</sup>
+
                 </div>
 
             </div>
-        </section>
 
 
-        <!-- MÉTODO -->
-        <section class="tarjeta">
-            <h2>Método de generación</h2>
+            <!-- EXPLICACIÓN -->
+
+            <p style="margin-top: 20px;">
+                Donde:
+            </p>
+
 
             <p>
-                La variable Chi-cuadrada se obtiene mediante la suma de los
-                cuadrados de variables normales estándar:
+
+                <strong>
+                    Z<sub>j</sub>:
+                </strong>
+
+                variables aleatorias independientes con
+                distribución Normal estándar N(0,1).
+
             </p>
 
-            <div class="formula">
-                χ² = Z₁² + Z₂² + ... + Zₙ²
-            </div>
 
-            <p style="margin-top: 15px;">
-                Donde <strong>Z</strong> representa una variable normal estándar
-                y <strong>n</strong> corresponde a los grados de libertad.
+            <p>
+
+                <strong>
+                    n:
+                </strong>
+
+                grados de libertad de la distribución
+                Chi-cuadrada.
+
             </p>
+
+
         </section>
 
 
-        <!-- GENERACIÓN -->
+        <!-- =========================
+             GENERACIÓN
+             ========================= -->
+
         <section class="tarjeta">
 
-            <h2>Generación de variables aleatorias</h2>
+            <h2>
+                Generación de variables aleatorias
+            </h2>
+
 
             <div class="botones">
 
-                <button onclick="generarChiCuadrada()">
+
+                <button
+                    onclick="generarChiCuadrada()"
+                >
+
                     Generar variables aleatorias
+
                 </button>
 
-                <button onclick="copiarExcel()">
+
+                <button
+                    onclick="copiarExcel()"
+                >
+
                     Copiar Excel
+
                 </button>
+
 
             </div>
 
+
             <div id="resultados"></div>
+
 
         </section>
 
+
+        <!-- =========================
+             VOLVER
+             ========================= -->
 
         <a
             href="index.html"
             class="volver"
         >
+
             ← Volver al inicio
+
         </a>
+
 
     </main>
 
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
 
     <footer>
 
@@ -344,28 +633,56 @@
 
     <script>
 
+
         // ==========================================
         // GENERAR VARIABLE NORMAL ESTÁNDAR
         // ==========================================
 
         function generarNormal() {
 
-            let u1 = Math.random();
-            let u2 = Math.random();
+
+            let u1 =
+                Math.random();
+
+
+            let u2 =
+                Math.random();
+
+
+            // Evitar log(0)
+
+            if (u1 === 0) {
+
+                u1 = 0.000001;
+
+            }
+
 
             let z =
+
                 Math.sqrt(
+
                     -2 *
+
                     Math.log(u1)
+
                 )
+
                 *
+
                 Math.cos(
+
                     2 *
+
                     Math.PI *
+
                     u2
+
                 );
 
+
             return z;
+
         }
 
 
@@ -375,88 +692,141 @@
 
         function generarChiCuadrada() {
 
+
             const cantidad =
+
                 parseInt(
-                    document.getElementById("cantidad").value
+
+                    document.getElementById(
+                        "cantidad"
+                    ).value
+
                 );
 
+
             const grados =
+
                 parseInt(
-                    document.getElementById("grados").value
+
+                    document.getElementById(
+                        "grados"
+                    ).value
+
                 );
 
 
             // VALIDAR DATOS
 
             if (
+
                 isNaN(cantidad) ||
+
                 isNaN(grados) ||
+
                 cantidad <= 0 ||
+
                 grados <= 0
+
             ) {
+
 
                 alert(
                     "Ingrese una cantidad y grados de libertad válidos."
                 );
 
+
                 return;
+
             }
 
 
             // CREAR TABLA
 
-            let html = "<table>";
+            let html =
+                "<table>";
 
-            html += "<tr>";
 
-            html += "<th>Variable</th>";
+            html +=
+                "<tr>";
+
+
+            html +=
+                "<th>i</th>";
 
 
             // ENCABEZADOS Z1, Z2, Z3...
 
             for (
+
                 let j = 1;
+
                 j <= grados;
+
                 j++
+
             ) {
 
-                html += `<th>Z${j}</th>`;
+                html +=
+                    `<th>Z${j}</th>`;
 
             }
 
 
-            html += "<th>Chi-cuadrada</th>";
+            html +=
+                "<th>χ²ᵢ</th>";
 
-            html += "</tr>";
+
+            html +=
+                "</tr>";
 
 
             // GENERAR FILAS
 
             for (
+
                 let i = 1;
+
                 i <= cantidad;
+
                 i++
+
             ) {
 
-                html += "<tr>";
 
-                html += `<td>${i}</td>`;
+                html +=
+                    "<tr>";
 
-                let suma = 0;
+
+                html +=
+                    `<td>${i}</td>`;
+
+
+                let suma =
+                    0;
 
 
                 // GENERAR LOS Z
 
                 for (
+
                     let j = 1;
+
                     j <= grados;
+
                     j++
+
                 ) {
+
 
                     let z =
                         generarNormal();
 
-                    suma += z * z;
+
+                    // SUMAR Z²
+
+                    suma +=
+                        z * z;
+
 
                     html +=
                         `<td>${z.toFixed(6)}</td>`;
@@ -469,15 +839,22 @@
                 html +=
                     `<td><strong>${suma.toFixed(6)}</strong></td>`;
 
-                html += "</tr>";
+
+                html +=
+                    "</tr>";
+
             }
 
 
-            html += "</table>";
+            html +=
+                "</table>";
 
 
-            document.getElementById("resultados").innerHTML =
+            document.getElementById(
+                "resultados"
+            ).innerHTML =
                 html;
+
         }
 
 
@@ -487,7 +864,9 @@
 
         function copiarExcel() {
 
+
             const tabla =
+
                 document.querySelector(
                     "#resultados table"
                 );
@@ -495,78 +874,109 @@
 
             if (!tabla) {
 
+
                 alert(
                     "Primero genere las variables aleatorias."
                 );
 
+
                 return;
+
             }
 
 
-            let texto = "";
+            let texto =
+                "";
 
 
-            tabla.querySelectorAll("tr").forEach(
+            tabla.querySelectorAll(
+                "tr"
+            ).forEach(
+
                 fila => {
 
-                    let datos = [];
+
+                    let datos =
+                        [];
 
 
                     fila.querySelectorAll(
                         "th, td"
                     ).forEach(
+
                         celda => {
+
 
                             datos.push(
                                 celda.innerText
                             );
 
+
                         }
+
                     );
 
 
                     texto +=
-                        datos.join("\t") +
+
+                        datos.join("\t")
+
+                        +
+
                         "\n";
 
+
                 }
+
             );
 
 
-            navigator.clipboard.writeText(texto);
+            navigator.clipboard.writeText(
+                texto
+            );
 
 
             alert(
                 "Tabla copiada. Ahora puede pegarla en Excel."
             );
+
         }
 
 
         // ==========================================
-        // LIMPIAR CAMPOS AL ENTRAR A LA PÁGINA
+        // LIMPIAR CAMPOS AL ENTRAR
         // ==========================================
 
         window.addEventListener(
+
             "pageshow",
+
             function () {
+
 
                 document.getElementById(
                     "cantidad"
                 ).value = "";
 
+
                 document.getElementById(
                     "grados"
                 ).value = "";
 
+
+                document.getElementById(
+                    "resultados"
+                ).innerHTML = "";
+
+
             }
+
         );
 
     </script>
 
+
 </body>
+
 </html>
 ```
-
-**Importante:** en este código ya no existen `value="10"` ni `value="5"`. Además, el `pageshow` hace que al volver a entrar a la página se borren esos valores aunque el navegador haya restaurado la página anterior.
-
-Después de pegarlo en GitHub: **Commit changes → vuelve a la página principal → entra otra vez a Chi-cuadrada**.
