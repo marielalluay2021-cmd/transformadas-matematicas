@@ -1,61 +1,522 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Distribución Erlang</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2ff, #dbeafe);
+            min-height: 100vh;
+            padding: 30px;
+            color: #1e293b;
+        }
+
+        .contenedor {
+            width: 95%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .cabecera {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            margin-bottom: 25px;
+        }
+
+        .cabecera h1 {
+            font-size: 38px;
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .cabecera p {
+            color: #475569;
+            font-size: 17px;
+        }
+
+        .formula {
+            background: #eff6ff;
+            border-left: 5px solid #2563eb;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            margin-bottom: 25px;
+        }
+
+        .panel h2 {
+            color: #1e40af;
+            margin-bottom: 20px;
+        }
+
+        .campos {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .campo input:focus {
+            border-color: #2563eb;
+        }
+
+        .botones {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-generar {
+            background: #2563eb;
+            color: white;
+        }
+
+        .btn-generar:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-excel {
+            background: #16a34a;
+            color: white;
+        }
+
+        .btn-excel:hover {
+            background: #15803d;
+        }
+
+        .btn-limpiar {
+            background: #64748b;
+            color: white;
+        }
+
+        .btn-limpiar:hover {
+            background: #475569;
+        }
+
+        #resultados {
+            margin-top: 20px;
+        }
+
+        .tabla-contenedor {
+            width: 100%;
+            overflow-x: auto;
+            background: white;
+            border-radius: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 500px;
+        }
+
+        th {
+            background: #1d4ed8;
+            color: white;
+            padding: 14px;
+            text-align: center;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        tr:hover {
+            background: #dbeafe;
+        }
+
+        .explicacion {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .explicacion h2 {
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        .explicacion p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .nota {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fef3c7;
+            border-left: 5px solid #f59e0b;
+            border-radius: 8px;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            background: #334155;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .volver:hover {
+            background: #1e293b;
+        }
+
+        @media (max-width: 800px) {
+
+            .campos {
+                grid-template-columns: 1fr;
+            }
+
+            .cabecera h1 {
+                font-size: 28px;
+            }
+
+            body {
+                padding: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="contenedor">
+
+    <a href="index.html" class="volver">
+        ← Volver al inicio
+    </a>
+
+
+    <div class="cabecera">
+
+        <h1>
+            Distribución Erlang
+        </h1>
+
+        <p>
+            Generación de variables aleatorias mediante
+            la distribución Erlang.
+        </p>
+
+        <div class="formula">
+
+            ERᵢ = -1 / (kλ) × ln[(1-r₁)(1-r₂)...(1-rₖ)]
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>
+            Parámetros de simulación
+        </h2>
+
+
+        <div class="campos">
+
+            <div class="campo">
+
+                <label for="cantidad">
+                    Cantidad de datos
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    value="10"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="lambda">
+                    λ (Lambda)
+                </label>
+
+                <input
+                    type="number"
+                    id="lambda"
+                    min="0.000001"
+                    step="0.01"
+                    value="2"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="k">
+                    k
+                </label>
+
+                <input
+                    type="number"
+                    id="k"
+                    min="1"
+                    step="1"
+                    value="4"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="botones">
+
+            <button
+                class="btn-generar"
+                onclick="generarVariables()"
+            >
+                Generar variables
+            </button>
+
+
+            <button
+                class="btn-excel"
+                onclick="copiarExcel()"
+            >
+                Copiar a Excel
+            </button>
+
+
+            <button
+                class="btn-limpiar"
+                onclick="limpiarTabla()"
+            >
+                Limpiar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="panel">
+
+        <h2>
+            Resultados
+        </h2>
+
+        <div id="resultados">
+
+            <p>
+                Ingresa los parámetros y presiona
+                "Generar variables".
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="explicacion">
+
+        <h2>
+            ¿Cómo funciona?
+        </h2>
+
+        <p>
+            La distribución Erlang permite representar
+            tiempos de espera que se producen mediante
+            varias etapas.
+        </p>
+
+        <p>
+            Para generar cada variable se utilizan
+            números aleatorios r entre 0 y 1.
+        </p>
+
+        <p>
+            Los números aleatorios generados en esta
+            página no se repiten dentro de una misma
+            tabla.
+        </p>
+
+        <div class="nota">
+
+            <strong>Nota:</strong>
+            Los valores aleatorios se generan nuevamente
+            cada vez que se presiona el botón
+            "Generar variables".
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
 <script>
 
-    // Guarda todos los números que ya fueron utilizados
+    /*
+        ============================================
+        NÚMEROS ALEATORIOS SIN REPETIR
+        ============================================
+    */
+
     let usados = new Set();
 
 
-    // Genera un número entre 0 y 1 sin repetir
     function generarAleatorioSinRepetir() {
 
         let r;
 
         do {
 
-            // Genera números entre 0.000001 y 0.999999
+            /*
+                Se generan números desde:
+
+                0.000001
+
+                hasta
+
+                0.999999
+            */
+
             r =
                 Math.floor(
                     Math.random() * 999999
                 ) + 1;
 
-            r = r / 1000000;
+
+            r =
+                r / 1000000;
+
 
         } while (
             usados.has(r)
         );
 
-        // Guarda el número para evitar que vuelva a salir
+
         usados.add(r);
 
         return r;
+
     }
 
+
+
+    /*
+        ============================================
+        GENERAR VARIABLES DE ERLANG
+        ============================================
+    */
 
     function generarVariables() {
 
         const cantidad =
             parseInt(
-                document.getElementById("cantidad").value
+                document.getElementById(
+                    "cantidad"
+                ).value
             );
+
 
         const lambda =
             parseFloat(
-                document.getElementById("lambda").value
+                document.getElementById(
+                    "lambda"
+                ).value
             );
+
 
         const k =
             parseInt(
-                document.getElementById("k").value
+                document.getElementById(
+                    "k"
+                ).value
             );
 
+
         const resultados =
-            document.getElementById("resultados");
+            document.getElementById(
+                "resultados"
+            );
 
 
-        /* VALIDACIONES */
+
+        /*
+            ========================================
+            VALIDACIONES
+            ========================================
+        */
+
 
         if (
-            !Number.isInteger(cantidad)
-            ||
+            !Number.isInteger(cantidad) ||
             cantidad < 1
         ) {
 
@@ -69,8 +530,7 @@
 
 
         if (
-            !Number.isFinite(lambda)
-            ||
+            !Number.isFinite(lambda) ||
             lambda <= 0
         ) {
 
@@ -84,8 +544,7 @@
 
 
         if (
-            !Number.isInteger(k)
-            ||
+            !Number.isInteger(k) ||
             k < 1
         ) {
 
@@ -98,15 +557,22 @@
         }
 
 
+
         /*
-            Se reinician los números utilizados
-            cada vez que se genera una nueva tabla.
+            ========================================
+            REINICIAR ALEATORIOS
+            ========================================
         */
 
         usados.clear();
 
 
-        /* ENCABEZADO DE TABLA */
+
+        /*
+            ========================================
+            CREAR TABLA
+            ========================================
+        */
 
         let tabla = `
 
@@ -120,6 +586,11 @@
 
         `;
 
+
+
+        /*
+            Crear columnas r1, r2, r3...
+        */
 
         for (
             let j = 1;
@@ -136,6 +607,7 @@
         }
 
 
+
         tabla += `
 
                     <th>ERᵢ</th>
@@ -145,7 +617,12 @@
         `;
 
 
-        /* GENERACIÓN */
+
+        /*
+            ========================================
+            GENERAR CADA FILA
+            ========================================
+        */
 
         for (
             let i = 1;
@@ -153,6 +630,12 @@
             i++
         ) {
 
+
+            /*
+                Producto:
+
+                (1-r1)(1-r2)...(1-rk)
+            */
 
             let producto = 1;
 
@@ -166,6 +649,11 @@
             `;
 
 
+
+            /*
+                Generar r1...rk
+            */
+
             for (
                 let j = 1;
                 j <= k;
@@ -173,14 +661,18 @@
             ) {
 
 
-                // Generar número entre 0 y 1 sin repetir
-                let r =
+                const r =
                     generarAleatorioSinRepetir();
 
 
-                // Multiplicación para Erlang
+
+                /*
+                    Producto de Erlang
+                */
+
                 producto *=
                     (1 - r);
+
 
 
                 fila += `
@@ -194,12 +686,18 @@
             }
 
 
+
             /*
-                Fórmula:
+                =================================
+                FÓRMULA DE ERLANG
+                =================================
 
                 ERᵢ =
-                -1/(kλ) × ln(producto)
+                -1/(kλ)
+                ×
+                ln(producto)
             */
+
 
             const ER =
                 -(
@@ -207,8 +705,15 @@
                     (k * lambda)
                 )
                 *
-                Math.log(producto);
+                Math.log(
+                    producto
+                );
 
+
+
+            /*
+                Agregar ER a la fila
+            */
 
             fila += `
 
@@ -221,9 +726,11 @@
             `;
 
 
+
             tabla += fila;
 
         }
+
 
 
         tabla += `
@@ -235,13 +742,23 @@
         `;
 
 
+
+        /*
+            Mostrar tabla
+        */
+
         resultados.innerHTML =
             tabla;
 
     }
 
 
-    /* COPIAR A EXCEL */
+
+    /*
+        ============================================
+        COPIAR TABLA A EXCEL
+        ============================================
+    */
 
     function copiarExcel() {
 
@@ -263,11 +780,16 @@
         }
 
 
+
         let texto = "";
 
 
+
         const filas =
-            tabla.querySelectorAll("tr");
+            tabla.querySelectorAll(
+                "tr"
+            );
+
 
 
         filas.forEach(
@@ -283,15 +805,17 @@
                 const datos = [];
 
 
+
                 celdas.forEach(
                     celda => {
 
                         datos.push(
-                            celda.innerText
+                            celda.innerText.trim()
                         );
 
                     }
                 );
+
 
 
                 texto +=
@@ -303,15 +827,60 @@
         );
 
 
+
         navigator.clipboard.writeText(
             texto
-        );
+        )
+        .then(
+            () => {
 
+                alert(
+                    "Datos copiados. Ahora puedes pegarlos en Excel."
+                );
 
-        alert(
-            "Datos copiados. Ahora puedes pegarlos en Excel."
+            }
+        )
+        .catch(
+            () => {
+
+                alert(
+                    "No se pudo copiar automáticamente. Intenta nuevamente."
+                );
+
+            }
         );
 
     }
 
+
+
+    /*
+        ============================================
+        LIMPIAR TABLA
+        ============================================
+    */
+
+    function limpiarTabla() {
+
+        document.getElementById(
+            "resultados"
+        ).innerHTML = `
+
+            <p>
+                Ingresa los parámetros y presiona
+                "Generar variables".
+            </p>
+
+        `;
+
+
+        usados.clear();
+
+    }
+
 </script>
+
+
+</body>
+
+</html>
