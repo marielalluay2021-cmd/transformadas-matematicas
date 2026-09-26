@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribución Uniforme | Simulación de Procesos</title>
 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #faf8fc;
+            color: #27223b;
+        }
+
+        .encabezado {
+            background: linear-gradient(135deg, #101c4f, #263d82, #65509b);
+            color: white;
+            padding: 45px 25px;
+            text-align: center;
+        }
+
+        .encabezado h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .encabezado p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .contenedor {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+
+        .tarjeta {
+            background: white;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(92, 65, 130, 0.12);
+            border-top: 5px solid #ff9dce;
+        }
+
+        .tarjeta h2 {
+            color: #51428a;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #514a63;
+        }
+
+        .datos {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #51428a;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 2px solid #ddd5ee;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #a98bea;
+        }
+
+        .boton {
+            display: block;
+            margin: 30px auto 10px;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #ff9dce, #a98bea);
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .boton:hover {
+            transform: translateY(-2px);
+        }
+
+        .formula {
+            text-align: center;
+            background: #f3efff;
+            padding: 25px;
+            border-radius: 18px;
+            margin-top: 20px;
+            font-size: 24px;
+            color: #51428a;
+            font-weight: bold;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin-top: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e5dff0;
+        }
+
+        th {
+            background: #51428a;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #faf7ff;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 20px;
+            color: #7c5bb8;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 30px;
+            text-align: center;
+            background: #101c4f;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            .datos {
+                grid-template-columns: 1fr;
+            }
+
+            .encabezado h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="encabezado">
+        <h1>Distribución Uniforme</h1>
+        <p>Generador de Variables Aleatorias</p>
+    </header>
+
+    <main class="contenedor">
+
+        <section class="tarjeta">
+            <h2>01. Concepto</h2>
+
+            <p>
+                La distribución uniforme permite generar variables
+                aleatorias cuyos valores se encuentran dentro de un
+                intervalo definido entre un límite inferior y un
+                límite superior.
+            </p>
+        </section>
+
+        <section class="tarjeta">
+            <h2>02. Datos de entrada</h2>
+
+            <div class="datos">
+
+                <div>
+                    <label for="cantidad">
+                        Cantidad de variables a generar
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        min="1"
+                        value="10"
+                    >
+                </div>
+
+                <div>
+                    <label for="limiteInferior">
+                        Límite inferior (a)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="limiteInferior"
+                        value="0"
+                        step="any"
+                    >
+                </div>
+
+                <div>
+                    <label for="limiteSuperior">
+                        Límite superior (b)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="limiteSuperior"
+                        value="1"
+                        step="any"
+                    >
+                </div>
+
+            </div>
+        </section>
+
+        <section class="tarjeta">
+
+            <h2>03. Método de generación</h2>
+
+            <p>
+                Primero se generan números aleatorios uniformes
+                entre 0 y 1. Luego se utiliza el intervalo definido
+                por el usuario para obtener las variables aleatorias.
+            </p>
+
+            <div class="formula">
+                X<sub>i</sub> = a + (b - a)U<sub>i</sub>
+            </div>
+
+        </section>
+
+        <section class="tarjeta">
+
+            <h2>04. Generación de variables</h2>
+
+            <button class="boton" onclick="generarVariables()">
+                Generar variables aleatorias
+            </button>
+
+            <div id="resultados"></div>
+
+        </section>
+
+        <a href="index.html" class="volver">
+            ← Volver al inicio
+        </a>
+
+    </main>
+
+    <footer>
+        Simulación de Procesos · ESPOCH
+        <br>
+        Facultad de Mecánica · Ingeniería Industrial
+        <br>
+        Mariela Lluay
+    </footer>
+
+    <script>
+
+        function generarVariables() {
+
+            const cantidad =
+                parseInt(document.getElementById("cantidad").value);
+
+            const a =
+                parseFloat(document.getElementById("limiteInferior").value);
+
+            const b =
+                parseFloat(document.getElementById("limiteSuperior").value);
+
+            const resultados =
+                document.getElementById("resultados");
+
+            if (cantidad < 1) {
+                alert("La cantidad debe ser mayor que 0.");
+                return;
+            }
+
+            if (a >= b) {
+                alert("El límite inferior debe ser menor que el límite superior.");
+                return;
+            }
+
+            let tabla = `
+                <div class="tabla-contenedor">
+                <table>
+                    <tr>
+                        <th>i</th>
+                        <th>Uᵢ</th>
+                        <th>Xᵢ</th>
+                    </tr>
+            `;
+
+            for (let i = 1; i <= cantidad; i++) {
+
+                const U = Math.random();
+
+                const X = a + (b - a) * U;
+
+                tabla += `
+                    <tr>
+                        <td>${i}</td>
+                        <td>${U.toFixed(6)}</td>
+                        <td>${X.toFixed(6)}</td>
+                    </tr>
+                `;
+            }
+
+            tabla += `
+                </table>
+                </div>
+            `;
+
+            resultados.innerHTML = tabla;
+        }
+
+    </script>
+
+</body>
+</html>
