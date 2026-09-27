@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Distribución Binomial | Simulación de Procesos</title>
+    <title>Distribución Bernoulli | Simulación de Procesos</title>
 
     <style>
         * {
@@ -46,7 +47,7 @@
             border-radius: 12px;
             padding: 25px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border-top: 5px solid #d85c91;
         }
 
@@ -78,39 +79,36 @@
 
         .formula-matematica {
             font-family: "Times New Roman", serif;
-            font-size: 30px;
+            font-size: 27px;
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 10px;
             white-space: nowrap;
         }
 
-        .sumatoria {
-            display: inline-block;
-            position: relative;
-            width: 55px;
-            height: 65px;
-            margin: 0 8px;
-            vertical-align: middle;
+        .casos {
+            display: inline-flex;
+            flex-direction: column;
+            text-align: left;
+            gap: 12px;
+            margin-left: 10px;
         }
 
-        .sigma {
-            font-size: 58px;
-            line-height: 60px;
+        .caso {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .limite-superior {
-            position: absolute;
-            top: -5px;
-            right: 0;
-            font-size: 16px;
+        .caso-numero {
+            font-size: 25px;
+            font-weight: bold;
+            min-width: 25px;
         }
 
-        .limite-inferior {
-            position: absolute;
-            bottom: -2px;
-            right: -3px;
-            font-size: 16px;
+        .caso-texto {
+            font-size: 23px;
         }
 
         .notas {
@@ -190,9 +188,8 @@
         th,
         td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
-            white-space: nowrap;
         }
 
         th {
@@ -202,19 +199,6 @@
 
         tr:nth-child(even) {
             background: #f8f5fb;
-        }
-
-        .grupo-r {
-            background: #eee8f7;
-        }
-
-        .grupo-be {
-            background: #f9e7ef;
-        }
-
-        .resultado-bi {
-            background: #eadff4;
-            font-weight: bold;
         }
 
         .volver {
@@ -247,454 +231,410 @@
             .formula-matematica {
                 font-size: 22px;
             }
+
+            .caso-texto {
+                font-size: 19px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Distribución Binomial (B<sub>i</sub>)</h1>
-    <p>Generador de Variables Aleatorias</p>
-</header>
+    <!-- ENCABEZADO -->
+    <header>
 
-<div class="contenedor">
+        <h1>Distribución Bernoulli (BE<sub>i</sub>)</h1>
 
-    <!-- CONCEPTO -->
-    <div class="tarjeta">
+        <p>Generador de Variables Aleatorias</p>
 
-        <h2>Concepto</h2>
+    </header>
 
-        <p>
-            La distribución binomial permite determinar el número de éxitos
-            obtenidos en un número determinado de eventos de Bernoulli.
-        </p>
 
-        <p>
-            El resultado se obtiene sumando las variables aleatorias
-            Bernoulli generadas en cada evento.
-        </p>
+    <div class="contenedor">
 
-    </div>
+        <!-- CONCEPTO -->
+        <div class="tarjeta">
 
-    <!-- PARÁMETROS -->
-    <div class="tarjeta">
+            <h2>Concepto</h2>
 
-        <h2>Parámetros</h2>
+            <p>
+                La distribución Bernoulli se utiliza para modelar experimentos
+                aleatorios que tienen únicamente dos resultados posibles:
+                éxito o fracaso.
+            </p>
 
-        <div class="notas">
-
-            <ul>
-
-                <li>
-                    <strong>BE<sub>ij</sub>:</strong>
-                    números aleatorios con distribución de Bernoulli.
-                </li>
-
-                <li>
-                    <strong>N:</strong>
-                    número máximo de eventos de la distribución binomial.
-                </li>
-
-                <li>
-                    <strong>p:</strong>
-                    probabilidad de éxito de la distribución binomial.
-                </li>
-
-            </ul>
+            <p>
+                El resultado se representa mediante los valores 1 y 0,
+                respectivamente.
+            </p>
 
         </div>
 
-    </div>
 
-    <!-- FÓRMULA -->
-    <div class="tarjeta">
+        <!-- PARÁMETROS -->
+        <div class="tarjeta">
 
-        <h2>Fórmula</h2>
+            <h2>Parámetros</h2>
 
-        <div class="formula">
+            <div class="notas">
 
-            <div class="formula-titulo">
+                <ul>
 
-                <strong>
-                    B<sub>i</sub> =
-                </strong>
+                    <li>
+                        <strong>p:</strong>
+                        probabilidad de ocurrencia del evento x = 1.
+                    </li>
 
-            </div>
+                    <li>
+                        <strong>1 − p:</strong>
+                        probabilidad de ocurrencia del evento x = 0.
+                    </li>
 
-            <div class="formula-matematica">
+                    <li>
+                        <strong>r<sub>i</sub>:</strong>
+                        número aleatorio entre 0 y 1.
+                    </li>
 
-                <span class="sumatoria">
+                    <li>
+                        <strong>BE<sub>i</sub>:</strong>
+                        variable aleatoria Bernoulli.
+                    </li>
 
-                    <span class="sigma">∑</span>
-
-                    <span class="limite-superior">
-                        N
-                    </span>
-
-                    <span class="limite-inferior">
-                        j = 1
-                    </span>
-
-                </span>
-
-                <span>
-                    BE<sub>ij</sub>
-                </span>
+                </ul>
 
             </div>
 
         </div>
 
-    </div>
 
-    <!-- GENERADOR -->
-    <div class="tarjeta">
+        <!-- FÓRMULA -->
+        <div class="tarjeta">
 
-        <h2>Generador de variables aleatorias</h2>
+            <h2>Fórmula</h2>
 
-        <div class="formulario">
+            <div class="formula">
 
-            <div class="campo">
+                <div class="formula-titulo">
 
-                <label for="cantidad">
-                    Cantidad de variables
-                </label>
+                    <strong>
+                        BE<sub>i</sub> =
+                    </strong>
 
-                <input
-                    type="number"
-                    id="cantidad"
-                    min="1"
-                    placeholder="Ej. 10"
-                >
+                </div>
 
-            </div>
 
-            <div class="campo">
+                <div class="formula-matematica">
 
-                <label for="N">
-                    N (Número de eventos)
-                </label>
+                    <div class="casos">
 
-                <input
-                    type="number"
-                    id="N"
-                    min="1"
-                    placeholder="Ej. 7"
-                >
+                        <div class="caso">
 
-            </div>
+                            <span class="caso-numero">
+                                0
+                            </span>
 
-            <div class="campo">
+                            <span class="caso-texto">
+                                si r<sub>i</sub> ∈ (0, 1 − p)
+                            </span>
 
-                <label for="p">
-                    p (Probabilidad)
-                </label>
+                        </div>
 
-                <input
-                    type="number"
-                    id="p"
-                    min="0"
-                    max="1"
-                    step="0.01"
-                    placeholder="Ej. 0.7"
-                >
+
+                        <div class="caso">
+
+                            <span class="caso-numero">
+                                1
+                            </span>
+
+                            <span class="caso-texto">
+                                si r<sub>i</sub> ∈ (1 − p, 1)
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-        <div class="botones">
 
-            <button onclick="generarBinomial()">
-                Generar variables aleatorias
-            </button>
+        <!-- GENERADOR -->
+        <div class="tarjeta">
 
-            <button onclick="copiarExcel()">
-                Copiar Excel
-            </button>
+            <h2>Generador de variables aleatorias</h2>
+
+
+            <div class="formulario">
+
+                <div class="campo">
+
+                    <label for="cantidad">
+                        Cantidad de variables
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        min="1"
+                        placeholder="Ej. 10"
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="p">
+                        p (Probabilidad)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="p"
+                        min="0"
+                        max="1"
+                        step="0.01"
+                        placeholder="Ej. 0.5"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="botones">
+
+                <button onclick="generarBernoulli()">
+                    Generar variables aleatorias
+                </button>
+
+                <button onclick="copiarExcel()">
+                    Copiar Excel
+                </button>
+
+            </div>
+
+
+            <div id="resultados"></div>
 
         </div>
 
-        <div id="resultados"></div>
+
+        <!-- VOLVER -->
+        <a href="./index.html" class="volver">
+            ← Volver al inicio
+        </a>
 
     </div>
 
-    <a href="./index.html" class="volver">
-        ← Volver al inicio
-    </a>
 
-</div>
+    <!-- PIE DE PÁGINA -->
+    <footer>
 
-<footer>
+        <strong>ESPOCH</strong>
+        <br>
 
-    <strong>ESPOCH</strong><br>
-    Facultad de Mecánica<br>
-    Ingeniería Industrial<br>
-    Mariela Lluay
+        Facultad de Mecánica
+        <br>
 
-</footer>
+        Ingeniería Industrial
+        <br>
 
-<script>
+        Mariela Lluay
 
-function generarBinomial() {
+    </footer>
 
-    const cantidad =
-        parseInt(
-            document.getElementById("cantidad").value
-        );
 
-    const N =
-        parseInt(
-            document.getElementById("N").value
-        );
+    <!-- JAVASCRIPT -->
+    <script>
 
-    const p =
-        parseFloat(
-            document.getElementById("p").value
-        );
+        function generarBernoulli() {
 
-    if (
-        isNaN(cantidad) ||
-        isNaN(N) ||
-        isNaN(p) ||
-        cantidad <= 0 ||
-        N <= 0 ||
-        p < 0 ||
-        p > 1
-    ) {
+            const cantidad = parseInt(
+                document.getElementById("cantidad").value
+            );
 
-        alert(
-            "Ingrese valores válidos. N debe ser mayor que 0 y p debe estar entre 0 y 1."
-        );
+            const p = parseFloat(
+                document.getElementById("p").value
+            );
 
-        return;
-    }
 
-    let html = "<table>";
+            // Validación
+            if (
+                isNaN(cantidad) ||
+                isNaN(p) ||
+                cantidad <= 0 ||
+                p < 0 ||
+                p > 1
+            ) {
 
-    /*
-        ENCABEZADOS
-    */
+                alert(
+                    "Ingrese valores válidos. p debe estar entre 0 y 1."
+                );
 
-    html += "<tr>";
+                return;
+            }
 
-    html += "<th>i</th>";
-    html += "<th>N</th>";
 
-    for (let j = 1; j <= N; j++) {
+            let html = "<table>";
 
-        html += `<th class="grupo-r">r${j}</th>`;
 
-    }
+            // Encabezados
+            html += "<tr>";
 
-    for (let j = 1; j <= N; j++) {
+            html += "<th>i</th>";
 
-        html += `<th class="grupo-be">BE${j}</th>`;
+            html += "<th>r<sub>i</sub></th>";
 
-    }
+            html += "<th>1 − p</th>";
 
-    html += "<th class='resultado-bi'>Bi</th>";
+            html += "<th>BE<sub>i</sub></th>";
 
-    html += "</tr>";
+            html += "</tr>";
 
-    /*
-        GENERACIÓN DE FILAS
-    */
 
-    for (let i = 1; i <= cantidad; i++) {
+            // Generación de variables
+            for (let i = 1; i <= cantidad; i++) {
 
-        let aleatorios = [];
-        let bernoulli = [];
+                let r = Math.random();
 
-        let limite = 1 - p;
+                let limite = 1 - p;
 
-        let suma = 0;
+                let BE;
 
-        /*
-            GENERAR LOS N ALEATORIOS
-        */
 
-        for (let j = 1; j <= N; j++) {
+                // Regla de Bernoulli
+                if (r < limite) {
 
-            let r = Math.random();
+                    BE = 0;
 
-            aleatorios.push(r);
+                } else {
 
-            /*
-                Bernoulli:
-                0 si r < 1-p
-                1 si r >= 1-p
-            */
+                    BE = 1;
 
-            let BE;
+                }
 
-            if (r < limite) {
 
-                BE = 0;
+                // Crear fila
+                html += "<tr>";
 
-            } else {
+                html += `<td>${i}</td>`;
 
-                BE = 1;
+                html += `<td>${r.toFixed(6)}</td>`;
+
+                html += `<td>${limite.toFixed(6)}</td>`;
+
+                html += `<td><strong>${BE}</strong></td>`;
+
+                html += "</tr>";
 
             }
 
-            bernoulli.push(BE);
 
-            suma += BE;
+            html += "</table>";
+
+
+            // Mostrar resultados
+            document.getElementById("resultados").innerHTML = html;
 
         }
 
-        /*
-            FILA
-        */
 
-        html += "<tr>";
+        // COPIAR TABLA A EXCEL
+        function copiarExcel() {
 
-        html += `<td>${i}</td>`;
-
-        html += `<td>${N}</td>`;
-
-        /*
-            ALEATORIOS
-        */
-
-        aleatorios.forEach(r => {
-
-            html += `
-                <td class="grupo-r">
-                    ${r.toFixed(4)}
-                </td>
-            `;
-
-        });
-
-        /*
-            BERNOULLI SEPARADOS
-        */
-
-        bernoulli.forEach(BE => {
-
-            html += `
-                <td class="grupo-be">
-                    <strong>${BE}</strong>
-                </td>
-            `;
-
-        });
-
-        /*
-            BINOMIAL
-        */
-
-        html += `
-            <td class="resultado-bi">
-                <strong>${suma}</strong>
-            </td>
-        `;
-
-        html += "</tr>";
-
-    }
-
-    html += "</table>";
-
-    document.getElementById("resultados").innerHTML = html;
-}
+            const tabla = document.querySelector(
+                "#resultados table"
+            );
 
 
-/*
-    COPIAR PARA EXCEL
-*/
+            if (!tabla) {
 
-function copiarExcel() {
+                alert(
+                    "Primero genere las variables aleatorias."
+                );
 
-    const tabla =
-        document.querySelector(
-            "#resultados table"
+                return;
+
+            }
+
+
+            let texto = "";
+
+
+            const filas = tabla.querySelectorAll("tr");
+
+
+            filas.forEach(fila => {
+
+                const celdas = fila.querySelectorAll(
+                    "th, td"
+                );
+
+                const valores = [];
+
+
+                celdas.forEach(celda => {
+
+                    valores.push(
+                        celda.innerText
+                    );
+
+                });
+
+
+                texto += valores.join("\t") + "\n";
+
+            });
+
+
+            navigator.clipboard.writeText(texto)
+
+                .then(() => {
+
+                    alert(
+                        "Tabla copiada. Ahora puede pegarla directamente en Excel."
+                    );
+
+                })
+
+                .catch(() => {
+
+                    alert(
+                        "No se pudo copiar automáticamente. Seleccione y copie la tabla manualmente."
+                    );
+
+                });
+
+        }
+
+
+        // LIMPIAR AL REGRESAR A LA PÁGINA
+        window.addEventListener(
+            "pageshow",
+            function () {
+
+                document.getElementById(
+                    "cantidad"
+                ).value = "";
+
+                document.getElementById(
+                    "p"
+                ).value = "";
+
+                document.getElementById(
+                    "resultados"
+                ).innerHTML = "";
+
+            }
         );
 
-    if (!tabla) {
-
-        alert(
-            "Primero genere las variables aleatorias."
-        );
-
-        return;
-    }
-
-    let texto = "";
-
-    const filas =
-        tabla.querySelectorAll("tr");
-
-    filas.forEach(fila => {
-
-        const celdas =
-            fila.querySelectorAll("th, td");
-
-        const valores = [];
-
-        celdas.forEach(celda => {
-
-            valores.push(
-                celda.innerText
-            );
-
-        });
-
-        texto +=
-            valores.join("\t") + "\n";
-
-    });
-
-    navigator.clipboard.writeText(texto)
-        .then(() => {
-
-            alert(
-                "Tabla copiada. Ahora puede pegarla directamente en Excel."
-            );
-
-        })
-        .catch(() => {
-
-            alert(
-                "No se pudo copiar automáticamente."
-            );
-
-        });
-}
-
-
-/*
-    LIMPIAR AL VOLVER A LA PÁGINA
-*/
-
-window.addEventListener(
-    "pageshow",
-    function() {
-
-        document.getElementById(
-            "cantidad"
-        ).value = "";
-
-        document.getElementById(
-            "N"
-        ).value = "";
-
-        document.getElementById(
-            "p"
-        ).value = "";
-
-        document.getElementById(
-            "resultados"
-        ).innerHTML = "";
-
-    }
-);
-
-</script>
+    </script>
 
 </body>
-</html>
 
+</html>
