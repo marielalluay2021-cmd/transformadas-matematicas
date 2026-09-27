@@ -1,201 +1,252 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribución Binomial</title>
+
+    <title>Distribución Binomial | Simulación de Procesos</title>
 
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #222;
+            background: #f4f1f8;
+            color: #333;
         }
 
         header {
-            background: #1f4e78;
+            background: linear-gradient(135deg, #30245f, #6b4ca5);
             color: white;
-            padding: 25px;
             text-align: center;
+            padding: 35px 20px;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 30px;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
         }
 
         .contenedor {
-            width: 95%;
-            max-width: 1400px;
-            margin: 25px auto;
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
         }
 
-        .card {
+        .tarjeta {
             background: white;
-            padding: 22px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #d85c91;
         }
 
-        h2 {
-            color: #1f4e78;
-            margin-top: 0;
+        .tarjeta h2 {
+            color: #3f3275;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta p {
+            line-height: 1.6;
+            margin-bottom: 10px;
         }
 
         .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+            padding: 35px 20px;
+            margin-top: 15px;
             text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-            font-weight: bold;
+            color: #3f3275;
+            overflow-x: auto;
+        }
+
+        .formula-titulo {
+            font-family: "Times New Roman", serif;
+            font-size: 27px;
+            margin-bottom: 25px;
+        }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            white-space: nowrap;
         }
 
         .sumatoria {
             display: inline-block;
             position: relative;
+            width: 55px;
+            height: 65px;
             margin: 0 8px;
-            width: 40px;
-            height: 55px;
             vertical-align: middle;
         }
 
         .sigma {
-            font-size: 45px;
-            line-height: 45px;
+            font-size: 58px;
+            line-height: 60px;
         }
 
         .limite-superior {
             position: absolute;
-            top: -4px;
+            top: -5px;
             right: 0;
-            font-size: 15px;
+            font-size: 16px;
         }
 
         .limite-inferior {
             position: absolute;
-            bottom: -3px;
-            right: -5px;
-            font-size: 15px;
+            bottom: -2px;
+            right: -3px;
+            font-size: 16px;
         }
 
-        .parametros {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .parametro {
-            background: #eef4f8;
-            padding: 15px;
+        .notas {
+            background: #faf8fc;
+            padding: 15px 20px;
             border-radius: 8px;
+            margin-top: 15px;
         }
 
-        .parametro strong {
-            color: #1f4e78;
+        .notas ul {
+            padding-left: 20px;
         }
 
-        .inputs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: end;
+        .notas li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
         }
 
         .campo {
             display: flex;
             flex-direction: column;
-            gap: 6px;
         }
 
         .campo label {
             font-weight: bold;
+            color: #3f3275;
+            margin-bottom: 8px;
         }
 
         .campo input {
-            width: 140px;
-            padding: 10px;
-            border: 1px solid #bbb;
-            border-radius: 6px;
-            font-size: 15px;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         button {
-            padding: 11px 18px;
             border: none;
-            border-radius: 6px;
+            padding: 13px 22px;
+            border-radius: 8px;
             cursor: pointer;
-            background: #1f4e78;
             color: white;
-            font-size: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6b4ca5, #d85c91);
         }
 
         button:hover {
-            background: #163a5b;
+            opacity: 0.9;
         }
 
-        .tabla-contenedor {
+        #resultados {
+            margin-top: 25px;
             overflow-x: auto;
-            margin-top: 20px;
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
-            min-width: 1100px;
+            border-collapse: collapse;
+            background: white;
         }
 
         th,
         td {
-            border: 1px solid #bbb;
-            padding: 9px;
+            border: 1px solid #ddd;
+            padding: 8px;
             text-align: center;
             white-space: nowrap;
         }
 
         th {
-            background: #1f4e78;
+            background: #6b4ca5;
             color: white;
         }
 
+        tr:nth-child(even) {
+            background: #f8f5fb;
+        }
+
         .grupo-r {
-            background: #dceaf5;
-            color: #1f4e78;
+            background: #eee8f7;
         }
 
         .grupo-be {
-            background: #e7f0df;
-            color: #315c20;
+            background: #f9e7ef;
         }
 
-        .resultado {
-            background: #fff2cc;
+        .resultado-bi {
+            background: #eadff4;
             font-weight: bold;
         }
 
-        .excel {
-            background: #217346;
-            margin-top: 15px;
+        .volver {
+            display: inline-block;
+            margin-top: 10px;
+            color: #3f3275;
+            text-decoration: none;
+            font-weight: bold;
         }
 
-        .excel:hover {
-            background: #185c38;
+        footer {
+            background: #30245f;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+            line-height: 1.7;
         }
 
-        .nota {
-            margin-top: 12px;
-            padding: 12px;
-            background: #f1f1f1;
-            border-left: 4px solid #1f4e78;
-        }
+        @media (max-width: 600px) {
 
-        @media (max-width: 800px) {
-            .parametros {
-                grid-template-columns: 1fr;
+            header h1 {
+                font-size: 25px;
+            }
+
+            .formula-titulo {
+                font-size: 23px;
+            }
+
+            .formula-matematica {
+                font-size: 22px;
             }
         }
     </style>
@@ -204,13 +255,15 @@
 <body>
 
 <header>
-    <h1>Distribución Binomial</h1>
+    <h1>Distribución Binomial (B<sub>i</sub>)</h1>
+    <p>Generador de Variables Aleatorias</p>
 </header>
 
 <div class="contenedor">
 
     <!-- CONCEPTO -->
-    <div class="card">
+    <div class="tarjeta">
+
         <h2>Concepto</h2>
 
         <p>
@@ -218,296 +271,437 @@
             obtenidos en un número determinado de eventos de Bernoulli.
         </p>
 
-        <div class="formula">
-            B<sub>i</sub> =
-            <span class="sumatoria">
-                <span class="sigma">∑</span>
-                <span class="limite-superior">N</span>
-                <span class="limite-inferior">j = 1</span>
-            </span>
-            BE<sub>ij</sub>
-        </div>
+        <p>
+            El resultado se obtiene sumando las variables aleatorias
+            Bernoulli generadas en cada evento.
+        </p>
+
     </div>
 
-    <!-- PARAMETROS -->
-    <div class="card">
+    <!-- PARÁMETROS -->
+    <div class="tarjeta">
+
         <h2>Parámetros</h2>
 
-        <div class="parametros">
+        <div class="notas">
 
-            <div class="parametro">
-                <strong>BE<sub>ij</sub>:</strong>
-                Números aleatorios con distribución de Bernoulli.
+            <ul>
+
+                <li>
+                    <strong>BE<sub>ij</sub>:</strong>
+                    números aleatorios con distribución de Bernoulli.
+                </li>
+
+                <li>
+                    <strong>N:</strong>
+                    número máximo de eventos de la distribución binomial.
+                </li>
+
+                <li>
+                    <strong>p:</strong>
+                    probabilidad de éxito de la distribución binomial.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- FÓRMULA -->
+    <div class="tarjeta">
+
+        <h2>Fórmula</h2>
+
+        <div class="formula">
+
+            <div class="formula-titulo">
+
+                <strong>
+                    B<sub>i</sub> =
+                </strong>
+
             </div>
 
-            <div class="parametro">
-                <strong>N:</strong>
-                Número del evento máximo de la distribución binomial.
-            </div>
+            <div class="formula-matematica">
 
-            <div class="parametro">
-                <strong>p:</strong>
-                Probabilidad de éxito de la distribución binomial que se
-                involucra al generar los Bernoulli.
+                <span class="sumatoria">
+
+                    <span class="sigma">∑</span>
+
+                    <span class="limite-superior">
+                        N
+                    </span>
+
+                    <span class="limite-inferior">
+                        j = 1
+                    </span>
+
+                </span>
+
+                <span>
+                    BE<sub>ij</sub>
+                </span>
+
             </div>
 
         </div>
 
-        <div class="nota">
-            Para generar cada Bernoulli se utiliza:
-            <strong>1 − p</strong>.
-            Si r<sub>ij</sub> &lt; 1 − p, el resultado es 0.
-            Si r<sub>ij</sub> ≥ 1 − p, el resultado es 1.
-        </div>
     </div>
 
     <!-- GENERADOR -->
-    <div class="card">
-        <h2>Generador de la distribución</h2>
+    <div class="tarjeta">
 
-        <div class="inputs">
+        <h2>Generador de variables aleatorias</h2>
+
+        <div class="formulario">
 
             <div class="campo">
-                <label for="cantidad">Cantidad de filas (i)</label>
-                <input type="number" id="cantidad" value="10" min="1">
+
+                <label for="cantidad">
+                    Cantidad de variables
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    placeholder="Ej. 10"
+                >
+
             </div>
 
             <div class="campo">
-                <label for="N">N</label>
-                <input type="number" id="N" value="7" min="1">
+
+                <label for="N">
+                    N (Número de eventos)
+                </label>
+
+                <input
+                    type="number"
+                    id="N"
+                    min="1"
+                    placeholder="Ej. 7"
+                >
+
             </div>
 
             <div class="campo">
-                <label for="p">p</label>
-                <input type="number" id="p" value="0.7" min="0" max="1" step="0.01">
-            </div>
 
-            <button onclick="generar()">Generar</button>
+                <label for="p">
+                    p (Probabilidad)
+                </label>
+
+                <input
+                    type="number"
+                    id="p"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    placeholder="Ej. 0.7"
+                >
+
+            </div>
 
         </div>
-    </div>
 
-    <!-- TABLA -->
-    <div class="card">
-        <h2>Resultados</h2>
+        <div class="botones">
 
-        <div class="tabla-contenedor">
-            <table id="tabla">
-                <thead id="encabezado"></thead>
-                <tbody id="cuerpo"></tbody>
-            </table>
+            <button onclick="generarBinomial()">
+                Generar variables aleatorias
+            </button>
+
+            <button onclick="copiarExcel()">
+                Copiar Excel
+            </button>
+
         </div>
 
-        <button class="excel" onclick="copiarExcel()">
-            Copiar para Excel
-        </button>
+        <div id="resultados"></div>
+
     </div>
+
+    <a href="./index.html" class="volver">
+        ← Volver al inicio
+    </a>
 
 </div>
 
+<footer>
+
+    <strong>ESPOCH</strong><br>
+    Facultad de Mecánica<br>
+    Ingeniería Industrial<br>
+    Mariela Lluay
+
+</footer>
+
 <script>
 
-    let datosExcel = [];
+function generarBinomial() {
 
-    function generar() {
+    const cantidad =
+        parseInt(
+            document.getElementById("cantidad").value
+        );
 
-        const cantidad = parseInt(document.getElementById("cantidad").value);
-        const N = parseInt(document.getElementById("N").value);
-        const p = parseFloat(document.getElementById("p").value);
+    const N =
+        parseInt(
+            document.getElementById("N").value
+        );
 
-        const encabezado = document.getElementById("encabezado");
-        const cuerpo = document.getElementById("cuerpo");
+    const p =
+        parseFloat(
+            document.getElementById("p").value
+        );
 
-        encabezado.innerHTML = "";
-        cuerpo.innerHTML = "";
-        datosExcel = [];
+    if (
+        isNaN(cantidad) ||
+        isNaN(N) ||
+        isNaN(p) ||
+        cantidad <= 0 ||
+        N <= 0 ||
+        p < 0 ||
+        p > 1
+    ) {
+
+        alert(
+            "Ingrese valores válidos. N debe ser mayor que 0 y p debe estar entre 0 y 1."
+        );
+
+        return;
+    }
+
+    let html = "<table>";
+
+    /*
+        ENCABEZADOS
+    */
+
+    html += "<tr>";
+
+    html += "<th>i</th>";
+    html += "<th>N</th>";
+
+    for (let j = 1; j <= N; j++) {
+
+        html += `<th class="grupo-r">r${j}</th>`;
+
+    }
+
+    for (let j = 1; j <= N; j++) {
+
+        html += `<th class="grupo-be">BE${j}</th>`;
+
+    }
+
+    html += "<th class='resultado-bi'>Bi</th>";
+
+    html += "</tr>";
+
+    /*
+        GENERACIÓN DE FILAS
+    */
+
+    for (let i = 1; i <= cantidad; i++) {
+
+        let aleatorios = [];
+        let bernoulli = [];
+
+        let limite = 1 - p;
+
+        let suma = 0;
 
         /*
-            ENCABEZADO
+            GENERAR LOS N ALEATORIOS
         */
 
-        let filaEncabezado = document.createElement("tr");
-
-        let thI = document.createElement("th");
-        thI.textContent = "i";
-        filaEncabezado.appendChild(thI);
-
-        let thN = document.createElement("th");
-        thN.textContent = "N";
-        filaEncabezado.appendChild(thN);
-
-        // r1, r2, ..., rN
         for (let j = 1; j <= N; j++) {
 
-            let th = document.createElement("th");
-            th.className = "grupo-r";
-            th.textContent = "r" + j;
+            let r = Math.random();
 
-            filaEncabezado.appendChild(th);
-        }
-
-        // BE1, BE2, ..., BEN
-        for (let j = 1; j <= N; j++) {
-
-            let th = document.createElement("th");
-            th.className = "grupo-be";
-            th.textContent = "BE" + j;
-
-            filaEncabezado.appendChild(th);
-        }
-
-        let thBi = document.createElement("th");
-        thBi.className = "resultado";
-        thBi.textContent = "Bi";
-        filaEncabezado.appendChild(thBi);
-
-        encabezado.appendChild(filaEncabezado);
-
-        /*
-            FILAS
-        */
-
-        for (let i = 1; i <= cantidad; i++) {
-
-            let fila = document.createElement("tr");
-
-            let celdaI = document.createElement("td");
-            celdaI.textContent = i;
-            fila.appendChild(celdaI);
-
-            let celdaN = document.createElement("td");
-            celdaN.textContent = N;
-            fila.appendChild(celdaN);
-
-            let aleatorios = [];
-            let bernoulli = [];
-            let suma = 0;
+            aleatorios.push(r);
 
             /*
-                GENERAR r y BE
+                Bernoulli:
+                0 si r < 1-p
+                1 si r >= 1-p
             */
 
-            for (let j = 1; j <= N; j++) {
+            let BE;
 
-                let r = Math.random();
+            if (r < limite) {
 
-                aleatorios.push(r);
+                BE = 0;
 
-                let limite = 1 - p;
+            } else {
 
-                let BE = (r < limite) ? 0 : 1;
+                BE = 1;
 
-                bernoulli.push(BE);
-
-                suma += BE;
             }
 
-            /*
-                MOSTRAR r
-            */
+            bernoulli.push(BE);
 
-            aleatorios.forEach(r => {
+            suma += BE;
 
-                let td = document.createElement("td");
-                td.className = "grupo-r";
-                td.textContent = r.toFixed(4);
-
-                fila.appendChild(td);
-
-            });
-
-            /*
-                MOSTRAR CADA BE POR SEPARADO
-            */
-
-            bernoulli.forEach(BE => {
-
-                let td = document.createElement("td");
-                td.className = "grupo-be";
-                td.textContent = BE;
-
-                fila.appendChild(td);
-
-            });
-
-            /*
-                MOSTRAR Bi
-            */
-
-            let tdBi = document.createElement("td");
-            tdBi.className = "resultado";
-            tdBi.textContent = suma;
-
-            fila.appendChild(tdBi);
-
-            cuerpo.appendChild(fila);
-
-            /*
-                DATOS PARA EXCEL
-            */
-
-            let filaExcel = [
-                i,
-                N,
-                ...aleatorios.map(r => r.toFixed(4)),
-                ...bernoulli,
-                suma
-            ];
-
-            datosExcel.push(filaExcel);
-        }
-    }
-
-    /*
-        COPIAR TABLA PARA EXCEL
-    */
-
-    function copiarExcel() {
-
-        if (datosExcel.length === 0) {
-            alert("Primero genera la tabla.");
-            return;
         }
 
-        const encabezados = [];
+        /*
+            FILA
+        */
 
-        encabezados.push("i");
-        encabezados.push("N");
+        html += "<tr>";
 
-        const N = parseInt(document.getElementById("N").value);
+        html += `<td>${i}</td>`;
 
-        for (let j = 1; j <= N; j++) {
-            encabezados.push("r" + j);
-        }
+        html += `<td>${N}</td>`;
 
-        for (let j = 1; j <= N; j++) {
-            encabezados.push("BE" + j);
-        }
+        /*
+            ALEATORIOS
+        */
 
-        encabezados.push("Bi");
+        aleatorios.forEach(r => {
 
-        let texto = encabezados.join("\t") + "\n";
+            html += `
+                <td class="grupo-r">
+                    ${r.toFixed(4)}
+                </td>
+            `;
 
-        datosExcel.forEach(fila => {
-            texto += fila.join("\t") + "\n";
         });
 
-        navigator.clipboard.writeText(texto)
-            .then(() => {
-                alert("Tabla copiada. Ahora puedes pegarla directamente en Excel.");
-            })
-            .catch(() => {
-                alert("No se pudo copiar automáticamente.");
-            });
+        /*
+            BERNOULLI SEPARADOS
+        */
+
+        bernoulli.forEach(BE => {
+
+            html += `
+                <td class="grupo-be">
+                    <strong>${BE}</strong>
+                </td>
+            `;
+
+        });
+
+        /*
+            BINOMIAL
+        */
+
+        html += `
+            <td class="resultado-bi">
+                <strong>${suma}</strong>
+            </td>
+        `;
+
+        html += "</tr>";
+
     }
 
-    /*
-        GENERAR AL ABRIR LA PÁGINA
-    */
+    html += "</table>";
 
-    generar();
+    document.getElementById("resultados").innerHTML = html;
+}
+
+
+/*
+    COPIAR PARA EXCEL
+*/
+
+function copiarExcel() {
+
+    const tabla =
+        document.querySelector(
+            "#resultados table"
+        );
+
+    if (!tabla) {
+
+        alert(
+            "Primero genere las variables aleatorias."
+        );
+
+        return;
+    }
+
+    let texto = "";
+
+    const filas =
+        tabla.querySelectorAll("tr");
+
+    filas.forEach(fila => {
+
+        const celdas =
+            fila.querySelectorAll("th, td");
+
+        const valores = [];
+
+        celdas.forEach(celda => {
+
+            valores.push(
+                celda.innerText
+            );
+
+        });
+
+        texto +=
+            valores.join("\t") + "\n";
+
+    });
+
+    navigator.clipboard.writeText(texto)
+        .then(() => {
+
+            alert(
+                "Tabla copiada. Ahora puede pegarla directamente en Excel."
+            );
+
+        })
+        .catch(() => {
+
+            alert(
+                "No se pudo copiar automáticamente."
+            );
+
+        });
+}
+
+
+/*
+    LIMPIAR AL VOLVER A LA PÁGINA
+*/
+
+window.addEventListener(
+    "pageshow",
+    function() {
+
+        document.getElementById(
+            "cantidad"
+        ).value = "";
+
+        document.getElementById(
+            "N"
+        ).value = "";
+
+        document.getElementById(
+            "p"
+        ).value = "";
+
+        document.getElementById(
+            "resultados"
+        ).innerHTML = "";
+
+    }
+);
 
 </script>
 
 </body>
 </html>
+```
+
+Con **N = 7** te va a generar exactamente esta estructura:
+
+**i | N | r1 | r2 | r3 | r4 | r5 | r6 | r7 | BE1 | BE2 | BE3 | BE4 | BE5 | BE6 | BE7 | Bi**
+
+Y si cambias **N = 10**, automáticamente aparecen `r1` hasta `r10`, `BE1` hasta `BE10` y el `Bi` se calcula sumando esos 10 Bernoulli.
