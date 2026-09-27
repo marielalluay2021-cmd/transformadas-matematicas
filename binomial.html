@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Distribución Binomial | Simulación de Procesos</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -63,23 +67,54 @@
         .formula {
             background: #f5f0fa;
             border-radius: 10px;
-            padding: 35px 20px;
+            padding: 45px 20px;
             margin-top: 15px;
             text-align: center;
             color: #3f3275;
             overflow-x: auto;
         }
 
-        .formula-titulo {
-            font-family: "Times New Roman", serif;
-            font-size: 27px;
-            margin-bottom: 20px;
-        }
-
         .formula-matematica {
             font-family: "Times New Roman", serif;
-            font-size: 27px;
-            line-height: 1.8;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .formula-principal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .sumatoria {
+            position: relative;
+            display: inline-block;
+            width: 65px;
+            height: 65px;
+        }
+
+        .sigma {
+            font-size: 60px;
+            line-height: 65px;
+        }
+
+        .limite-superior {
+            position: absolute;
+            top: -8px;
+            right: 0;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .limite-inferior {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            font-size: 18px;
+            font-weight: bold;
         }
 
         .notas {
@@ -201,48 +236,55 @@
                 font-size: 25px;
             }
 
-            .formula-titulo {
-                font-size: 23px;
+            .formula-matematica {
+                font-size: 25px;
             }
 
-            .formula-matematica {
-                font-size: 22px;
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <h1>Distribución Binomial (B<sub>i</sub>)</h1>
+
     <p>Generador de Variables Aleatorias</p>
+
 </header>
+
 
 <div class="contenedor">
 
+
     <!-- CONCEPTO -->
+
     <div class="tarjeta">
 
         <h2>Concepto</h2>
 
         <p>
-            La distribución binomial se utiliza para modelar el número
-            de éxitos obtenidos al realizar N ensayos Bernoulli
-            independientes, donde cada ensayo tiene dos resultados
-            posibles: éxito o fracaso.
-        </p>
 
-        <p>
-            Cada ensayo Bernoulli toma el valor 1 cuando ocurre un éxito
-            y 0 cuando ocurre un fracaso. La variable binomial se obtiene
-            sumando los resultados de los N ensayos Bernoulli.
+            La distribución binomial se utiliza para modelar el número
+
+            de éxitos obtenidos al realizar N ensayos Bernoulli
+
+            independientes, donde cada ensayo tiene dos resultados
+
+            posibles: éxito o fracaso.
+
         </p>
 
     </div>
 
 
     <!-- PARÁMETROS -->
+
     <div class="tarjeta">
 
         <h2>Parámetros</h2>
@@ -252,31 +294,29 @@
             <ul>
 
                 <li>
-                    <strong>B<sub>i</sub>:</strong>
-                    variable aleatoria con distribución binomial.
-                </li>
 
-                <li>
                     <strong>BE<sub>ij</sub>:</strong>
-                    resultado del ensayo Bernoulli j perteneciente
-                    a la variable binomial i.
+
+                    números aleatorios con distribución de Bernoulli.
+
                 </li>
 
                 <li>
+
                     <strong>N:</strong>
-                    número de ensayos Bernoulli que se realizan
-                    para obtener una variable binomial.
+
+                    número de eventos máximo de la distribución binomial.
+
                 </li>
 
                 <li>
+
                     <strong>p:</strong>
-                    probabilidad de éxito de cada ensayo Bernoulli.
-                </li>
 
-                <li>
-                    <strong>r<sub>ij</sub>:</strong>
-                    número aleatorio entre 0 y 1 utilizado para
-                    generar cada ensayo Bernoulli.
+                    probabilidad de éxito de la distribución binomial
+
+                    que se involucra al generar los Bernoulli.
+
                 </li>
 
             </ul>
@@ -287,74 +327,48 @@
 
 
     <!-- FÓRMULA -->
+
     <div class="tarjeta">
 
         <h2>Fórmula</h2>
 
         <div class="formula">
 
-            <div class="formula-titulo">
-
-                <strong>
-                    B<sub>i</sub> =
-                </strong>
-
-            </div>
-
             <div class="formula-matematica">
 
-                <strong>
-                    ∑<sub>j=1</sub><sup>N</sup>
-                    BE<sub>ij</sub>
-                </strong>
+                <div class="formula-principal">
 
-                <br>
+                    <span>
 
-                <span>
-                    B<sub>i</sub> =
-                    BE<sub>i1</sub> +
-                    BE<sub>i2</sub> +
-                    ... +
-                    BE<sub>iN</sub>
-                </span>
+                        B<sub>i</sub> =
 
-            </div>
+                    </span>
 
-        </div>
+                    <span class="sumatoria">
 
-    </div>
+                        <span class="sigma">∑</span>
 
+                        <span class="limite-superior">
 
-    <!-- RELACIÓN CON BERNOULLI -->
-    <div class="tarjeta">
+                            N
 
-        <h2>Relación con la distribución Bernoulli</h2>
+                        </span>
 
-        <p>
-            Para obtener cada variable binomial B<sub>i</sub>,
-            primero se generan N variables Bernoulli utilizando
-            la misma probabilidad p.
-        </p>
+                        <span class="limite-inferior">
 
-        <div class="formula">
+                            j = 1
 
-            <div class="formula-matematica">
+                        </span>
 
-                BE<sub>ij</sub> =
+                    </span>
 
-                <br>
+                    <span>
 
-                0, si r<sub>ij</sub> &lt; 1 − p
+                        BE<sub>ij</sub>
 
-                <br>
+                    </span>
 
-                1, si r<sub>ij</sub> ≥ 1 − p
-
-                <br><br>
-
-                B<sub>i</sub> =
-                ∑<sub>j=1</sub><sup>N</sup>
-                BE<sub>ij</sub>
+                </div>
 
             </div>
 
@@ -364,23 +378,32 @@
 
 
     <!-- GENERADOR -->
+
     <div class="tarjeta">
 
         <h2>Generador de variables aleatorias</h2>
 
         <div class="formulario">
 
+
             <div class="campo">
 
                 <label for="cantidad">
-                    Cantidad de variables binomiales
+
+                    Cantidad de variables
+
                 </label>
 
                 <input
+
                     type="number"
+
                     id="cantidad"
+
                     min="1"
+
                     placeholder="Ej. 10"
+
                 >
 
             </div>
@@ -389,14 +412,21 @@
             <div class="campo">
 
                 <label for="N">
-                    N (Número de ensayos Bernoulli)
+
+                    N (Número de Bernoulli)
+
                 </label>
 
                 <input
+
                     type="number"
+
                     id="N"
+
                     min="1"
+
                     placeholder="Ej. 10"
+
                 >
 
             </div>
@@ -405,19 +435,29 @@
             <div class="campo">
 
                 <label for="p">
-                    p (Probabilidad de éxito)
+
+                    p (Probabilidad)
+
                 </label>
 
                 <input
+
                     type="number"
+
                     id="p"
+
                     min="0"
+
                     max="1"
+
                     step="0.01"
+
                     placeholder="Ej. 0.5"
+
                 >
 
             </div>
+
 
         </div>
 
@@ -425,11 +465,16 @@
         <div class="botones">
 
             <button onclick="generarBinomial()">
+
                 Generar variables aleatorias
+
             </button>
 
+
             <button onclick="copiarExcel()">
+
                 Copiar Excel
+
             </button>
 
         </div>
@@ -441,8 +486,11 @@
 
 
     <a href="./index.html" class="volver">
+
         ← Volver al inicio
+
     </a>
+
 
 </div>
 
@@ -450,8 +498,11 @@
 <footer>
 
     <strong>ESPOCH</strong><br>
+
     Facultad de Mecánica<br>
+
     Ingeniería Industrial<br>
+
     Mariela Lluay
 
 </footer>
@@ -459,39 +510,65 @@
 
 <script>
 
+
 function generarBinomial() {
 
+
     const cantidad =
+
         parseInt(
+
             document.getElementById("cantidad").value
+
         );
+
 
     const N =
+
         parseInt(
+
             document.getElementById("N").value
+
         );
 
+
     const p =
+
         parseFloat(
+
             document.getElementById("p").value
+
         );
 
 
     if (
+
         isNaN(cantidad) ||
+
         isNaN(N) ||
+
         isNaN(p) ||
+
         cantidad <= 0 ||
+
         N <= 0 ||
+
         p < 0 ||
+
         p > 1
+
     ) {
 
+
         alert(
+
             "Ingrese valores válidos. N debe ser mayor que 0 y p debe estar entre 0 y 1."
+
         );
 
+
         return;
+
     }
 
 
@@ -502,7 +579,7 @@ function generarBinomial() {
 
     html += "<th>i</th>";
 
-    html += "<th>Ensayos Bernoulli</th>";
+    html += "<th>N</th>";
 
     html += "<th>BE<sub>ij</sub></th>";
 
@@ -511,22 +588,38 @@ function generarBinomial() {
     html += "</tr>";
 
 
-    for (let i = 1; i <= cantidad; i++) {
+    for (
+
+        let i = 1;
+
+        i <= cantidad;
+
+        i++
+
+    ) {
+
 
         let suma = 0;
 
         let bernoulli = [];
 
 
-        /*
-         * Generación de los N ensayos Bernoulli
-         */
+        for (
 
-        for (let j = 1; j <= N; j++) {
+            let j = 1;
+
+            j <= N;
+
+            j++
+
+        ) {
+
 
             let r = Math.random();
 
+
             let limite = 1 - p;
+
 
             let BE;
 
@@ -552,17 +645,26 @@ function generarBinomial() {
 
         html += "<tr>";
 
+
         html += `<td>${i}</td>`;
+
 
         html += `<td>${N}</td>`;
 
+
         html += `<td>${bernoulli.join(" + ")}</td>`;
 
+
         html += `
+
             <td class="resultado-binomial">
+
                 ${suma}
+
             </td>
+
         `;
+
 
         html += "</tr>";
 
@@ -572,7 +674,11 @@ function generarBinomial() {
     html += "</table>";
 
 
-    document.getElementById("resultados").innerHTML = html;
+    document.getElementById(
+
+        "resultados"
+
+    ).innerHTML = html;
 
 }
 
@@ -580,17 +686,25 @@ function generarBinomial() {
 
 function copiarExcel() {
 
+
     const tabla =
+
         document.querySelector(
+
             "#resultados table"
+
         );
 
 
     if (!tabla) {
 
+
         alert(
+
             "Primero genere las variables aleatorias."
+
         );
+
 
         return;
 
@@ -601,13 +715,20 @@ function copiarExcel() {
 
 
     const filas =
+
         tabla.querySelectorAll("tr");
 
 
     filas.forEach(fila => {
 
+
         const celdas =
-            fila.querySelectorAll("th, td");
+
+            fila.querySelectorAll(
+
+                "th, td"
+
+            );
 
 
         const valores = [];
@@ -615,24 +736,36 @@ function copiarExcel() {
 
         celdas.forEach(celda => {
 
+
             valores.push(
+
                 celda.innerText
+
             );
 
         });
 
 
         texto +=
-            valores.join("\t") + "\n";
+
+            valores.join("\t") +
+
+            "\n";
 
     });
 
 
-    navigator.clipboard.writeText(texto);
+    navigator.clipboard.writeText(
+
+        texto
+
+    );
 
 
     alert(
+
         "Tabla copiada. Ahora puede pegarla directamente en Excel."
+
     );
 
 }
@@ -640,29 +773,47 @@ function copiarExcel() {
 
 
 window.addEventListener(
+
     "pageshow",
+
     function() {
 
+
         document.getElementById(
+
             "cantidad"
+
         ).value = "";
 
+
         document.getElementById(
+
             "N"
+
         ).value = "";
 
+
         document.getElementById(
+
             "p"
+
         ).value = "";
 
+
         document.getElementById(
+
             "resultados"
+
         ).innerHTML = "";
 
     }
+
 );
+
 
 </script>
 
+
 </body>
+
 </html>
