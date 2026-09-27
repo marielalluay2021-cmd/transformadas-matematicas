@@ -67,7 +67,7 @@
         .formula {
             background: #f5f0fa;
             border-radius: 10px;
-            padding: 45px 20px;
+            padding: 50px 20px;
             margin-top: 15px;
             text-align: center;
             color: #3f3275;
@@ -85,35 +85,39 @@
         .formula-principal {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 18px;
         }
+
+        /* SUMATORIA */
 
         .sumatoria {
             position: relative;
             display: inline-block;
             width: 65px;
-            height: 65px;
+            height: 75px;
         }
 
         .sigma {
-            font-size: 60px;
+            position: absolute;
+            left: 8px;
+            top: 5px;
+            font-size: 65px;
             line-height: 65px;
         }
 
         .limite-superior {
             position: absolute;
-            top: -8px;
+            top: -15px;
             right: 0;
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
         }
 
         .limite-inferior {
             position: absolute;
-            bottom: -5px;
+            bottom: -10px;
             left: 0;
-            font-size: 18px;
+            font-size: 19px;
             font-weight: bold;
         }
 
@@ -297,7 +301,7 @@
 
                     <strong>BE<sub>ij</sub>:</strong>
 
-                    números aleatorios con distribución de Bernoulli.
+                    Números aleatorios con distribución de Bernoulli.
 
                 </li>
 
@@ -305,7 +309,7 @@
 
                     <strong>N:</strong>
 
-                    número de eventos máximo de la distribución binomial.
+                    Número del evento máximo de la distribución binomial.
 
                 </li>
 
@@ -313,7 +317,7 @@
 
                     <strong>p:</strong>
 
-                    probabilidad de éxito de la distribución binomial
+                    Probabilidad de éxito de la distribución binomial
 
                     que se involucra al generar los Bernoulli.
 
@@ -339,33 +343,27 @@
                 <div class="formula-principal">
 
                     <span>
-
                         B<sub>i</sub> =
-
                     </span>
 
                     <span class="sumatoria">
 
-                        <span class="sigma">∑</span>
+                        <span class="sigma">
+                            ∑
+                        </span>
 
                         <span class="limite-superior">
-
                             N
-
                         </span>
 
                         <span class="limite-inferior">
-
                             j = 1
-
                         </span>
 
                     </span>
 
                     <span>
-
                         BE<sub>ij</sub>
-
                     </span>
 
                 </div>
@@ -395,15 +393,10 @@
                 </label>
 
                 <input
-
                     type="number"
-
                     id="cantidad"
-
                     min="1"
-
                     placeholder="Ej. 10"
-
                 >
 
             </div>
@@ -418,15 +411,10 @@
                 </label>
 
                 <input
-
                     type="number"
-
                     id="N"
-
                     min="1"
-
                     placeholder="Ej. 10"
-
                 >
 
             </div>
@@ -441,19 +429,12 @@
                 </label>
 
                 <input
-
                     type="number"
-
                     id="p"
-
                     min="0"
-
                     max="1"
-
                     step="0.01"
-
                     placeholder="Ej. 0.5"
-
                 >
 
             </div>
@@ -515,29 +496,20 @@ function generarBinomial() {
 
 
     const cantidad =
-
         parseInt(
-
             document.getElementById("cantidad").value
-
         );
 
 
     const N =
-
         parseInt(
-
             document.getElementById("N").value
-
         );
 
 
     const p =
-
         parseFloat(
-
             document.getElementById("p").value
-
         );
 
 
@@ -617,9 +589,7 @@ function generarBinomial() {
 
             let r = Math.random();
 
-
             let limite = 1 - p;
-
 
             let BE;
 
@@ -637,7 +607,6 @@ function generarBinomial() {
 
             suma += BE;
 
-
             bernoulli.push(BE);
 
         }
@@ -648,12 +617,9 @@ function generarBinomial() {
 
         html += `<td>${i}</td>`;
 
-
         html += `<td>${N}</td>`;
 
-
         html += `<td>${bernoulli.join(" + ")}</td>`;
-
 
         html += `
 
@@ -809,7 +775,6 @@ window.addEventListener(
     }
 
 );
-
 
 </script>
 
