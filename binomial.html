@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Distribución Binomial | Simulación de Procesos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1f8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #30245f, #6b4ca5);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #d85c91;
+        }
+
+        .tarjeta h2 {
+            color: #3f3275;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+            padding: 35px 20px;
+            margin-top: 15px;
+            text-align: center;
+            color: #3f3275;
+            overflow-x: auto;
+        }
+
+        .formula-titulo {
+            font-family: "Times New Roman", serif;
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+            font-size: 27px;
+            line-height: 1.8;
+        }
+
+        .notas {
+            background: #faf8fc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .notas ul {
+            padding-left: 20px;
+        }
+
+        .notas li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            color: #3f3275;
+            margin-bottom: 8px;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6b4ca5, #d85c91);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #resultados {
+            margin-top: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #6b4ca5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f5fb;
+        }
+
+        .resultado-binomial {
+            font-weight: bold;
+            color: #3f3275;
+            font-size: 18px;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 10px;
+            color: #3f3275;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #30245f;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .formula-titulo {
+                font-size: 23px;
+            }
+
+            .formula-matematica {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Distribución Binomial (B<sub>i</sub>)</h1>
+    <p>Generador de Variables Aleatorias</p>
+</header>
+
+<div class="contenedor">
+
+    <!-- CONCEPTO -->
+    <div class="tarjeta">
+
+        <h2>Concepto</h2>
+
+        <p>
+            La distribución binomial se utiliza para modelar el número
+            de éxitos obtenidos al realizar N ensayos Bernoulli
+            independientes, donde cada ensayo tiene dos resultados
+            posibles: éxito o fracaso.
+        </p>
+
+        <p>
+            Cada ensayo Bernoulli toma el valor 1 cuando ocurre un éxito
+            y 0 cuando ocurre un fracaso. La variable binomial se obtiene
+            sumando los resultados de los N ensayos Bernoulli.
+        </p>
+
+    </div>
+
+
+    <!-- PARÁMETROS -->
+    <div class="tarjeta">
+
+        <h2>Parámetros</h2>
+
+        <div class="notas">
+
+            <ul>
+
+                <li>
+                    <strong>B<sub>i</sub>:</strong>
+                    variable aleatoria con distribución binomial.
+                </li>
+
+                <li>
+                    <strong>BE<sub>ij</sub>:</strong>
+                    resultado del ensayo Bernoulli j perteneciente
+                    a la variable binomial i.
+                </li>
+
+                <li>
+                    <strong>N:</strong>
+                    número de ensayos Bernoulli que se realizan
+                    para obtener una variable binomial.
+                </li>
+
+                <li>
+                    <strong>p:</strong>
+                    probabilidad de éxito de cada ensayo Bernoulli.
+                </li>
+
+                <li>
+                    <strong>r<sub>ij</sub>:</strong>
+                    número aleatorio entre 0 y 1 utilizado para
+                    generar cada ensayo Bernoulli.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    <!-- FÓRMULA -->
+    <div class="tarjeta">
+
+        <h2>Fórmula</h2>
+
+        <div class="formula">
+
+            <div class="formula-titulo">
+
+                <strong>
+                    B<sub>i</sub> =
+                </strong>
+
+            </div>
+
+            <div class="formula-matematica">
+
+                <strong>
+                    ∑<sub>j=1</sub><sup>N</sup>
+                    BE<sub>ij</sub>
+                </strong>
+
+                <br>
+
+                <span>
+                    B<sub>i</sub> =
+                    BE<sub>i1</sub> +
+                    BE<sub>i2</sub> +
+                    ... +
+                    BE<sub>iN</sub>
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- RELACIÓN CON BERNOULLI -->
+    <div class="tarjeta">
+
+        <h2>Relación con la distribución Bernoulli</h2>
+
+        <p>
+            Para obtener cada variable binomial B<sub>i</sub>,
+            primero se generan N variables Bernoulli utilizando
+            la misma probabilidad p.
+        </p>
+
+        <div class="formula">
+
+            <div class="formula-matematica">
+
+                BE<sub>ij</sub> =
+
+                <br>
+
+                0, si r<sub>ij</sub> &lt; 1 − p
+
+                <br>
+
+                1, si r<sub>ij</sub> ≥ 1 − p
+
+                <br><br>
+
+                B<sub>i</sub> =
+                ∑<sub>j=1</sub><sup>N</sup>
+                BE<sub>ij</sub>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- GENERADOR -->
+    <div class="tarjeta">
+
+        <h2>Generador de variables aleatorias</h2>
+
+        <div class="formulario">
+
+            <div class="campo">
+
+                <label for="cantidad">
+                    Cantidad de variables binomiales
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    placeholder="Ej. 10"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="N">
+                    N (Número de ensayos Bernoulli)
+                </label>
+
+                <input
+                    type="number"
+                    id="N"
+                    min="1"
+                    placeholder="Ej. 10"
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="p">
+                    p (Probabilidad de éxito)
+                </label>
+
+                <input
+                    type="number"
+                    id="p"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    placeholder="Ej. 0.5"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="botones">
+
+            <button onclick="generarBinomial()">
+                Generar variables aleatorias
+            </button>
+
+            <button onclick="copiarExcel()">
+                Copiar Excel
+            </button>
+
+        </div>
+
+
+        <div id="resultados"></div>
+
+    </div>
+
+
+    <a href="./index.html" class="volver">
+        ← Volver al inicio
+    </a>
+
+</div>
+
+
+<footer>
+
+    <strong>ESPOCH</strong><br>
+    Facultad de Mecánica<br>
+    Ingeniería Industrial<br>
+    Mariela Lluay
+
+</footer>
+
+
+<script>
+
+function generarBinomial() {
+
+    const cantidad =
+        parseInt(
+            document.getElementById("cantidad").value
+        );
+
+    const N =
+        parseInt(
+            document.getElementById("N").value
+        );
+
+    const p =
+        parseFloat(
+            document.getElementById("p").value
+        );
+
+
+    if (
+        isNaN(cantidad) ||
+        isNaN(N) ||
+        isNaN(p) ||
+        cantidad <= 0 ||
+        N <= 0 ||
+        p < 0 ||
+        p > 1
+    ) {
+
+        alert(
+            "Ingrese valores válidos. N debe ser mayor que 0 y p debe estar entre 0 y 1."
+        );
+
+        return;
+    }
+
+
+    let html = "<table>";
+
+
+    html += "<tr>";
+
+    html += "<th>i</th>";
+
+    html += "<th>Ensayos Bernoulli</th>";
+
+    html += "<th>BE<sub>ij</sub></th>";
+
+    html += "<th>B<sub>i</sub></th>";
+
+    html += "</tr>";
+
+
+    for (let i = 1; i <= cantidad; i++) {
+
+        let suma = 0;
+
+        let bernoulli = [];
+
+
+        /*
+         * Generación de los N ensayos Bernoulli
+         */
+
+        for (let j = 1; j <= N; j++) {
+
+            let r = Math.random();
+
+            let limite = 1 - p;
+
+            let BE;
+
+
+            if (r < limite) {
+
+                BE = 0;
+
+            } else {
+
+                BE = 1;
+
+            }
+
+
+            suma += BE;
+
+
+            bernoulli.push(BE);
+
+        }
+
+
+        html += "<tr>";
+
+        html += `<td>${i}</td>`;
+
+        html += `<td>${N}</td>`;
+
+        html += `<td>${bernoulli.join(" + ")}</td>`;
+
+        html += `
+            <td class="resultado-binomial">
+                ${suma}
+            </td>
+        `;
+
+        html += "</tr>";
+
+    }
+
+
+    html += "</table>";
+
+
+    document.getElementById("resultados").innerHTML = html;
+
+}
+
+
+
+function copiarExcel() {
+
+    const tabla =
+        document.querySelector(
+            "#resultados table"
+        );
+
+
+    if (!tabla) {
+
+        alert(
+            "Primero genere las variables aleatorias."
+        );
+
+        return;
+
+    }
+
+
+    let texto = "";
+
+
+    const filas =
+        tabla.querySelectorAll("tr");
+
+
+    filas.forEach(fila => {
+
+        const celdas =
+            fila.querySelectorAll("th, td");
+
+
+        const valores = [];
+
+
+        celdas.forEach(celda => {
+
+            valores.push(
+                celda.innerText
+            );
+
+        });
+
+
+        texto +=
+            valores.join("\t") + "\n";
+
+    });
+
+
+    navigator.clipboard.writeText(texto);
+
+
+    alert(
+        "Tabla copiada. Ahora puede pegarla directamente en Excel."
+    );
+
+}
+
+
+
+window.addEventListener(
+    "pageshow",
+    function() {
+
+        document.getElementById(
+            "cantidad"
+        ).value = "";
+
+        document.getElementById(
+            "N"
+        ).value = "";
+
+        document.getElementById(
+            "p"
+        ).value = "";
+
+        document.getElementById(
+            "resultados"
+        ).innerHTML = "";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
