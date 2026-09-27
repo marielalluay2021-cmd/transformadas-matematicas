@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Distribución Binomial | Simulación de Procesos</title>
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -40,8 +35,8 @@
         }
 
         .contenedor {
-            width: 90%;
-            max-width: 1100px;
+            width: 95%;
+            max-width: 1300px;
             margin: 30px auto;
         }
 
@@ -87,8 +82,6 @@
             align-items: center;
             gap: 18px;
         }
-
-        /* SUMATORIA */
 
         .sumatoria {
             position: relative;
@@ -193,10 +186,10 @@
             width: 100%;
             border-collapse: collapse;
             background: white;
+            min-width: 900px;
         }
 
-        th,
-        td {
+        th, td {
             border: 1px solid #ddd;
             padding: 10px;
             text-align: center;
@@ -235,7 +228,6 @@
         }
 
         @media (max-width: 600px) {
-
             header h1 {
                 font-size: 25px;
             }
@@ -243,54 +235,34 @@
             .formula-matematica {
                 font-size: 25px;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
-
     <h1>Distribución Binomial (B<sub>i</sub>)</h1>
-
     <p>Generador de Variables Aleatorias</p>
-
 </header>
-
 
 <div class="contenedor">
 
-
     <!-- CONCEPTO -->
-
     <div class="tarjeta">
-
         <h2>Concepto</h2>
 
         <p>
-
             La distribución binomial se utiliza para modelar el número
-
             de éxitos obtenidos al realizar N ensayos Bernoulli
-
             independientes, donde cada ensayo tiene dos resultados
-
             posibles: éxito o fracaso.
-
         </p>
-
     </div>
 
 
     <!-- PARÁMETROS -->
-
     <div class="tarjeta">
-
         <h2>Parámetros</h2>
 
         <div class="notas">
@@ -298,40 +270,28 @@
             <ul>
 
                 <li>
-
                     <strong>BE<sub>ij</sub>:</strong>
-
                     Números aleatorios con distribución de Bernoulli.
-
                 </li>
 
                 <li>
-
                     <strong>N:</strong>
-
                     Número del evento máximo de la distribución binomial.
-
                 </li>
 
                 <li>
-
                     <strong>p:</strong>
-
                     Probabilidad de éxito de la distribución binomial
-
                     que se involucra al generar los Bernoulli.
-
                 </li>
 
             </ul>
 
         </div>
-
     </div>
 
 
-    <!-- FÓRMULA -->
-
+    <!-- FORMULA -->
     <div class="tarjeta">
 
         <h2>Fórmula</h2>
@@ -348,9 +308,7 @@
 
                     <span class="sumatoria">
 
-                        <span class="sigma">
-                            ∑
-                        </span>
+                        <span class="sigma">∑</span>
 
                         <span class="limite-superior">
                             N
@@ -376,20 +334,16 @@
 
 
     <!-- GENERADOR -->
-
     <div class="tarjeta">
 
         <h2>Generador de variables aleatorias</h2>
 
         <div class="formulario">
 
-
             <div class="campo">
 
                 <label for="cantidad">
-
                     Cantidad de variables
-
                 </label>
 
                 <input
@@ -405,16 +359,14 @@
             <div class="campo">
 
                 <label for="N">
-
                     N (Número de Bernoulli)
-
                 </label>
 
                 <input
                     type="number"
                     id="N"
                     min="1"
-                    placeholder="Ej. 10"
+                    placeholder="Ej. 7"
                 >
 
             </div>
@@ -423,9 +375,7 @@
             <div class="campo">
 
                 <label for="p">
-
                     p (Probabilidad)
-
                 </label>
 
                 <input
@@ -439,23 +389,17 @@
 
             </div>
 
-
         </div>
 
 
         <div class="botones">
 
             <button onclick="generarBinomial()">
-
                 Generar variables aleatorias
-
             </button>
 
-
             <button onclick="copiarExcel()">
-
                 Copiar Excel
-
             </button>
 
         </div>
@@ -467,11 +411,8 @@
 
 
     <a href="./index.html" class="volver">
-
         ← Volver al inicio
-
     </a>
-
 
 </div>
 
@@ -479,11 +420,8 @@
 <footer>
 
     <strong>ESPOCH</strong><br>
-
     Facultad de Mecánica<br>
-
     Ingeniería Industrial<br>
-
     Mariela Lluay
 
 </footer>
@@ -491,53 +429,31 @@
 
 <script>
 
-
 function generarBinomial() {
 
-
     const cantidad =
-        parseInt(
-            document.getElementById("cantidad").value
-        );
-
+        parseInt(document.getElementById("cantidad").value);
 
     const N =
-        parseInt(
-            document.getElementById("N").value
-        );
-
+        parseInt(document.getElementById("N").value);
 
     const p =
-        parseFloat(
-            document.getElementById("p").value
-        );
+        parseFloat(document.getElementById("p").value);
 
 
     if (
-
         isNaN(cantidad) ||
-
         isNaN(N) ||
-
         isNaN(p) ||
-
         cantidad <= 0 ||
-
         N <= 0 ||
-
         p < 0 ||
-
         p > 1
-
     ) {
 
-
         alert(
-
             "Ingrese valores válidos. N debe ser mayor que 0 y p debe estar entre 0 y 1."
-
         );
-
 
         return;
 
@@ -546,12 +462,28 @@ function generarBinomial() {
 
     let html = "<table>";
 
+    /*
+        ENCABEZADOS
+    */
 
     html += "<tr>";
 
     html += "<th>i</th>";
 
     html += "<th>N</th>";
+
+
+    /*
+        SE CREAN AUTOMÁTICAMENTE
+        TANTAS COLUMNAS r COMO INDIQUE N
+    */
+
+    for (let j = 1; j <= N; j++) {
+
+        html += `<th>r<sub>${j}</sub></th>`;
+
+    }
+
 
     html += "<th>BE<sub>ij</sub></th>";
 
@@ -560,39 +492,44 @@ function generarBinomial() {
     html += "</tr>";
 
 
-    for (
+    /*
+        GENERAR LAS VARIABLES
+    */
 
-        let i = 1;
-
-        i <= cantidad;
-
-        i++
-
-    ) {
-
+    for (let i = 1; i <= cantidad; i++) {
 
         let suma = 0;
 
-        let bernoulli = [];
+        let valoresR = [];
+
+        let valoresBE = [];
 
 
-        for (
+        /*
+            GENERAR N NÚMEROS ALEATORIOS
+        */
 
-            let j = 1;
+        for (let j = 1; j <= N; j++) {
 
-            j <= N;
-
-            j++
-
-        ) {
-
+            /*
+                NÚMERO ALEATORIO ENTRE 0 Y 1
+            */
 
             let r = Math.random();
 
+
+            /*
+                LÍMITE DE BERNOULLI
+            */
+
             let limite = 1 - p;
 
-            let BE;
 
+            /*
+                OBTENER BEij
+            */
+
+            let BE;
 
             if (r < limite) {
 
@@ -605,32 +542,65 @@ function generarBinomial() {
             }
 
 
-            suma += BE;
+            /*
+                GUARDAR LOS VALORES
+            */
 
-            bernoulli.push(BE);
+            valoresR.push(r);
+
+            valoresBE.push(BE);
+
+            suma += BE;
 
         }
 
 
-        html += "<tr>";
+        /*
+            CREAR FILA
+        */
 
+        html += "<tr>";
 
         html += `<td>${i}</td>`;
 
         html += `<td>${N}</td>`;
 
-        html += `<td>${bernoulli.join(" + ")}</td>`;
+
+        /*
+            MOSTRAR TODOS LOS r
+        */
+
+        for (let j = 0; j < N; j++) {
+
+            html += `
+                <td>
+                    ${valoresR[j].toFixed(4)}
+                </td>
+            `;
+
+        }
+
+
+        /*
+            MOSTRAR LOS BERNOULLI
+        */
 
         html += `
-
-            <td class="resultado-binomial">
-
-                ${suma}
-
+            <td>
+                ${valoresBE.join(" + ")}
             </td>
-
         `;
 
+
+        /*
+            SUMA DE LOS BERNOULLI
+        */
+
+        html += `
+            <td class="resultado-binomial">
+                ${suma}
+            </td>
+        `;
 
         html += "</tr>";
 
@@ -640,37 +610,26 @@ function generarBinomial() {
     html += "</table>";
 
 
-    document.getElementById(
-
-        "resultados"
-
-    ).innerHTML = html;
+    document.getElementById("resultados").innerHTML = html;
 
 }
 
 
+/*
+    COPIAR PARA EXCEL
+*/
 
 function copiarExcel() {
 
-
     const tabla =
-
-        document.querySelector(
-
-            "#resultados table"
-
-        );
+        document.querySelector("#resultados table");
 
 
     if (!tabla) {
 
-
         alert(
-
             "Primero genere las variables aleatorias."
-
         );
-
 
         return;
 
@@ -681,104 +640,56 @@ function copiarExcel() {
 
 
     const filas =
-
         tabla.querySelectorAll("tr");
 
 
     filas.forEach(fila => {
 
-
         const celdas =
-
-            fila.querySelectorAll(
-
-                "th, td"
-
-            );
-
+            fila.querySelectorAll("th, td");
 
         const valores = [];
 
 
         celdas.forEach(celda => {
 
-
-            valores.push(
-
-                celda.innerText
-
-            );
+            valores.push(celda.innerText);
 
         });
 
 
-        texto +=
-
-            valores.join("\t") +
-
-            "\n";
+        texto += valores.join("\t") + "\n";
 
     });
 
 
-    navigator.clipboard.writeText(
-
-        texto
-
-    );
+    navigator.clipboard.writeText(texto);
 
 
     alert(
-
         "Tabla copiada. Ahora puede pegarla directamente en Excel."
-
     );
 
 }
 
 
+/*
+    LIMPIAR AL RECARGAR
+*/
 
-window.addEventListener(
+window.addEventListener("pageshow", function() {
 
-    "pageshow",
+    document.getElementById("cantidad").value = "";
 
-    function() {
+    document.getElementById("N").value = "";
 
+    document.getElementById("p").value = "";
 
-        document.getElementById(
+    document.getElementById("resultados").innerHTML = "";
 
-            "cantidad"
-
-        ).value = "";
-
-
-        document.getElementById(
-
-            "N"
-
-        ).value = "";
-
-
-        document.getElementById(
-
-            "p"
-
-        ).value = "";
-
-
-        document.getElementById(
-
-            "resultados"
-
-        ).innerHTML = "";
-
-    }
-
-);
+});
 
 </script>
 
-
 </body>
-
 </html>
