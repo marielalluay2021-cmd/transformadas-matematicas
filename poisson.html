@@ -1,0 +1,646 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Distribución Poisson | Simulación de Procesos</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f1f8;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #30245f, #6b4ca5);
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        .contenedor {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-top: 5px solid #d85c91;
+        }
+
+        .tarjeta h2 {
+            color: #3f3275;
+            margin-bottom: 15px;
+        }
+
+        .tarjeta p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .formula {
+            background: #f5f0fa;
+            border-radius: 10px;
+            padding: 30px 20px;
+            margin-top: 15px;
+            text-align: center;
+            color: #3f3275;
+            overflow-x: auto;
+        }
+
+        .formula-titulo {
+            font-family: "Times New Roman", serif;
+            font-size: 27px;
+            margin-bottom: 20px;
+        }
+
+        .formula-matematica {
+            font-family: "Times New Roman", serif;
+            font-size: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            white-space: nowrap;
+            margin-bottom: 18px;
+        }
+
+        .notas {
+            background: #faf8fc;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+
+        .notas ul {
+            padding-left: 20px;
+        }
+
+        .notas li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            color: #3f3275;
+            margin-bottom: 8px;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        .botones {
+            margin-top: 20px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #6b4ca5, #d85c91);
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #resultados {
+            margin-top: 25px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 9px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        th {
+            background: #6b4ca5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f5fb;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 10px;
+            color: #3f3275;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background: #30245f;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+            margin-top: 40px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 25px;
+            }
+
+            .formula-titulo {
+                font-size: 23px;
+            }
+
+            .formula-matematica {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Distribución Poisson (P<sub>i</sub>)</h1>
+    <p>Generador de Variables Aleatorias</p>
+</header>
+
+<div class="contenedor">
+
+    <!-- CONCEPTO -->
+    <div class="tarjeta">
+
+        <h2>Concepto</h2>
+
+        <p>
+            La distribución de Poisson permite generar variables aleatorias
+            que representan el número de ocurrencias de un evento durante
+            un intervalo determinado.
+        </p>
+
+    </div>
+
+    <!-- PARÁMETROS -->
+    <div class="tarjeta">
+
+        <h2>Parámetros</h2>
+
+        <div class="notas">
+
+            <ul>
+
+                <li>
+                    <strong>λ:</strong>
+                    Media de la distribución de Poisson.
+                </li>
+
+                <li>
+                    <strong>N:</strong>
+                    Contador.
+                </li>
+
+                <li>
+                    <strong>T:</strong>
+                    Contador.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- ALGORITMO -->
+    <div class="tarjeta">
+
+        <h2>Algoritmo de generación</h2>
+
+        <div class="notas">
+
+            <p>
+                <strong>Inicialización:</strong>
+                Hacer N = 0, T = 1 y generar un aleatorio r<sub>i</sub>.
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Paso 1:</strong>
+                Calcular:
+            </p>
+
+            <div class="formula">
+                <div class="formula-matematica">
+                    T' = (T)(r<sub>i</sub>)
+                </div>
+            </div>
+
+            <br>
+
+            <p>
+                <strong>Paso 2:</strong>
+                Si:
+            </p>
+
+            <div class="formula">
+                <div class="formula-matematica">
+                    T' ≥ e<sup>−λ</sup>
+                </div>
+            </div>
+
+            <p>
+                entonces hacer N = N + 1, T = T',
+                calcular otro r<sub>i</sub> y regresar al paso 1.
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Condición de parada:</strong>
+                Si:
+            </p>
+
+            <div class="formula">
+                <div class="formula-matematica">
+                    T' &lt; e<sup>−λ</sup>
+                </div>
+            </div>
+
+            <p>
+                entonces la variable generada está dada por:
+            </p>
+
+            <div class="formula">
+                <div class="formula-matematica">
+                    P<sub>i</sub> = N
+                </div>
+            </div>
+
+            <p>
+                Para generar la siguiente variable de Poisson,
+                regresar a la fase de inicialización.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- GENERADOR -->
+    <div class="tarjeta">
+
+        <h2>Generador de variables aleatorias</h2>
+
+        <div class="formulario">
+
+            <div class="campo">
+
+                <label for="cantidad">
+                    Cantidad de variables
+                </label>
+
+                <input
+                    type="number"
+                    id="cantidad"
+                    min="1"
+                    placeholder="Ej. 10"
+                >
+
+            </div>
+
+            <div class="campo">
+
+                <label for="lambda">
+                    λ (Media)
+                </label>
+
+                <input
+                    type="number"
+                    id="lambda"
+                    min="0"
+                    step="0.01"
+                    placeholder="Ej. 4"
+                >
+
+            </div>
+
+        </div>
+
+        <div class="botones">
+
+            <button onclick="generarPoisson()">
+                Generar variables aleatorias
+            </button>
+
+            <button onclick="copiarExcel()">
+                Copiar Excel
+            </button>
+
+        </div>
+
+        <div id="resultados"></div>
+
+    </div>
+
+    <a href="./index.html" class="volver">
+        ← Volver al inicio
+    </a>
+
+</div>
+
+<footer>
+
+    <strong>ESPOCH</strong><br>
+    Facultad de Mecánica<br>
+    Ingeniería Industrial<br>
+    Mariela Lluay
+
+</footer>
+
+<script>
+
+function generarPoisson() {
+
+    const cantidad =
+        parseInt(
+            document.getElementById("cantidad").value
+        );
+
+    const lambda =
+        parseFloat(
+            document.getElementById("lambda").value
+        );
+
+    if (
+        isNaN(cantidad) ||
+        isNaN(lambda) ||
+        cantidad <= 0 ||
+        lambda <= 0
+    ) {
+
+        alert(
+            "Ingrese valores válidos. λ debe ser mayor que 0."
+        );
+
+        return;
+    }
+
+    let html = "<table>";
+
+    /*
+        ENCABEZADO
+    */
+
+    html += "<tr>";
+
+    html += "<th>i</th>";
+    html += "<th>λ</th>";
+    html += "<th>N</th>";
+    html += "<th>T</th>";
+    html += "<th>r<sub>i</sub></th>";
+    html += "<th>T'</th>";
+    html += "<th>e<sup>−λ</sup></th>";
+    html += "<th>P<sub>i</sub></th>";
+
+    html += "</tr>";
+
+    /*
+        GENERAR CADA VARIABLE
+    */
+
+    for (let i = 1; i <= cantidad; i++) {
+
+        /*
+            INICIALIZACIÓN
+        */
+
+        let N = 0;
+        let T = 1;
+
+        let filasProceso = [];
+
+        let limite =
+            Math.exp(-lambda);
+
+        let terminado = false;
+
+        /*
+            PROCESO
+        */
+
+        while (!terminado) {
+
+            let r =
+                Math.random();
+
+            let Tprima =
+                T * r;
+
+            /*
+                GUARDAR EL ESTADO
+            */
+
+            filasProceso.push({
+                N: N,
+                T: T,
+                r: r,
+                Tprima: Tprima
+            });
+
+            /*
+                CONDICIÓN DE PARADA
+            */
+
+            if (Tprima < limite) {
+
+                terminado = true;
+
+            } else {
+
+                N = N + 1;
+
+                T = Tprima;
+
+            }
+
+        }
+
+        /*
+            MOSTRAR EL ÚLTIMO PROCESO
+        */
+
+        let ultimo =
+            filasProceso[filasProceso.length - 1];
+
+        html += "<tr>";
+
+        html += `<td>${i}</td>`;
+
+        html += `<td>${lambda}</td>`;
+
+        html += `<td>${ultimo.N}</td>`;
+
+        html += `<td>${ultimo.T.toFixed(6)}</td>`;
+
+        html += `<td>${ultimo.r.toFixed(6)}</td>`;
+
+        html += `<td>${ultimo.Tprima.toFixed(6)}</td>`;
+
+        html += `<td>${limite.toFixed(6)}</td>`;
+
+        html += `<td><strong>${N}</strong></td>`;
+
+        html += "</tr>";
+
+    }
+
+    html += "</table>";
+
+    document.getElementById("resultados").innerHTML = html;
+}
+
+
+/*
+    COPIAR PARA EXCEL
+*/
+
+function copiarExcel() {
+
+    const tabla =
+        document.querySelector(
+            "#resultados table"
+        );
+
+    if (!tabla) {
+
+        alert(
+            "Primero genere las variables aleatorias."
+        );
+
+        return;
+    }
+
+    let texto = "";
+
+    const filas =
+        tabla.querySelectorAll("tr");
+
+    filas.forEach(fila => {
+
+        const celdas =
+            fila.querySelectorAll("th, td");
+
+        const valores = [];
+
+        celdas.forEach(celda => {
+
+            valores.push(
+                celda.innerText
+            );
+
+        });
+
+        texto +=
+            valores.join("\t") + "\n";
+
+    });
+
+    navigator.clipboard.writeText(texto)
+        .then(() => {
+
+            alert(
+                "Tabla copiada. Ahora puede pegarla directamente en Excel."
+            );
+
+        })
+        .catch(() => {
+
+            alert(
+                "No se pudo copiar automáticamente."
+            );
+
+        });
+}
+
+
+/*
+    LIMPIAR AL VOLVER A LA PÁGINA
+*/
+
+window.addEventListener(
+    "pageshow",
+    function() {
+
+        document.getElementById(
+            "cantidad"
+        ).value = "";
+
+        document.getElementById(
+            "lambda"
+        ).value = "";
+
+        document.getElementById(
+            "resultados"
+        ).innerHTML = "";
+
+    }
+);
+
+</script>
+
+</body>
+</html>
