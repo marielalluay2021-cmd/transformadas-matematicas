@@ -201,6 +201,35 @@
             background: #f8f5fb;
         }
 
+        /* GRÁFICA */
+
+        #contenedorGrafica {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: #faf8fc;
+            border-radius: 12px;
+            border: 1px solid #e2dcef;
+        }
+
+        #contenedorGrafica h3 {
+            text-align: center;
+            color: #3f3275;
+            margin-bottom: 20px;
+            font-size: 22px;
+        }
+
+        #grafica {
+            width: 100%;
+            max-width: 1000px;
+            height: 400px;
+            display: block;
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
         .volver {
             display: inline-block;
             margin-top: 10px;
@@ -234,6 +263,10 @@
 
             .caso-texto {
                 font-size: 19px;
+            }
+
+            #grafica {
+                height: 300px;
             }
         }
     </style>
@@ -416,10 +449,27 @@
                     Copiar Excel
                 </button>
 
+                <button onclick="mostrarGrafica()">
+                    📊 Gráfica
+                </button>
+
             </div>
 
 
             <div id="resultados"></div>
+
+
+            <!-- GRÁFICA DEBAJO DE LA TABLA -->
+
+            <div id="contenedorGrafica">
+
+                <h3>
+                    📊 Gráfica de la distribución Bernoulli
+                </h3>
+
+                <canvas id="grafica"></canvas>
+
+            </div>
 
         </div>
 
@@ -452,6 +502,10 @@
     <!-- JAVASCRIPT -->
     <script>
 
+        // Guardar los valores generados
+        let datosBernoulli = [];
+
+
         function generarBernoulli() {
 
             const cantidad = parseInt(
@@ -478,6 +532,16 @@
 
                 return;
             }
+
+
+            // Ocultar gráfica cuando se generan nuevos datos
+            document.getElementById(
+                "contenedorGrafica"
+            ).style.display = "none";
+
+
+            // Vaciar datos anteriores
+            datosBernoulli = [];
 
 
             let html = "<table>";
@@ -519,6 +583,13 @@
                 }
 
 
+                // Guardar datos para la gráfica
+                datosBernoulli.push({
+                    i: i,
+                    BE: BE
+                });
+
+
                 // Crear fila
                 html += "<tr>";
 
@@ -539,7 +610,270 @@
 
 
             // Mostrar resultados
-            document.getElementById("resultados").innerHTML = html;
+            document.getElementById(
+                "resultados"
+            ).innerHTML = html;
+
+        }
+
+
+        // MOSTRAR GRÁFICA
+        function mostrarGrafica() {
+
+            // Verificar que existan datos
+            if (datosBernoulli.length === 0) {
+
+                alert(
+                    "Primero genere las variables aleatorias."
+                );
+
+                return;
+
+            }
+
+
+            // Mostrar contenedor
+            document.getElementById(
+                "contenedorGrafica"
+            ).style.display = "block";
+
+
+            dibujarGrafica();
+
+        }
+
+
+        // DIBUJAR GRÁFICA
+        function dibujarGrafica() {
+
+            const canvas =
+                document.getElementById("grafica");
+
+            const ctx = canvas.getContext("2d");
+
+
+            // Tamaño real del canvas
+            const ancho =
+                canvas.clientWidth;
+
+            const alto =
+                canvas.clientHeight;
+
+
+            canvas.width = ancho;
+            canvas.height = alto;
+
+
+            // Limpiar
+            ctx.clearRect(
+                0,
+                0,
+                ancho,
+                alto
+            );
+
+
+            // Márgenes
+            const margenIzquierdo = 60;
+            const margenDerecho = 25;
+            const margenSuperior = 35;
+            const margenInferior = 55;
+
+
+            const anchoGrafica =
+                ancho -
+                margenIzquierdo -
+                margenDerecho;
+
+
+            const altoGrafica =
+                alto -
+                margenSuperior -
+                margenInferior;
+
+
+            // Fondo
+            ctx.fillStyle = "#ffffff";
+
+            ctx.fillRect(
+                0,
+                0,
+                ancho,
+                alto
+            );
+
+
+            // Ejes
+            ctx.strokeStyle = "#555";
+            ctx.lineWidth = 2;
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                margenIzquierdo,
+                margenSuperior
+            );
+
+            ctx.lineTo(
+                margenIzquierdo,
+                alto - margenInferior
+            );
+
+            ctx.lineTo(
+                ancho - margenDerecho,
+                alto - margenInferior
+            );
+
+            ctx.stroke();
+
+
+            // Línea horizontal de referencia
+            ctx.strokeStyle = "#dddddd";
+            ctx.lineWidth = 1;
+
+            for (let valor = 0; valor <= 1; valor++) {
+
+                const y =
+                    alto -
+                    margenInferior -
+                    valor * altoGrafica;
+
+                ctx.beginPath();
+
+                ctx.moveTo(
+                    margenIzquierdo,
+                    y
+                );
+
+                ctx.lineTo(
+                    ancho - margenDerecho,
+                    y
+                );
+
+                ctx.stroke();
+
+
+                // Valores del eje Y
+                ctx.fillStyle = "#333";
+                ctx.font = "14px Arial";
+                ctx.textAlign = "right";
+
+                ctx.fillText(
+                    valor.toString(),
+                    margenIzquierdo - 10,
+                    y + 5
+                );
+
+            }
+
+
+            // Título de eje Y
+            ctx.save();
+
+            ctx.translate(
+                18,
+                alto / 2
+            );
+
+            ctx.rotate(-Math.PI / 2);
+
+            ctx.fillStyle = "#3f3275";
+            ctx.font = "bold 15px Arial";
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "BEᵢ",
+                0,
+                0
+            );
+
+            ctx.restore();
+
+
+            // Barras
+            const cantidad =
+                datosBernoulli.length;
+
+
+            const espacio =
+                anchoGrafica / cantidad;
+
+
+            const anchoBarra =
+                Math.max(
+                    4,
+                    espacio * 0.55
+                );
+
+
+            datosBernoulli.forEach(
+                dato => {
+
+                    const x =
+                        margenIzquierdo +
+                        (dato.i - 0.5) *
+                        espacio -
+                        anchoBarra / 2;
+
+
+                    const alturaBarra =
+                        dato.BE *
+                        altoGrafica;
+
+
+                    const y =
+                        alto -
+                        margenInferior -
+                        alturaBarra;
+
+
+                    // Barra
+                    ctx.fillStyle = "#d85c91";
+
+                    ctx.fillRect(
+                        x,
+                        y,
+                        anchoBarra,
+                        alturaBarra
+                    );
+
+
+                    // Valor encima
+                    ctx.fillStyle = "#3f3275";
+                    ctx.font = "bold 13px Arial";
+                    ctx.textAlign = "center";
+
+                    ctx.fillText(
+                        dato.BE,
+                        x + anchoBarra / 2,
+                        y - 7
+                    );
+
+
+                    // Número de iteración
+                    ctx.fillStyle = "#333";
+                    ctx.font = "12px Arial";
+
+                    ctx.fillText(
+                        dato.i,
+                        x + anchoBarra / 2,
+                        alto - margenInferior + 20
+                    );
+
+                }
+            );
+
+
+            // Nombre del eje X
+            ctx.fillStyle = "#3f3275";
+            ctx.font = "bold 15px Arial";
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "i (iteración)",
+                ancho / 2,
+                alto - 12
+            );
 
         }
 
@@ -630,11 +964,17 @@
                     "resultados"
                 ).innerHTML = "";
 
+                document.getElementById(
+                    "contenedorGrafica"
+                ).style.display = "none";
+
+                datosBernoulli = [];
+
             }
         );
 
     </script>
 
 </body>
-
 </html>
+
