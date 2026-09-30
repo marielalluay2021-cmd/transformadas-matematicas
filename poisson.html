@@ -1,64 +1,1080 @@
-<script>
-function generarPoisson() {
-    const cantidad = parseInt(document.getElementById("cantidad").value);
-    const lambda = parseFloat(document.getElementById("lambda").value);
+<!DOCTYPE html>
+<html lang="es">
 
-    if (isNaN(cantidad) || isNaN(lambda) || cantidad <= 0 || lambda <= 0) {
-        alert("Ingrese valores válidos. λ debe ser mayor que 0.");
-        return;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    let html = "<table>";
-    html += "<tr>";
-    html += "<th>i</th>";
-    html += "<th>λ</th>";
-    html += "<th>N</th>";
-    html += "<th>T</th>";
-    html += "<th>r<sub>i</sub></th>";
-    html += "<th>T'</th>";
-    html += "<th>e<sup>−λ</sup></th>";
-    html += "<th>P<sub>i</sub></th>";
-    html += "</tr>";
+    <title>Distribución Poisson | Simulación de Procesos</title>
 
-    const limite = Math.exp(-lambda);
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    // Generar la cantidad de variables Poisson solicitadas
-    for (let i = 1; i <= cantidad; i++) {
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #fff0f8, #f3eaff);
+            color: #333;
+            min-height: 100vh;
+        }
 
-        // Reiniciar el proceso para cada P_i
-        let N = 0;
-        let T = 1;
+        header {
+            background: linear-gradient(135deg, #a98bea, #ff9dce);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
 
-        let r;
-        let Tprima;
+        header h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
 
-        // Proceso de generación de una variable Poisson
-        do {
-            r = Math.random();
-            Tprima = T * r;
+        header p {
+            font-size: 17px;
+        }
 
-            if (Tprima >= limite) {
-                N = N + 1;
-                T = Tprima;
+        .contenedor {
+            width: 94%;
+            max-width: 1400px;
+            margin: 30px auto;
+        }
+
+        .tarjeta {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.10);
+        }
+
+        .tarjeta h2 {
+            color: #7d55b8;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #ff9dce;
+            padding-bottom: 8px;
+        }
+
+        .formula {
+            background: #faf3ff;
+            border-left: 5px solid #a98bea;
+            padding: 18px;
+            margin: 15px 0;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .pasos {
+            line-height: 1.8;
+            padding-left: 25px;
+        }
+
+        .pasos li {
+            margin-bottom: 8px;
+        }
+
+        .parametros {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .campo label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #68459b;
+        }
+
+        .campo input {
+            padding: 12px;
+            border: 2px solid #d8c4ef;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .campo input:focus {
+            border-color: #a98bea;
+        }
+
+        .botones {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            border: none;
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-generar {
+            background: #a98bea;
+            color: white;
+        }
+
+        .btn-generar:hover {
+            background: #8d6ed0;
+            transform: translateY(-2px);
+        }
+
+        .btn-copiar {
+            background: #ff9dce;
+            color: white;
+        }
+
+        .btn-copiar:hover {
+            background: #ed7fb4;
+            transform: translateY(-2px);
+        }
+
+        .btn-grafica {
+            background: #ffd875;
+            color: #5c4700;
+        }
+
+        .btn-grafica:hover {
+            background: #f1c84d;
+            transform: translateY(-2px);
+        }
+
+        #resultados {
+            margin-top: 25px;
+            overflow-x: auto;
+            max-height: 700px;
+            overflow-y: auto;
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+            background: white;
+        }
+
+        th {
+            background: #a98bea;
+            color: white;
+            padding: 12px;
+            border: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+        }
+
+        td {
+            padding: 9px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background: #faf5ff;
+        }
+
+        tr:hover {
+            background: #ffeef7;
+        }
+
+        .fila-final {
+            background: #fff0c7 !important;
+            font-weight: bold;
+        }
+
+        .resultado {
+            color: #68459b;
+            font-size: 16px;
+        }
+
+        .nota {
+            background: #fff7df;
+            border-left: 5px solid #ffd875;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            line-height: 1.6;
+        }
+
+        .grafica-contenedor {
+            margin-top: 25px;
+            display: none;
+            text-align: center;
+        }
+
+        canvas {
+            max-width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .volver {
+            display: inline-block;
+            text-decoration: none;
+            background: #68459b;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .volver:hover {
+            background: #513477;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+            background: #68459b;
+            color: white;
+        }
+
+        @media (max-width: 700px) {
+            header h1 {
+                font-size: 23px;
             }
 
-        } while (Tprima >= limite);
+            .tarjeta {
+                padding: 18px;
+            }
 
-        // Una sola fila representa cada P_i terminado
-        html += "<tr>";
-        html += `<td>${i}</td>`;
-        html += `<td>${lambda}</td>`;
-        html += `<td>${N}</td>`;
-        html += `<td>${T.toFixed(6)}</td>`;
-        html += `<td>${r.toFixed(6)}</td>`;
-        html += `<td>${Tprima.toFixed(6)}</td>`;
-        html += `<td>${limite.toFixed(6)}</td>`;
-        html += `<td><strong>${N}</strong></td>`;
-        html += "</tr>";
-    }
+            .botones {
+                flex-direction: column;
+            }
 
-    html += "</table>";
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
 
-    document.getElementById("resultados").innerHTML = html;
-}
-</script>
+<body>
+
+    <header>
+        <h1>Distribución Poisson (P<sub>i</sub>)</h1>
+        <p>Simulación de Procesos — Método de Transformación Directa</p>
+    </header>
+
+    <div class="contenedor">
+
+        <a href="index.html" class="volver">← Regresar al inicio</a>
+
+        <!-- CONCEPTO -->
+        <div class="tarjeta">
+
+            <h2>Concepto</h2>
+
+            <p>
+                La distribución de Poisson permite modelar el número de eventos
+                que ocurren durante un intervalo determinado, cuando estos
+                eventos ocurren de manera independiente y con una tasa promedio
+                constante.
+            </p>
+
+            <div class="formula">
+                P(X = x) =
+                <strong>
+                    (e<sup>−λ</sup> λ<sup>x</sup>) / x!
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- PARÁMETRO -->
+        <div class="tarjeta">
+
+            <h2>Parámetro</h2>
+
+            <p>
+                <strong>λ:</strong> representa el número promedio de eventos
+                que se espera que ocurran durante el intervalo considerado.
+            </p>
+
+            <div class="nota">
+
+                En el algoritmo se utiliza el límite:
+
+                <strong>e<sup>−λ</sup></strong>
+
+                <br><br>
+
+                Por ejemplo, si λ = 12:
+
+                <strong>
+                    e<sup>−12</sup> ≈ 0.0000061442
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ALGORITMO -->
+        <div class="tarjeta">
+
+            <h2>Algoritmo de generación</h2>
+
+            <ol class="pasos">
+
+                <li>
+                    Inicializar:
+                    <strong>N = 0</strong> y
+                    <strong>T = 1</strong>.
+                </li>
+
+                <li>
+                    Generar un número aleatorio
+                    <strong>r<sub>i</sub></strong>
+                    entre 0 y 1.
+                </li>
+
+                <li>
+                    Calcular:
+                    <strong>
+                        T' = T × r<sub>i</sub>
+                    </strong>.
+                </li>
+
+                <li>
+                    Si:
+                    <strong>
+                        T' ≥ e<sup>−λ</sup>
+                    </strong>,
+                    entonces:
+                    <strong>N = N + 1</strong>
+                    y
+                    <strong>T = T'</strong>.
+                </li>
+
+                <li>
+                    Generar un nuevo
+                    <strong>r<sub>i</sub></strong>
+                    y repetir.
+                </li>
+
+                <li>
+                    Si:
+                    <strong>
+                        T' &lt; e<sup>−λ</sup>
+                    </strong>,
+                    se detiene el proceso.
+                </li>
+
+                <li>
+                    Finalmente:
+                    <strong>
+                        P<sub>i</sub> = N
+                    </strong>.
+                </li>
+
+                <li>
+                    Para generar el siguiente
+                    <strong>P<sub>i</sub></strong>,
+                    se reinicia:
+                    <strong>N = 0</strong> y
+                    <strong>T = 1</strong>.
+                </li>
+
+            </ol>
+
+        </div>
+
+
+        <!-- GENERADOR -->
+        <div class="tarjeta">
+
+            <h2>Generador de variables Poisson</h2>
+
+            <div class="parametros">
+
+                <div class="campo">
+
+                    <label for="cantidad">
+                        Cantidad de variables P<sub>i</sub>
+                    </label>
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        min="1"
+                        value="50"
+                        placeholder="Ejemplo: 50, 100, 200">
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="lambda">
+                        λ
+                    </label>
+
+                    <input
+                        type="number"
+                        id="lambda"
+                        min="0.01"
+                        step="0.01"
+                        value="12"
+                        placeholder="Ejemplo: 12">
+
+                </div>
+
+            </div>
+
+
+            <div class="botones">
+
+                <button
+                    class="btn-generar"
+                    onclick="generarPoisson()">
+
+                    Generar variables
+
+                </button>
+
+
+                <button
+                    class="btn-copiar"
+                    onclick="copiarExcel()">
+
+                    Copiar para Excel
+
+                </button>
+
+
+                <button
+                    class="btn-grafica"
+                    onclick="mostrarGrafica()">
+
+                    Gráfica
+
+                </button>
+
+            </div>
+
+
+            <div id="resultados"></div>
+
+
+            <!-- GRÁFICA -->
+
+            <div
+                class="grafica-contenedor"
+                id="contenedorGrafica">
+
+                <h2>
+                    Gráfica de la distribución Poisson
+                </h2>
+
+                <canvas
+                    id="graficaPoisson">
+                </canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            ESPOCH — Facultad de Mecánica — Ingeniería Industrial
+        </p>
+
+        <p>
+            Simulación de Procesos
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        // ==========================================================
+        // VARIABLES GLOBALES
+        // ==========================================================
+
+        let valoresPoisson = [];
+
+        let grafica = null;
+
+
+        // ==========================================================
+        // GENERAR VARIABLES POISSON
+        // ==========================================================
+
+        function generarPoisson() {
+
+            const cantidad =
+                parseInt(
+                    document.getElementById("cantidad").value
+                );
+
+
+            const lambda =
+                parseFloat(
+                    document.getElementById("lambda").value
+                );
+
+
+            // Validación
+
+            if (
+                isNaN(cantidad) ||
+                isNaN(lambda) ||
+                cantidad <= 0 ||
+                lambda <= 0
+            ) {
+
+                alert(
+                    "Ingrese valores válidos. λ debe ser mayor que 0."
+                );
+
+                return;
+            }
+
+
+            // Reiniciar resultados
+
+            valoresPoisson = [];
+
+
+            // Crear tabla
+
+            let html = "<table>";
+
+
+            html += "<tr>";
+
+            html += "<th>P<sub>i</sub></th>";
+
+            html += "<th>Paso</th>";
+
+            html += "<th>λ</th>";
+
+            html += "<th>N</th>";
+
+            html += "<th>T</th>";
+
+            html += "<th>r<sub>i</sub></th>";
+
+            html += "<th>T'</th>";
+
+            html += "<th>e<sup>−λ</sup></th>";
+
+            html += "<th>Condición</th>";
+
+            html += "<th>Resultado</th>";
+
+            html += "</tr>";
+
+
+            // Calcular e^-lambda
+
+            const limite =
+                Math.exp(-lambda);
+
+
+            // ======================================================
+            // GENERAR CADA P_i
+            // ======================================================
+
+            for (
+                let i = 1;
+                i <= cantidad;
+                i++
+            ) {
+
+
+                // Cada P_i comienza nuevamente
+
+                let N = 0;
+
+                let T = 1;
+
+                let paso = 0;
+
+                let terminado = false;
+
+
+                // ==================================================
+                // PROCESO INTERNO DE CADA P_i
+                // ==================================================
+
+                while (!terminado) {
+
+                    paso++;
+
+
+                    // Generar aleatorio
+
+                    const r =
+                        Math.random();
+
+
+                    // Calcular T'
+
+                    const Tprima =
+                        T * r;
+
+
+                    // Guardar N y T antes de actualizar
+
+                    const Nactual =
+                        N;
+
+                    const Tactual =
+                        T;
+
+
+                    // ==================================================
+                    // COMPROBAR CONDICIÓN
+                    // ==================================================
+
+                    if (
+                        Tprima >= limite
+                    ) {
+
+                        // Cumple
+
+                        N =
+                            N + 1;
+
+
+                        T =
+                            Tprima;
+
+
+                        html += "<tr>";
+
+                        html +=
+                            `<td>${i}</td>`;
+
+                        html +=
+                            `<td>${paso}</td>`;
+
+                        html +=
+                            `<td>${lambda}</td>`;
+
+                        html +=
+                            `<td>${Nactual}</td>`;
+
+                        html +=
+                            `<td>${Tactual.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${r.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${Tprima.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${limite.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>Cumple</td>`;
+
+                        html +=
+                            `<td></td>`;
+
+                        html += "</tr>";
+
+
+                    } else {
+
+                        // ==================================================
+                        // NO CUMPLE: AQUÍ TERMINA EL P_i
+                        // ==================================================
+
+                        terminado = true;
+
+
+                        html +=
+                            `<tr class="fila-final">`;
+
+                        html +=
+                            `<td>${i}</td>`;
+
+                        html +=
+                            `<td>${paso}</td>`;
+
+                        html +=
+                            `<td>${lambda}</td>`;
+
+                        html +=
+                            `<td>${Nactual}</td>`;
+
+                        html +=
+                            `<td>${Tactual.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${r.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${Tprima.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td>${limite.toFixed(6)}</td>`;
+
+                        html +=
+                            `<td><strong>No cumple</strong></td>`;
+
+                        html +=
+                            `<td class="resultado">
+                                <strong>P<sub>${i}</sub> = ${Nactual}</strong>
+                            </td>`;
+
+                        html += "</tr>";
+
+
+                        // Guardar resultado final
+
+                        valoresPoisson.push(
+                            Nactual
+                        );
+
+                    }
+
+                }
+
+            }
+
+
+            html += "</table>";
+
+
+            // Mostrar tabla
+
+            document.getElementById(
+                "resultados"
+            ).innerHTML = html;
+
+
+            // Ocultar gráfica anterior
+
+            document.getElementById(
+                "contenedorGrafica"
+            ).style.display = "none";
+
+        }
+
+
+        // ==========================================================
+        // COPIAR PARA EXCEL
+        // ==========================================================
+
+        function copiarExcel() {
+
+            const tabla =
+                document.querySelector(
+                    "#resultados table"
+                );
+
+
+            if (!tabla) {
+
+                alert(
+                    "Primero genere las variables."
+                );
+
+                return;
+            }
+
+
+            let texto = "";
+
+
+            const filas =
+                tabla.querySelectorAll("tr");
+
+
+            filas.forEach(
+                fila => {
+
+                    const celdas =
+                        fila.querySelectorAll(
+                            "th, td"
+                        );
+
+
+                    const valores = [];
+
+
+                    celdas.forEach(
+                        celda => {
+
+                            valores.push(
+                                celda.innerText
+                            );
+
+                        }
+                    );
+
+
+                    texto +=
+                        valores.join("\t") +
+                        "\n";
+
+                }
+            );
+
+
+            navigator.clipboard
+                .writeText(texto)
+                .then(
+                    () => {
+
+                        alert(
+                            "Tabla copiada. Puedes pegarla directamente en Excel."
+                        );
+
+                    }
+                )
+                .catch(
+                    () => {
+
+                        alert(
+                            "No se pudo copiar automáticamente."
+                        );
+
+                    }
+                );
+
+        }
+
+
+        // ==========================================================
+        // MOSTRAR GRÁFICA
+        // ==========================================================
+
+        function mostrarGrafica() {
+
+            if (
+                valoresPoisson.length === 0
+            ) {
+
+                alert(
+                    "Primero genere las variables."
+                );
+
+                return;
+            }
+
+
+            const contenedor =
+                document.getElementById(
+                    "contenedorGrafica"
+                );
+
+
+            contenedor.style.display =
+                "block";
+
+
+            const canvas =
+                document.getElementById(
+                    "graficaPoisson"
+                );
+
+
+            const ctx =
+                canvas.getContext("2d");
+
+
+            // Destruir gráfica anterior
+
+            if (grafica) {
+
+                grafica.destroy();
+
+            }
+
+
+            // ======================================================
+            // CALCULAR FRECUENCIAS
+            // ======================================================
+
+            const frecuencias = {};
+
+
+            valoresPoisson.forEach(
+                valor => {
+
+                    if (
+                        frecuencias[valor] === undefined
+                    ) {
+
+                        frecuencias[valor] = 0;
+
+                    }
+
+
+                    frecuencias[valor]++;
+
+                }
+            );
+
+
+            const valores =
+                Object.keys(frecuencias)
+                    .map(Number)
+                    .sort(
+                        (a, b) => a - b
+                    );
+
+
+            const frecuenciasOrdenadas =
+                valores.map(
+                    valor =>
+                        frecuencias[valor]
+                );
+
+
+            // ======================================================
+            // CREAR GRÁFICA
+            // ======================================================
+
+            grafica =
+                new Chart(
+                    ctx,
+                    {
+
+                        type: "bar",
+
+                        data: {
+
+                            labels: valores,
+
+                            datasets: [
+                                {
+
+                                    label:
+                                        "Frecuencia de Pᵢ",
+
+                                    data:
+                                        frecuenciasOrdenadas
+
+                                }
+                            ]
+
+                        },
+
+                        options: {
+
+                            responsive: true,
+
+                            plugins: {
+
+                                legend: {
+                                    display: true
+                                },
+
+                                title: {
+
+                                    display: true,
+
+                                    text:
+                                        "Distribución de valores Poisson generados"
+
+                                }
+
+                            },
+
+                            scales: {
+
+                                x: {
+
+                                    title: {
+
+                                        display: true,
+
+                                        text:
+                                            "Valor Pᵢ"
+
+                                    }
+
+                                },
+
+                                y: {
+
+                                    beginAtZero: true,
+
+                                    title: {
+
+                                        display: true,
+
+                                        text:
+                                            "Frecuencia"
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        // ==========================================================
+        // LIMPIAR AL RECARGAR
+        // ==========================================================
+
+        window.addEventListener(
+            "pageshow",
+            function() {
+
+                document.getElementById(
+                    "resultados"
+                ).innerHTML = "";
+
+
+                document.getElementById(
+                    "contenedorGrafica"
+                ).style.display = "none";
+
+
+                valoresPoisson = [];
+
+            }
+        );
+
+    </script>
+
+
+    <!-- Librería para las gráficas -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+
+</body>
+
+</html>
